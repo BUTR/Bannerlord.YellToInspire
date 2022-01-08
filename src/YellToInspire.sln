@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YellToInspire", "YellToInspire\YellToInspire.csproj", "{B5962C16-F849-4AE7-A155-5068555FBDA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{949B80C5-50B3-462D-A7B2-DB4B314AFF13}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CC992BF5-AA89-42C1-B1D4-BF66DDA11D3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C1A4BD70-E886-4E5C-9428-EDCD2ABEB1CC}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\common.props = ..\build\common.props
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5962C16-F849-4AE7-A155-5068555FBDA1}.Debug|x64.ActiveCfg = Debug|x64
+		{B5962C16-F849-4AE7-A155-5068555FBDA1}.Debug|x64.Build.0 = Debug|x64
+		{B5962C16-F849-4AE7-A155-5068555FBDA1}.Release|x64.ActiveCfg = Release|Any CPU
+		{B5962C16-F849-4AE7-A155-5068555FBDA1}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B5962C16-F849-4AE7-A155-5068555FBDA1} = {CC992BF5-AA89-42C1-B1D4-BF66DDA11D3B}
+		{CC992BF5-AA89-42C1-B1D4-BF66DDA11D3B} = {949B80C5-50B3-462D-A7B2-DB4B314AFF13}
+		{C1A4BD70-E886-4E5C-9428-EDCD2ABEB1CC} = {949B80C5-50B3-462D-A7B2-DB4B314AFF13}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9914E5D9-BF50-47C0-A194-519A91226325}
+	EndGlobalSection
+EndGlobal

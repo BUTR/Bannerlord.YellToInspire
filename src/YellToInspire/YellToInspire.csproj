@@ -1,0 +1,56 @@
+<!--EXTERNAL_PROPERTIES: DefineConstantsGameVersion;ButterLibVersion;HarmonyVersion;ButterLibVersion;BuildResourcesVersion-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <Platforms>x64</Platforms>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ModuleName>$(MSBuildProjectName)</ModuleName>
+    <Authors>BoiZoi (Kahchow), Mehdiocrity, BUTR</Authors>
+    <Configurations>Debug;Release</Configurations>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    <!--Some code analyzers don't support common.props parsing-->
+    <TargetFrameworks Condition=" '$(TargetFrameworks)' == '' ">net472</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net472|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bannerlord.BuildResources" Version="$(BuildResourcesVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Bannerlord.BUTR.Shared" Version="$(BUTRSharedVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Bannerlord.ModuleManager.Source" Version="$(BUTRModuleManagerVersion)" />
+    <PackageReference Include="Bannerlord.ReferenceAssemblies.Core.EarlyAccess" Version="$(GameVersion).*" PrivateAssets="all" />
+    <PackageReference Include="Bannerlord.ReferenceAssemblies.CustomBattle.EarlyAccess" Version="$(GameVersion).*" PrivateAssets="all" />
+    <PackageReference Include="IsExternalInit" Version="1.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Harmony.Extensions" Version="$(HarmonyExtensionsVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Lib.Harmony" Version="$(HarmonyVersion)" IncludeAssets="compile" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Nullable" Version="1.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
