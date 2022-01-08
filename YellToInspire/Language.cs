@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace YellToInspire;
 
-public class YellToInspireLanguage
+public class Language
 {
 	[JsonProperty("useCustomFlavorText")]
 	public bool UseCustomFlavorText { get; set; }

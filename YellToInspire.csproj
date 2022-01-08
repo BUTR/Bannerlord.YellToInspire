@@ -16,11 +16,10 @@
     <Reference Include="TaleWorlds.InputSystem" />
     <Reference Include="TaleWorlds.Library" />
     <Reference Include="TaleWorlds.CampaignSystem" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Yell to Inspire 0.3.5b-477-0-3-5b-1587961846\YellToInspireBoiZoi\bin\Win64_Shipping_Client\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    <Reference Include="Newtonsoft.Json" />
     <Reference Include="TaleWorlds.Core" />
     <Reference Include="TaleWorlds.Localization" />
+    <Reference Include="TaleWorlds.MountAndBlade.CustomBattle" />
     <Reference Include="System.Core" />
     <Reference Include="TaleWorlds.ObjectSystem" />
     <Reference Include="TaleWorlds.Engine" />

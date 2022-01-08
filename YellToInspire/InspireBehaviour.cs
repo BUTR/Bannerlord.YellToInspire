@@ -8,11 +8,12 @@ using TaleWorlds.Core;
 using TaleWorlds.InputSystem;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
+using TaleWorlds.MountAndBlade.CustomBattle;
 using YellToInspire.Skills;
 
 namespace YellToInspire;
 
-public class YellToInspireBehavior
+public class InspireBehaviour
 {
 	private static readonly ActionIndexCache[] _cheerActions = (ActionIndexCache[])(object)new ActionIndexCache[2]
 	{
@@ -114,47 +115,47 @@ public class YellToInspireBehavior
 
 	public static void InspireAura()
 	{
-		//IL_0035: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0073: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0180: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0185: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0189: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0313: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0318: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0326: Unknown result type (might be due to invalid IL or missing references)
-		//IL_032b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0339: Unknown result type (might be due to invalid IL or missing references)
-		//IL_033e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_036b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0370: Unknown result type (might be due to invalid IL or missing references)
-		//IL_037e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0383: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0387: Unknown result type (might be due to invalid IL or missing references)
-		//IL_03fe: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0403: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0426: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0451: Unknown result type (might be due to invalid IL or missing references)
-		//IL_045b: Expected O, but got Unknown
-		//IL_0473: Unknown result type (might be due to invalid IL or missing references)
-		//IL_047d: Expected O, but got Unknown
-		//IL_0570: Unknown result type (might be due to invalid IL or missing references)
-		//IL_057a: Expected O, but got Unknown
-		//IL_0593: Unknown result type (might be due to invalid IL or missing references)
-		//IL_059d: Expected O, but got Unknown
-		//IL_05af: Unknown result type (might be due to invalid IL or missing references)
-		//IL_05b9: Expected O, but got Unknown
-		//IL_05cb: Unknown result type (might be due to invalid IL or missing references)
-		//IL_05d5: Expected O, but got Unknown
-		//IL_05f6: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0600: Expected O, but got Unknown
-		//IL_0616: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0620: Expected O, but got Unknown
-		//IL_0624: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0629: Unknown result type (might be due to invalid IL or missing references)
-		//IL_067f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0689: Expected O, but got Unknown
+		//IL_0038: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0071: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0076: Unknown result type (might be due to invalid IL or missing references)
+		//IL_007a: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0197: Unknown result type (might be due to invalid IL or missing references)
+		//IL_019c: Unknown result type (might be due to invalid IL or missing references)
+		//IL_01a0: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0348: Unknown result type (might be due to invalid IL or missing references)
+		//IL_034d: Unknown result type (might be due to invalid IL or missing references)
+		//IL_035f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0364: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0376: Unknown result type (might be due to invalid IL or missing references)
+		//IL_037b: Unknown result type (might be due to invalid IL or missing references)
+		//IL_03b0: Unknown result type (might be due to invalid IL or missing references)
+		//IL_03b5: Unknown result type (might be due to invalid IL or missing references)
+		//IL_03c3: Unknown result type (might be due to invalid IL or missing references)
+		//IL_03c8: Unknown result type (might be due to invalid IL or missing references)
+		//IL_03cc: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0447: Unknown result type (might be due to invalid IL or missing references)
+		//IL_044c: Unknown result type (might be due to invalid IL or missing references)
+		//IL_046f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_049e: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04a8: Expected O, but got Unknown
+		//IL_04c0: Unknown result type (might be due to invalid IL or missing references)
+		//IL_04ca: Expected O, but got Unknown
+		//IL_05da: Unknown result type (might be due to invalid IL or missing references)
+		//IL_05e4: Expected O, but got Unknown
+		//IL_05fd: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0607: Expected O, but got Unknown
+		//IL_0619: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0623: Expected O, but got Unknown
+		//IL_0635: Unknown result type (might be due to invalid IL or missing references)
+		//IL_063f: Expected O, but got Unknown
+		//IL_0664: Unknown result type (might be due to invalid IL or missing references)
+		//IL_066e: Expected O, but got Unknown
+		//IL_0684: Unknown result type (might be due to invalid IL or missing references)
+		//IL_068e: Expected O, but got Unknown
+		//IL_0692: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0697: Unknown result type (might be due to invalid IL or missing references)
+		//IL_06ed: Unknown result type (might be due to invalid IL or missing references)
+		//IL_06f7: Expected O, but got Unknown
 		affectedAgents.Clear();
 		if (_abilityReady)
 		{
@@ -164,11 +165,11 @@ public class YellToInspireBehavior
 			int num3 = 0;
 			int num4 = 0;
 			string text = "";
-			YellToInspireSphereIndicator.AbilityUsedPosition = mainAgent.get_Position();
-			YellToInspireSphereIndicator.SphereCurrentRadius = 0f;
+			SphereIndicator.AbilityUsedPosition = mainAgent.get_Position();
+			SphereIndicator.SphereCurrentRadius = 0f;
 			if (_showSphereIndicators)
 			{
-				YellToInspireSphereIndicator.DisplaySphereIndicators = true;
+				SphereIndicator.DisplaySphereIndicators = true;
 			}
 			Mission current = Mission.get_Current();
 			Vec3 position = mainAgent.get_Position();
@@ -183,7 +184,7 @@ public class YellToInspireBehavior
 				AgentComponentExtensions.ChangeMorale(nearbyAllyAgent, _positiveMoraleChange);
 				if (CustomGame.get_Current() == null)
 				{
-					if (nearbyAllyAgent.IsRetreating() && Hero.get_MainHero().GetPerkValue(YellToInspireSkillsAndTalents.InspireResolve))
+					if (nearbyAllyAgent.IsRetreating() && Hero.get_MainHero().GetPerkValue(SkillsAndTalents.InspireResolve))
 					{
 						AgentComponentExtensions.ChangeMorale(nearbyAllyAgent, 25f);
 						nearbyAllyAgent.GetComponent<MoraleAgentComponent>().StopRetreating();
@@ -225,7 +226,7 @@ public class YellToInspireBehavior
 			}
 			if (affectedAgents.Count > 0)
 			{
-				YellToInspireSubmodule.DelayedAgentReactions(affectedAgents, _minResponseDelay, _maxResponseDelay);
+				Main.DelayedAgentReactions(affectedAgents, _minResponseDelay, _maxResponseDelay);
 			}
 			if (CustomGame.get_Current() == null && Mission.get_Current().GetMissionBehaviour<BattleEndLogic>() != null && !Mission.get_Current().GetMissionBehaviour<BattleEndLogic>().get_PlayerVictory())
 			{
@@ -253,7 +254,7 @@ public class YellToInspireBehavior
 				mainAgent.SetActionChannel(1, _cheerActions[MBRandom.RandomInt(_cheerActions.Length)], false, 0uL, 0f, 1f, -0.2f, 0.4f, 0f, false, -0.2f, 0, true);
 				Agent agent = mainAgent;
 				now = MissionTime.get_Now();
-				YellToInspireSubmodule.AddToCheeringList(new CheeringAgent(agent, ((MissionTime)(ref now)).get_ToSeconds(), 1.5));
+				Main.AddToCheeringList(new CheeringAgent(agent, ((MissionTime)(ref now)).get_ToSeconds(), 1.5));
 			}
 			mainAgent.MakeVoice(val, (CombatVoiceNetworkPredictionType)2);
 			if (!_useCustomPhrases)
@@ -318,62 +319,60 @@ public class YellToInspireBehavior
 
 	public static void LoadConfig()
 	{
-		//IL_002d: Unknown result type (might be due to invalid IL or missing references)
-		if (!File.Exists(_configPath))
+		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
+		if (File.Exists(_configPath))
 		{
-			return;
-		}
-		try
-		{
-			_boundInput = (InputKey)JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).YellKey;
-			_abilityRadius = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).AbilityRadius;
-			_maxCooldownTime = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).AbilityCooldown;
-			_positiveMoraleChange = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).AlliedMoraleGain;
-			_negativeMoraleChange = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).EnemyFleeMoraleThreshold;
-			_minResponseDelay = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).MinResponseDelay;
-			_maxResponseDelay = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).MaxResponseDelay;
-			_percentChanceToFlee = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).EnemyChanceToFlee / 100f;
-			_baseLeadershipExpPerAlly = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).BaseLeadershipExpPerAlly;
-			_baseRogueryExpPerEnemy = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).BaseRogueryExpPerEnemy;
-			_radiusIncreasePerLevelOfLeadership = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).RadiusIncreasePerLevel;
-			_cooldownDecreasePerLevelOfLeadership = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).CooldownDecreasePerLevel;
-			_moraleGainIncreasePerLevelOfLeadership = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).MoraleGainIncreasePerLevel;
-			_chanceToFleeIncreasePerLevelOfRoguery = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).ChanceToFleeIncreasePerLevel;
-			_fleeingEnemiesReturn = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).FleeingEnemiesReturn;
-			_showSphereIndicators = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).ShowSphereIndicators;
-			_showDetailedMessage = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).ShowDetailedMessage;
-			_enableRandomCheerDelay = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).EnableRandomCheerDelay;
-			_enableCheerAnimation = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).EnableCheerAnimation;
-			_enableEnemyReaction = JsonConvert.DeserializeObject<YellToInspireConfig>(File.ReadAllText(_configPath)).EnableEnemyReaction;
-			_baseRadius = _abilityRadius;
-			_baseCooldownTime = _maxCooldownTime;
-			_basePositiveMoraleChange = _positiveMoraleChange;
-			_baseChanceToFlee = _percentChanceToFlee;
-		}
-		catch
-		{
+			try
+			{
+				_boundInput = (InputKey)JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).YellKey;
+				_abilityRadius = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).AbilityRadius;
+				_maxCooldownTime = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).AbilityCooldown;
+				_positiveMoraleChange = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).AlliedMoraleGain;
+				_negativeMoraleChange = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).EnemyFleeMoraleThreshold;
+				_minResponseDelay = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).MinResponseDelay;
+				_maxResponseDelay = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).MaxResponseDelay;
+				_percentChanceToFlee = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).EnemyChanceToFlee / 100f;
+				_baseLeadershipExpPerAlly = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).BaseLeadershipExpPerAlly;
+				_baseRogueryExpPerEnemy = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).BaseRogueryExpPerEnemy;
+				_radiusIncreasePerLevelOfLeadership = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).RadiusIncreasePerLevel;
+				_cooldownDecreasePerLevelOfLeadership = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).CooldownDecreasePerLevel;
+				_moraleGainIncreasePerLevelOfLeadership = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).MoraleGainIncreasePerLevel;
+				_chanceToFleeIncreasePerLevelOfRoguery = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).ChanceToFleeIncreasePerLevel;
+				_fleeingEnemiesReturn = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).FleeingEnemiesReturn;
+				_showSphereIndicators = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).ShowSphereIndicators;
+				_showDetailedMessage = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).ShowDetailedMessage;
+				_enableRandomCheerDelay = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).EnableRandomCheerDelay;
+				_enableCheerAnimation = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).EnableCheerAnimation;
+				_enableEnemyReaction = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(_configPath)).EnableEnemyReaction;
+				_baseRadius = _abilityRadius;
+				_baseCooldownTime = _maxCooldownTime;
+				_basePositiveMoraleChange = _positiveMoraleChange;
+				_baseChanceToFlee = _percentChanceToFlee;
+			}
+			catch
+			{
+			}
 		}
 	}
 
 	public static void LoadLanguage()
 	{
-		if (!File.Exists(_languagePath))
+		if (File.Exists(_languagePath))
 		{
-			return;
-		}
-		try
-		{
-			_useCustomPhrases = JsonConvert.DeserializeObject<YellToInspireLanguage>(File.ReadAllText(_languagePath)).UseCustomFlavorText;
-			_customPhrases = JsonConvert.DeserializeObject<YellToInspireLanguage>(File.ReadAllText(_languagePath)).CustomFlavorText;
-			_useCustomDetailedText = JsonConvert.DeserializeObject<YellToInspireLanguage>(File.ReadAllText(_languagePath)).UseCustomDetailedText;
-			_alliesInspiredCustomDetailedText = JsonConvert.DeserializeObject<YellToInspireLanguage>(File.ReadAllText(_languagePath)).AlliesInspiredCustomDetailedText;
-			_alliesRestoredCustomDetailedText = JsonConvert.DeserializeObject<YellToInspireLanguage>(File.ReadAllText(_languagePath)).AlliesRestoredCustomDetailedText;
-			_enemiesScaredCustomDetailedText = JsonConvert.DeserializeObject<YellToInspireLanguage>(File.ReadAllText(_languagePath)).EnemiesScaredCustomDetailedText;
-			_enemiesFledCustomDetailedText = JsonConvert.DeserializeObject<YellToInspireLanguage>(File.ReadAllText(_languagePath)).EnemiesFledCustomDetailedText;
-			_enemiesRestoredCustomDetailedText = JsonConvert.DeserializeObject<YellToInspireLanguage>(File.ReadAllText(_languagePath)).EnemiesRestoredCustomDetailedText;
-		}
-		catch
-		{
+			try
+			{
+				_useCustomPhrases = JsonConvert.DeserializeObject<Language>(File.ReadAllText(_languagePath)).UseCustomFlavorText;
+				_customPhrases = JsonConvert.DeserializeObject<Language>(File.ReadAllText(_languagePath)).CustomFlavorText;
+				_useCustomDetailedText = JsonConvert.DeserializeObject<Language>(File.ReadAllText(_languagePath)).UseCustomDetailedText;
+				_alliesInspiredCustomDetailedText = JsonConvert.DeserializeObject<Language>(File.ReadAllText(_languagePath)).AlliesInspiredCustomDetailedText;
+				_alliesRestoredCustomDetailedText = JsonConvert.DeserializeObject<Language>(File.ReadAllText(_languagePath)).AlliesRestoredCustomDetailedText;
+				_enemiesScaredCustomDetailedText = JsonConvert.DeserializeObject<Language>(File.ReadAllText(_languagePath)).EnemiesScaredCustomDetailedText;
+				_enemiesFledCustomDetailedText = JsonConvert.DeserializeObject<Language>(File.ReadAllText(_languagePath)).EnemiesFledCustomDetailedText;
+				_enemiesRestoredCustomDetailedText = JsonConvert.DeserializeObject<Language>(File.ReadAllText(_languagePath)).EnemiesRestoredCustomDetailedText;
+			}
+			catch
+			{
+			}
 		}
 	}
 }

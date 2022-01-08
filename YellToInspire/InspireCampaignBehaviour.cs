@@ -3,7 +3,7 @@ using TaleWorlds.CampaignSystem;
 
 namespace YellToInspire;
 
-public class YellToInspireCampaignBehavior : CampaignBehaviorBase
+public class InspireCampaignBehaviour : CampaignBehaviorBase
 {
 	public override void RegisterEvents()
 	{

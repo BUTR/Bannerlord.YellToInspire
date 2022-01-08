@@ -7,7 +7,7 @@ using TaleWorlds.Localization;
 
 namespace YellToInspire.Skills;
 
-public class YellToInspireSkillsAndTalents
+public class SkillsAndTalents
 {
 	private Game _game;
 
@@ -29,7 +29,7 @@ public class YellToInspireSkillsAndTalents
 
 	public static TextObject inspireFortitudeDescription = new TextObject("Friendly units under the effect of Inspire gain a small temporary health boost!", (Dictionary<string, TextObject>)null);
 
-	public YellToInspireSkillsAndTalents(Game game)
+	public SkillsAndTalents(Game game)
 	{
 		_game = game;
 		perkObjects = new List<PerkObject>();
@@ -55,8 +55,8 @@ public class YellToInspireSkillsAndTalents
 	public void InitializePerks()
 	{
 		InitializeTextVariables();
-		InspireBasic.Initialize("Inspire", ((object)inspireBasicDescription).ToString(), DefaultSkills.get_Leadership(), 5, (PerkObject)null, (PerkRole)5, 10f, (PerkRole)0, 0f, (EffectIncrementType)0);
-		InspireResolve.Initialize("Inspire Resolve", ((object)inspireTenacityDescription).ToString(), DefaultSkills.get_Leadership(), 35, (PerkObject)null, (PerkRole)5, 15f, (PerkRole)0, 0f, (EffectIncrementType)1);
+		InspireBasic.Initialize("Inspire", ((object)inspireBasicDescription).ToString(), DefaultSkills.get_Leadership(), 5, (PerkObject)null, (PerkRole)5, 10f, (PerkRole)0, 0f, (EffectIncrementType)0, "");
+		InspireResolve.Initialize("Inspire Resolve", ((object)inspireTenacityDescription).ToString(), DefaultSkills.get_Leadership(), 35, (PerkObject)null, (PerkRole)5, 15f, (PerkRole)0, 0f, (EffectIncrementType)1, "");
 	}
 
 	public static void ReinitializePerks()
@@ -64,7 +64,7 @@ public class YellToInspireSkillsAndTalents
 		InitializeTextVariables();
 		if (InspireBasic != null)
 		{
-			InspireBasic.Initialize("Inspire", ((object)inspireBasicDescription).ToString(), DefaultSkills.get_Leadership(), 5, (PerkObject)null, (PerkRole)5, 10f, (PerkRole)0, 0f, (EffectIncrementType)1);
+			InspireBasic.Initialize("Inspire", ((object)inspireBasicDescription).ToString(), DefaultSkills.get_Leadership(), 5, (PerkObject)null, (PerkRole)5, 10f, (PerkRole)0, 0f, (EffectIncrementType)1, "");
 		}
 	}
 
@@ -72,10 +72,10 @@ public class YellToInspireSkillsAndTalents
 	{
 		//IL_002a: Unknown result type (might be due to invalid IL or missing references)
 		inspireBasicDescription.SetTextVariable("newline", "\n");
-		inspireBasicDescription.SetTextVariable("input", Enum.GetName(typeof(InputKey), YellToInspireBehavior._boundInput));
-		inspireBasicDescription.SetTextVariable("radius", YellToInspireBehavior._abilityRadius);
-		inspireBasicDescription.SetTextVariable("morale", YellToInspireBehavior._positiveMoraleChange);
-		inspireBasicDescription.SetTextVariable("flee", (float)Math.Round(YellToInspireBehavior._percentChanceToFlee * 100f, 4));
-		inspireBasicDescription.SetTextVariable("cooldown", YellToInspireBehavior._maxCooldownTime.ToString());
+		inspireBasicDescription.SetTextVariable("input", Enum.GetName(typeof(InputKey), InspireBehaviour._boundInput));
+		inspireBasicDescription.SetTextVariable("radius", InspireBehaviour._abilityRadius);
+		inspireBasicDescription.SetTextVariable("morale", InspireBehaviour._positiveMoraleChange);
+		inspireBasicDescription.SetTextVariable("flee", (float)Math.Round(InspireBehaviour._percentChanceToFlee * 100f, 4));
+		inspireBasicDescription.SetTextVariable("cooldown", InspireBehaviour._maxCooldownTime.ToString());
 	}
 }

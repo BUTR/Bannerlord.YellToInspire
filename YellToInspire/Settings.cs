@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace YellToInspire;
 
-public class YellToInspireConfig
+public class Settings
 {
 	[JsonProperty("yellKey")]
 	public int YellKey { get; set; }
