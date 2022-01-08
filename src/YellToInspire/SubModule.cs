@@ -17,7 +17,7 @@ using YellToInspire.Skills;
 
 namespace YellToInspire
 {
-    public class Main : MBSubModuleBase
+    public class SubModule : MBSubModuleBase
     {
         private delegate void SetAllPerksDelegate(Campaign instance, MBReadOnlyList<PerkObject> perks);
         private static readonly SetAllPerksDelegate? SetAllPerks =

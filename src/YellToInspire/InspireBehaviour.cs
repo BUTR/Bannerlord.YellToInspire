@@ -174,7 +174,7 @@ namespace YellToInspire
                 }
 
                 if (affectedAgents.Count > 0)
-                    Main.DelayedAgentReactions(affectedAgents, _minResponseDelay, _maxResponseDelay);
+                    SubModule.DelayedAgentReactions(affectedAgents, _minResponseDelay, _maxResponseDelay);
 
                 if (CustomGame.Current is null && Mission.Current.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: false })
                 {
@@ -193,7 +193,7 @@ namespace YellToInspire
                 if (!Mission.Current.GetNearbyEnemyAgents(MainAgent.Position.AsVec2, 8f, MainAgent.Team).Any() && _enableCheerAnimation)
                 {
                     MainAgent.SetActionChannel(1, _cheerActions[MBRandom.RandomInt(_cheerActions.Length)], false, 0uL, 0f, 1f, -0.2f, 0.4f, 0f, false, -0.2f, 0, true);
-                    Main.AddToCheeringList(new CheeringAgent(MainAgent, MissionTime.Now.ToSeconds, 1.5));
+                    SubModule.AddToCheeringList(new CheeringAgent(MainAgent, MissionTime.Now.ToSeconds, 1.5));
                 }
 
                 MainAgent.MakeVoice(voiceType, (SkinVoiceManager.CombatVoiceNetworkPredictionType) 2);
