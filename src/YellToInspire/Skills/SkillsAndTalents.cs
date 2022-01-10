@@ -1,72 +1,85 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
-using TaleWorlds.InputSystem;
 using TaleWorlds.Localization;
 
 namespace YellToInspire.Skills
 {
-    public class SkillsAndTalents
+    public sealed class SkillsAndTalents : IDisposable
     {
-        private static readonly TextObject inspireBasicDescription = new("Press {input} to belt out a mighty yell that inspires allies {newline}and instills fear in the hearts of your enemies. {newline}Nearby allies are given a small morale boost, and {newline}nearby enemies with low morale have a chance of fleeing! {newline}Radius, allied morale gain, and cooldown scale with Leadership. {newline}Enemy flee chance scales with Roguery. {newline} {newline}  Current radius size: {radius} meters {newline}  Allied morale gain: +{morale} morale {newline}  Enemy flee chance: {flee}% {newline}  Cooldown: {cooldown} seconds");
-        private static readonly TextObject inspireTenacityDescription = new("Friendly fleeing units under the effect of Inspire regain their resolve and return to the fight!");
-        private static readonly TextObject inspireHasteDescription = new("Friendly units under the effect of Inspire gain a short temporary speed boost!");
-        private static readonly TextObject inspireFortitudeDescription = new("Friendly units under the effect of Inspire gain a small temporary health boost!");
-        
-        public static PerkObject InspireBasic;
-        public static PerkObject InspireResolve;
-        public static PerkObject InspireHaste;
-        public static PerkObject InspireFortitude;
+        private static readonly string InspireId = "Inspire";
+        private static readonly string InspireResolveId = "Inspire Resolve";
+
+        private static readonly TextObject _inspireBasicDescription = new(@"{=c2MjU4ZqPQ}
+Press {INPUT} to belt out a mighty yell that inspires allies{NEWLINE}
+and instills fear in the hearts of your enemies.{NEWLINE}
+Nearby allies are given a small morale boost, and{NEWLINE}
+nearby enemies with low morale have a chance of fleeing!{NEWLINE}
+Radius, allied morale gain, and cooldown scale with Leadership.{NEWLINE}
+Enemy flee chance scales with Roguery.{NEWLINE}{NEWLINE}
+Current radius size: {RADIUS} meters{NEWLINE}
+Allied morale gain: +{MORALE} morale {NEWLINE}
+Enemy flee chance: {FLEE}% {NEWLINE}
+Cooldown: {COOLDOWN} seconds");
+        private static readonly TextObject _inspireTenacityDescription = new(@"{=cGR5dN440y}
+Friendly fleeing units under the effect of Inspire regain their resolve and return to the fight!");
+        private static readonly TextObject _inspireHasteDescription = new(@"{=NmyOWk1YDa}
+Friendly units under the effect of Inspire gain a short temporary speed boost!");
+        private static readonly TextObject _inspireFortitudeDescription = new(@"{=YwMTY7RbUv}
+Friendly units under the effect of Inspire gain a small temporary health boost!");
+
+        public static PerkObject InspireBasic { get; private set; }
+        public static PerkObject InspireResolve { get; private set; }
+        public static PerkObject InspireHaste { get; private set; }
+        public static PerkObject InspireFortitude { get; private set; }
 
         private readonly Game _game;
-        private List<PerkObject> perkObjects;
+        private float _deltaSum;
 
         public SkillsAndTalents(Game game)
         {
             _game = game;
-            perkObjects = new List<PerkObject>();
-            AddPerks();
-        }
 
-        private PerkObject CreatePerk(string stringId)
-        {
-            var val = new PerkObject(stringId);
-            perkObjects.Add(val);
-            return _game.ObjectManager.RegisterPresumedObject(val);
-        }
-
-        private void AddPerks()
-        {
-            InspireBasic = CreatePerk("Inspire");
-            InspireResolve = CreatePerk("Inspire Resolve");
+            InspireBasic = CreatePerk(InspireId);
+            InspireResolve = CreatePerk(InspireResolveId);
             InitializePerks();
         }
 
-        private static void InitializePerks()
+        public void Update(float dt)
         {
-            InitializeTextVariables();
-            InspireBasic.Initialize("Inspire", inspireBasicDescription.ToString(), DefaultSkills.Leadership, 5, null, SkillEffect.PerkRole.PartyLeader, 10f, SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.Add, "");
-            InspireResolve.Initialize("Inspire Resolve", inspireTenacityDescription.ToString(), DefaultSkills.Leadership, 35, null, SkillEffect.PerkRole.PartyLeader, 15f, SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.AddFactor, "");
+            // TODO:
+            _deltaSum += dt;
+            if (_deltaSum < 500f) return;
+            _deltaSum = 0f;
+
+            InspireBasic.Initialize(InspireId, SetVariables(_inspireBasicDescription).ToString(), DefaultSkills.Leadership, 5, null, SkillEffect.PerkRole.PartyLeader, 10f, SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.AddFactor, "");
         }
 
-        public static void ReinitializePerks()
+        private PerkObject CreatePerk(string stringId) => _game.ObjectManager.RegisterPresumedObject(new PerkObject(stringId));
+
+        private void InitializePerks()
         {
-            InitializeTextVariables();
-            if (InspireBasic is not null)
-            {
-                InspireBasic.Initialize("Inspire", inspireBasicDescription.ToString(), DefaultSkills.Leadership, 5, null, SkillEffect.PerkRole.PartyLeader, 10f, SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.AddFactor, "");
-            }
+            InspireBasic.Initialize(InspireId, SetVariables(_inspireBasicDescription).ToString(), DefaultSkills.Leadership, 5, null, SkillEffect.PerkRole.PartyLeader, 10f, SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.Add, "");
+            InspireResolve.Initialize(InspireResolveId, _inspireTenacityDescription.ToString(), DefaultSkills.Leadership, 35, null, SkillEffect.PerkRole.PartyLeader, 15f, SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.AddFactor, "");
         }
 
-        private static void InitializeTextVariables()
+        private static TextObject SetVariables(TextObject textObject)
         {
-            inspireBasicDescription.SetTextVariable("newline", "\n");
-            inspireBasicDescription.SetTextVariable("input", Enum.GetName(typeof(InputKey), InspireBehaviour._boundInput));
-            inspireBasicDescription.SetTextVariable("radius", InspireBehaviour._abilityRadius);
-            inspireBasicDescription.SetTextVariable("morale", InspireBehaviour._positiveMoraleChange);
-            inspireBasicDescription.SetTextVariable("flee", (float) Math.Round(InspireBehaviour._percentChanceToFlee * 100f, 4));
-            inspireBasicDescription.SetTextVariable("cooldown", InspireBehaviour._maxCooldownTime.ToString());
+            if (_inspireBasicDescription is null) return textObject;
+            if (Settings.Instance is not { } settings) return textObject;
+
+            return textObject
+                .SetTextVariable("NEWLINE", "\n")
+                .SetTextVariable("RADIUS", settings.AbilityRadius(Hero.MainHero))
+                .SetTextVariable("MORALE", settings.AlliedMoraleGain(Hero.MainHero))
+                .SetTextVariable("FLEE", settings.EnemyChanceToFlee(Hero.MainHero))
+                .SetTextVariable("COOLDOWN", settings.AbilityCooldown(Hero.MainHero));
+        }
+
+        public void Dispose()
+        {
+
         }
     }
 }
