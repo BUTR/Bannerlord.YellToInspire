@@ -1,6 +1,5 @@
 ﻿using Bannerlord.BUTR.Shared.Helpers;
-using Bannerlord.ButterLib.Common.Extensions;
-using Bannerlord.ButterLib.Common.Helpers;
+using Bannerlord.ModuleManager;
 
 using Microsoft.Extensions.Logging;
 
@@ -13,16 +12,19 @@ using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 
 using TaleWorlds.Core;
-using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 
 using AccessTools2 = HarmonyLib.BUTR.Extensions.AccessTools2;
 
 namespace YellToInspire.Loader
 {
+    internal record ImplementationFile(FileInfo Implementation, ApplicationVersion Version);
+
     internal static class LoaderHelper
     {
         private delegate MBSubModuleBase ConstructorDelegate();
+
+        private static ApplicationVersion? GameVersion() => ApplicationVersion.TryParse(ApplicationVersionHelper.GameVersionStr(), out var v) ? v : null;
 
         public static IEnumerable<MBSubModuleBase> LoadAllImplementations(ILogger? logger, string filterWildcard)
         {
@@ -55,7 +57,7 @@ namespace YellToInspire.Loader
                 yield break;
             }
 
-            var gameVersion = ApplicationVersionHelper.GameVersion();
+            var gameVersion = GameVersion();
             if (gameVersion is null)
             {
                 logger?.LogError("Failed to get Game version!");
@@ -71,7 +73,7 @@ namespace YellToInspire.Loader
                 yield break;
             }
 
-            var implementationsForGameVersion = ImplementationForGameVersion(gameVersion.Value, implementationsWithVersions).ToList();
+            var implementationsForGameVersion = ImplementationForGameVersion(gameVersion, implementationsWithVersions).ToList();
             switch (implementationsForGameVersion.Count)
             {
                 case > 1:
@@ -114,7 +116,7 @@ namespace YellToInspire.Loader
             {
                 try
                 {
-                    return a.GetTypes().Where(t => typeof(MBSubModuleBase).IsAssignableFrom(t));
+                    return AccessTools2.GetTypesFromAssembly(a).Where(t => typeof(MBSubModuleBase).IsAssignableFrom(t));
                 }
                 catch (Exception e) when (e is ReflectionTypeLoadException)
                 {
@@ -129,7 +131,7 @@ namespace YellToInspire.Loader
 
             foreach (var subModuleType in subModules)
             {
-                var constructor = subModuleType.GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.CreateInstance, null, Type.EmptyTypes, null);
+                var constructor = AccessTools2.Constructor(subModuleType, Type.EmptyTypes);
                 if (constructor is null)
                 {
                     logger?.LogError("SubModule {subModuleType} is missing a default constructor!", subModuleType);
@@ -149,7 +151,7 @@ namespace YellToInspire.Loader
             logger?.LogInformation("Finished loading implementations.");
         }
 
-        private static IEnumerable<(FileInfo Implementation, ApplicationVersion Version)> GetImplementations(IEnumerable<FileInfo> implementations, ILogger? logger = null)
+        private static IEnumerable<ImplementationFile> GetImplementations(IEnumerable<FileInfo> implementations, ILogger? logger = null)
         {
             foreach (var implementation in implementations)
             {
@@ -175,14 +177,14 @@ namespace YellToInspire.Loader
                     var value = attributeReader.ReadSerializedString();
                     if (string.Equals(key, "GameVersion"))
                     {
-                        if (!ApplicationVersionHelper.TryParse(value, out var implementationGameVersion))
+                        if (!ApplicationVersion.TryParse(value, out var implementationGameVersion))
                         {
                             logger?.LogError("Implementation {name} has invalid GameVersion AssemblyMetadataAttribute!", implementation.Name);
                             continue;
                         }
 
                         found = true;
-                        yield return (implementation, implementationGameVersion);
+                        yield return new(implementation, implementationGameVersion);
                         break;
                     }
                 }
@@ -192,27 +194,17 @@ namespace YellToInspire.Loader
             }
         }
 
-        private static IEnumerable<(FileInfo Implementation, ApplicationVersion Version)> ImplementationForGameVersion(ApplicationVersion gameVersion, IEnumerable<(FileInfo Implementation, ApplicationVersion Verion)> implementations)
+        private static IEnumerable<ImplementationFile> ImplementationForGameVersion(ApplicationVersion gameVersion, IEnumerable<ImplementationFile> implementations)
         {
             foreach (var (implementation, version) in implementations)
             {
-                if (version.Revision == -1) // Implementation does not specify the revision
+                if (gameVersion.IsSame(version))
                 {
-                    if (gameVersion.IsSameWithoutRevision(version))
-                    {
-                        yield return (implementation, version);
-                    }
-                }
-                else // Implementation specified the revision
-                {
-                    if (gameVersion.IsSameWithRevision(version))
-                    {
-                        yield return (implementation, version);
-                    }
+                    yield return new(implementation, version);
                 }
             }
         }
-        private static (FileInfo Implementation, ApplicationVersion Version) ImplementationLatest(IEnumerable<(FileInfo Implementation, ApplicationVersion Version)> implementations)
+        private static ImplementationFile ImplementationLatest(IEnumerable<ImplementationFile> implementations)
         {
             return implementations.MaxBy(x => x.Version, new ApplicationVersionComparer(), out _);
         }
