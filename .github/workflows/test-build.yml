@@ -53,7 +53,7 @@ jobs:
             # Copy Implementations to the Implementations folder
             Copy-Item $pdll $impl/;
             Copy-Item $ppdb $impl/;
-			echo "::endgroup::"
+            echo "::endgroup::"
         }
         # Copy Implementations and Loader to the Module
         Copy-Item $impl/* $final;
