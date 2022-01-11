@@ -50,7 +50,7 @@ namespace YellToInspire
                 {
                     if (causingAgent.Character is not CharacterObject charObj || charObj.GetPerkValue(Perks.InspireResolve))
                     {
-#if e164
+#if e162 || e163 || e164 || e165
                         nearbyAllyAgent.SetMorale(25f);
 #elif e170
                         nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
@@ -65,7 +65,7 @@ namespace YellToInspire
                 {
                     if (causingAgent.Character is not CharacterObject charObj || charObj.GetPerkValue(Perks.InspireResolve))
                     {
-#if e164
+#if e162 || e163 || e164 || e165
                         nearbyAllyAgent.SetMorale(25f);
 #elif e170
                         nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
@@ -89,8 +89,8 @@ namespace YellToInspire
 
                 if (nearbyEnemyAgent.GetMorale() <= settings.EnemyFleeMoraleThreshold)
                 {
-#if e164
-                     if (true)
+#if e162 || e163 || e164 || e165
+                    if (true)
 #elif e170
                      if (commonAiComponent.CanPanic())
 #else

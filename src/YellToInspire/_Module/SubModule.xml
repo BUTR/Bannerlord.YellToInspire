@@ -28,21 +28,9 @@
   </DependedModuleMetadatas>
   <SubModules>
     <SubModule>
-      <Name value="$modulename$" />
-      <DLLName value="$modulename$.dll" />
-      <SubModuleClassType value="$modulename$.SubModule" />
-      <Tags />
-    </SubModule>
-    <SubModule>
-      <Name value="$modulename$" />
-      <DLLName value="$modulename$.dll" />
-      <SubModuleClassType value="$modulename$.Handlers.CampaignHandler" />
-      <Tags />
-    </SubModule>
-    <SubModule>
-      <Name value="$modulename$" />
-      <DLLName value="$modulename$.dll" />
-      <SubModuleClassType value="$modulename$.Handlers.CustomGameHandler" />
+      <Name value="$modulename$ Loader" />
+      <DLLName value="$modulename$.Loader.dll" />
+      <SubModuleClassType value="$modulename$.Loader.LoaderSubModule" />
       <Tags />
     </SubModule>
   </SubModules>

@@ -1,8 +1,8 @@
 ﻿using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Settings.Base.Global;
 
-using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
 namespace YellToInspire
@@ -16,10 +16,26 @@ namespace YellToInspire
             { "VERSION", typeof(Settings).Assembly.GetName().Version?.ToString(3) ?? "ERROR" }
         }).ToString();
 
-        public float AbilityRadius(BasicCharacterObject? character) => BaseAbilityRadius + (character?.GetSkillValue(Skills.Leadership) ?? 0 * AbilityRadiusIncreasePerLevel);
-        public float AbilityCooldown(BasicCharacterObject? character) => BaseAbilityCooldown + (character?.GetSkillValue(Skills.Leadership) ?? 0 * AbilityCooldownDecreasePerLevel);
-        public float AlliedMoraleGain(BasicCharacterObject? character) => BaseAlliedMoraleGain + (character?.GetSkillValue(Skills.Leadership) ?? 0 * AlliedMoraleGainIncreasePerLevel);
-        public float EnemyChanceToFlee(BasicCharacterObject? character) => BaseEnemyChanceToFlee + (character?.GetSkillValue(Skills.Roguery) ?? 0 * ChanceToFleeIncreasePerLevel / 100f);
+        public float AbilityRadius(BasicCharacterObject? character)
+        {
+            var raw = BaseAbilityRadius + (character?.GetSkillValue(Skills.Leadership) ?? 0 * AbilityRadiusIncreasePerLevel);
+            return MathF.Clamp(raw, 1f, 100f);
+        }
+        public float AbilityCooldown(BasicCharacterObject? character)
+        {
+            var raw = BaseAbilityCooldown - (character?.GetSkillValue(Skills.Leadership) ?? 0 * AbilityCooldownDecreasePerLevel);
+            return MathF.Clamp(raw, 3f, 300f);
+        }
+        public float AlliedMoraleGain(BasicCharacterObject? character)
+        {
+            var raw = BaseAlliedMoraleGain + (character?.GetSkillValue(Skills.Leadership) ?? 0 * AlliedMoraleGainIncreasePerLevel);
+            return MathF.Clamp(raw, 0f, 100f);
+        }
+        public float EnemyChanceToFlee(BasicCharacterObject? character)
+        {
+            var raw = BaseEnemyChanceToFlee + (character?.GetSkillValue(Skills.Roguery) ?? 0 * ChanceToFleeIncreasePerLevel / 100f);
+            return MathF.Clamp(raw, 0f, 1f);
+        }
 
 
         [SettingPropertyFloatingInteger("{=OSbrbCqXUR}Base Ability Radius", 0f, 100f, "#0 units", Order = 0, RequireRestart = false, HintText = "")]

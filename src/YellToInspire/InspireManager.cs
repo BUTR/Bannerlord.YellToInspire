@@ -69,7 +69,7 @@ namespace YellToInspire
             if (_cooldownSnapshot != 0 && !(PastCooldown > settings.AbilityCooldown(causingAgent.Character)))
             {
                 var time = settings.AbilityCooldown(causingAgent.Character) - PastCooldown;
-                InformationManager.DisplayMessage(new(CooldownText.SetTextVariable("TIME", (float) time).ToString()));
+                InformationManager.DisplayMessage(new(CooldownText.SetTextVariable("TIME", $"{time:###0}").ToString()));
                 return;
             }
 
@@ -81,9 +81,9 @@ namespace YellToInspire
             if (affectedAgents.Count > 0)
                 _battlefieldManager.DelayedAgentReactions(affectedAgents);
 
-#if e164
+#if e162 || e163 || e164
             if (hero is not null && Mission.Current.GetMissionBehaviour<BattleEndLogic>() is { PlayerVictory: false })
-#elif e170
+#elif e165 || e170
             if (hero is not null && Mission.Current.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: false })
 #else
 #error NOT SET
@@ -102,9 +102,9 @@ namespace YellToInspire
             {
                 { Fled: > 0 } => SkinVoiceManager.VoiceType.Victory,
                 { Retreating: > 0 } => SkinVoiceManager.VoiceType.FaceEnemy,
-#if e164
+#if e162 || e163 || e164
                 _ when Mission.Current.GetMissionBehaviour<BattleEndLogic>() is { PlayerVictory: true } => SkinVoiceManager.VoiceType.Victory,
-#elif e170
+#elif e165 || e170
                 _ when Mission.Current.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: true } => SkinVoiceManager.VoiceType.Victory,
 #else
 #error NOT SET

@@ -2,16 +2,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-    <Platforms>x64</Platforms>
-    <LangVersion>9.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <ModuleName>$(MSBuildProjectName)</ModuleName>
-    <Authors>BoiZoi (Kahchow), Mehdiocrity, BUTR</Authors>
-    <Configurations>Debug;Release</Configurations>
-    <DefineConstants>$(DefineConstants);$(ConstGameVersionWithPrefix)</DefineConstants>
-    <!--Some code analyzers don't support common.props parsing-->
-    <TargetFrameworks Condition=" '$(TargetFrameworks)' == '' ">net472</TargetFrameworks>
+    <AssemblyName>$(ModuleName).$(GameVersion)</AssemblyName>
+    <DefineConstants>$(DefineConstants);$(GameVersionConstant)</DefineConstants>
+    <Configurations>Stable_Debug;Stable_Release;Beta_Debug;Beta_Release</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,12 +16,15 @@
     <PackageReference Include="Bannerlord.MCM" Version="$(MCMVersion)" IncludeAssets="compile" />
     <PackageReference Include="Harmony.Extensions" Version="$(HarmonyExtensionsVersion)" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
     <PackageReference Include="Lib.Harmony" Version="$(HarmonyVersion)" IncludeAssets="compile" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" IncludeAssets="compile" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="IsExternalInit" Version="1.0.1" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
     <PackageReference Include="Nullable" Version="1.3.0" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YellToInspire.Loader\YellToInspire.Loader.csproj" />
   </ItemGroup>
 
   <!-- Extra Substitution Variables to Use in SubModule.xml -->
