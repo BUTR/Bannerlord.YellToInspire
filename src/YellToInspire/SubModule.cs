@@ -6,7 +6,7 @@ using HotKeyManager = Bannerlord.ButterLib.HotKeys.HotKeyManager;
 
 namespace YellToInspire
 {
-    public class SubModule : MBSubModuleBase
+    internal sealed class SubModule : MBSubModuleBase
     {
         private bool _isInitialized;
 

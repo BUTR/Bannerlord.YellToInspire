@@ -36,13 +36,13 @@
     <SubModule>
       <Name value="$modulename$" />
       <DLLName value="$modulename$.dll" />
-      <SubModuleClassType value="$modulename$.CampaignHandler" />
+      <SubModuleClassType value="$modulename$.Handlers.CampaignHandler" />
       <Tags />
     </SubModule>
     <SubModule>
       <Name value="$modulename$" />
       <DLLName value="$modulename$.dll" />
-      <SubModuleClassType value="$modulename$.CustomGameHandler" />
+      <SubModuleClassType value="$modulename$.Handlers.CustomGameHandler" />
       <Tags />
     </SubModule>
   </SubModules>

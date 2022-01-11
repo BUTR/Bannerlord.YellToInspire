@@ -1,47 +1,20 @@
 ﻿using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 
-namespace YellToInspire
+namespace YellToInspire.Handlers
 {
-    public class CustomGameHandler : MBSubModuleBase
+    internal sealed class CustomGameHandler : MBSubModuleBase
     {
-        private enum MissionState { None, Started, Finished }
+        private enum CustomGameState { None, BattleSetupScreen, Battle }
 
         private InspireManager? _inspireManager;
-        private MissionState _missionState;
-
-        protected override void OnApplicationTick(float dt)
-        {
-            if (_inspireManager is null) return;
-
-            if (Mission.Current is not null)
-            {
-                if (_missionState != MissionState.Started)
-                {
-                    _inspireManager.MissionStarted();
-                    _missionState = MissionState.Started;
-                }
-
-                _inspireManager.MissionTick(dt);
-            }
-            else
-            {
-                if (_missionState != MissionState.Finished)
-                {
-                    _inspireManager.MissionEnded();
-                    _missionState = MissionState.Finished;
-                }
-            }
-
-            base.OnApplicationTick(dt);
-        }
+        private CustomGameState _missionState;
 
         protected override void OnGameStart(Game game, IGameStarter gameStarter)
         {
             if (gameStarter is BasicGameStarter)
             {
                 _inspireManager = new InspireManager();
-                _inspireManager.OnNewGameCreated(gameStarter);
             }
 
             base.OnGameStart(game, gameStarter);
@@ -51,12 +24,38 @@ namespace YellToInspire
         {
             if (_inspireManager is null) return;
 
-            _missionState = MissionState.Finished;
+            _missionState = CustomGameState.None;
             _inspireManager.MissionEnded();
             _inspireManager.Dispose();
             _inspireManager = null;
 
             base.OnGameEnd(game);
+        }
+
+        protected override void OnApplicationTick(float dt)
+        {
+            if (_inspireManager is null) return;
+
+            if (Mission.Current is not null)
+            {
+                if (_missionState != CustomGameState.Battle)
+                {
+                    _inspireManager.MissionStarted();
+                    _missionState = CustomGameState.Battle;
+                }
+
+                _inspireManager.MissionTick(dt);
+            }
+            else
+            {
+                if (_missionState != CustomGameState.BattleSetupScreen)
+                {
+                    _inspireManager.MissionEnded();
+                    _missionState = CustomGameState.BattleSetupScreen;
+                }
+            }
+
+            base.OnApplicationTick(dt);
         }
     }
 }

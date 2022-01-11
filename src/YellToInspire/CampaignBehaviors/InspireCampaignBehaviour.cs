@@ -1,8 +1,10 @@
 ﻿using TaleWorlds.CampaignSystem;
 
-namespace YellToInspire
+using YellToInspire.Handlers;
+
+namespace YellToInspire.CampaignBehaviors
 {
-    public class InspireCampaignBehaviour : CampaignBehaviorBase
+    internal sealed class InspireCampaignBehaviour : CampaignBehaviorBase
     {
         private readonly InspireManager _inspireManager = new();
         private readonly CampaignHandler _campaignHandler;
@@ -17,11 +19,6 @@ namespace YellToInspire
 
         public override void RegisterEvents()
         {
-            CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, _inspireManager.SetupCampaign);
-            CampaignEvents.TickEvent.AddNonSerializedListener(this, _inspireManager.CampaignTick);
-
-            CampaignEvents.OnNewGameCreatedEvent.AddNonSerializedListener(this, _inspireManager.OnNewGameCreated);
-
             CampaignEvents.MissionTickEvent.AddNonSerializedListener(this, _inspireManager.MissionTick);
             CampaignEvents.OnMissionStartedEvent.AddNonSerializedListener(this, _ => _inspireManager.MissionStarted());
             CampaignEvents.OnMissionEndedEvent.AddNonSerializedListener(this, _ => _inspireManager.MissionEnded());

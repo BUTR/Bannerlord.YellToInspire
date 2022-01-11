@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 using TaleWorlds.CampaignSystem;
@@ -6,120 +7,128 @@ using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 
-using YellToInspire.Skills;
-
 namespace YellToInspire
 {
-    internal static class Shared
-    {
-        public static readonly TextObject CooldownText = new("{=FsbQpeMJYJ}Your ability is still on cooldown for {TIME} second(s)!");
-        public static readonly TextObject AlliesInspiredText = new("{=gqr3o3aOfu}Allied unit(s) that were inspired: {INSPIRED}");
-        public static readonly TextObject AlliesRestoredText = new("{=5fapWaqKVw}Allied unit(s) that are returning to battle: {RETURNING}");
-        public static readonly TextObject EnemiesScaredText = new("{=Ldui1l6RMK}Enemy unit(s) that had their courage tested: {SCARED}");
-        public static readonly TextObject EnemiesFledText = new("{=8aQ7tO6TbA}Enemy unit(s) that are fleeing: {FLED}");
-        public static readonly TextObject EnemiesRestoredText = new("{=zy6xciLnky}Enemy unit(s) that are returning to battle: {RETURNING}");
-        public static readonly TextObject[] AbilityPhrases =
-        {
-            new("{=OG3KT8KQvR}A primal bellow echos forth from the depths of your soul!"),
-            new("{=0SKEk61Zj0}Your banshee howl pierces the battlefield!"),
-            new("{=HT9YJgKEl2}You let out a deafening warcry!"),
-            new("{=Nr6docL7MZ}You explode with a thunderous roar!")
-        };
-
-        public static readonly ActionIndexCache[] CheerActions =
-        {
-            ActionIndexCache.Create("act_command"),
-            ActionIndexCache.Create("act_command_follow")
-        };
-    }
-
     internal static class Utils
     {
-        public struct TroopsStatistics
+        public struct TroopStatistics
         {
             public int Inspired;
             public int Retreating;
             public int Nearby;
-            public int Fleeting;
+            public int Fled;
         }
 
-        private static Agent? MainAgent => Mission.Current?.MainAgent;
-        private static Hero? Hero => CharacterObject.PlayerCharacter?.HeroObject;
+        private static readonly TextObject AlliesInspiredText = new("{=gqr3o3aOfu}Allied unit(s) that were inspired: {INSPIRED}");
+        private static readonly TextObject AlliesRestoredText = new("{=5fapWaqKVw}Allied unit(s) that are returning to battle: {RETURNING}");
+        private static readonly TextObject EnemiesScaredText = new("{=Ldui1l6RMK}Enemy unit(s) that had their courage tested: {SCARED}");
+        private static readonly TextObject EnemiesFledText = new("{=8aQ7tO6TbA}Enemy unit(s) that are fleeing: {FLED}");
+        private static readonly TextObject EnemiesRestoredText = new("{=zy6xciLnky}Enemy unit(s) that are returning to battle: {RETURNING}");
 
-        public static (TroopsStatistics, List<Agent>) IterateTroops()
+        public static (TroopStatistics Statistics, List<WeakReference<Agent>> AffectedAgents) AffectTroops(Agent causingAgent)
         {
             if (Settings.Instance is not { } settings) return default;
-            if (MainAgent is null) return default;
 
-            var data = new TroopsStatistics();
-            var list = new List<Agent>();
+            var vec2Pos = causingAgent.Position.AsVec2;
+            var team = causingAgent.Team;
 
-            foreach (var nearbyAllyAgent in Mission.Current.GetNearbyAllyAgents(MainAgent.Position.AsVec2,
-                         settings.AbilityRadius(Hero), MainAgent.Team))
+            var statistics = new TroopStatistics();
+            var affectedAgents = new List<WeakReference<Agent>>();
+
+            foreach (var nearbyAllyAgent in Mission.Current.GetNearbyAllyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
             {
-                if (nearbyAllyAgent == MainAgent) continue;
+                if (nearbyAllyAgent == causingAgent) continue;
 
-                data.Inspired++;
-                list.Add(nearbyAllyAgent);
-                nearbyAllyAgent.ChangeMorale(settings.AlliedMoraleGain(Hero));
+                if (nearbyAllyAgent.GetComponent<CommonAIComponent>() is not { } commonAiComponent) continue;
 
-                if (Hero is not null)
+                statistics.Inspired++;
+                affectedAgents.Add(new(nearbyAllyAgent));
+
+                nearbyAllyAgent.ChangeMorale(settings.AlliedMoraleGain(causingAgent.Character));
+
+                if (commonAiComponent.IsRetreating)
                 {
-                    if (nearbyAllyAgent.IsRetreating() && Hero.GetPerkValue(SkillsAndTalents.InspireResolve))
+                    if (causingAgent.Character is not CharacterObject charObj || charObj.GetPerkValue(Perks.InspireResolve))
                     {
-                        nearbyAllyAgent.ChangeMorale(25f);
-                        nearbyAllyAgent.GetComponent<CommonAIComponent>().StopRetreating();
-                        data.Retreating++;
+#if e164
+                        nearbyAllyAgent.SetMorale(25f);
+#elif e170
+                        nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
+#else
+#error NOT SET
+#endif
+                        commonAiComponent.StopRetreating();
+                        statistics.Retreating++;
                     }
                 }
-                else if (nearbyAllyAgent.IsRetreating())
+                if (commonAiComponent.IsPanicked)
                 {
-                    nearbyAllyAgent.ChangeMorale(25f);
-                    nearbyAllyAgent.GetComponent<CommonAIComponent>().StopRetreating();
-                    data.Retreating++;
+                    if (causingAgent.Character is not CharacterObject charObj || charObj.GetPerkValue(Perks.InspireResolve))
+                    {
+#if e164
+                        nearbyAllyAgent.SetMorale(25f);
+#elif e170
+                        nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
+#else
+#error NOT SET
+#endif
+                        commonAiComponent.StopRetreating();
+                        statistics.Retreating++;
+                    }
                 }
             }
 
-            foreach (var nearbyEnemyAgent in Mission.Current.GetNearbyEnemyAgents(MainAgent.Position.AsVec2,
-                         settings.AbilityRadius(Hero), MainAgent.Team))
+            foreach (var nearbyEnemyAgent in Mission.Current.GetNearbyEnemyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
             {
-                data.Nearby++;
-                list.Add(nearbyEnemyAgent);
+                if (nearbyEnemyAgent.GetComponent<CommonAIComponent>() is not { } commonAiComponent) continue;
 
-                if (MBRandom.RandomFloatRanged(0f, 1f) > settings.EnemyChanceToFlee(Hero)) continue;
+                statistics.Nearby++;
+                affectedAgents.Add(new(nearbyEnemyAgent));
 
-                nearbyEnemyAgent.ChangeMorale(0f - settings.EnemyFleeMoraleThreshold);
-                if (nearbyEnemyAgent.GetMorale() <= 0.0)
+                if (MBRandom.RandomFloatRanged(0f, 1f) > settings.EnemyChanceToFlee(causingAgent.Character)) continue;
+
+                if (nearbyEnemyAgent.GetMorale() <= settings.EnemyFleeMoraleThreshold)
                 {
-                    data.Fleeting++;
-                    nearbyEnemyAgent.GetComponent<CommonAIComponent>().Panic();
-                    if (settings.FleeingEnemiesReturn)
+#if e164
+                     if (true)
+#elif e170
+                     if (commonAiComponent.CanPanic())
+#else
+#error NOT SET
+#endif
                     {
-                        nearbyEnemyAgent.ChangeMorale(settings.EnemyFleeMoraleThreshold * 2f);
-                        nearbyEnemyAgent.GetComponent<CommonAIComponent>().StopRetreating();
+                        statistics.Fled++;
+
+                        nearbyEnemyAgent.GetComponent<CommonAIComponent>().Panic();
+
+                        //if (settings.FledEnemiesReturn)
+                        //{
+                        //    commonAiComponent.StopRetreating();
+                        //}
                     }
                 }
-                else
-                    nearbyEnemyAgent.ChangeMorale(settings.EnemyFleeMoraleThreshold);
             }
 
-            return (data, list);
+            return (statistics, affectedAgents);
         }
 
-        public static void ShowDetailedMessage(TroopsStatistics troopsStatistics)
+        public static void ShowDetailedMessage(TroopStatistics troopsStatistics)
         {
             if (Settings.Instance is not { } settings) return;
 
             if (settings.ShowDetailedMessageText)
             {
-                
-                InformationManager.DisplayMessage(new(Shared.AlliesInspiredText.SetTextVariable("INSPIRED", troopsStatistics.Inspired).ToString()));
-                InformationManager.DisplayMessage(new(Shared.AlliesRestoredText.SetTextVariable("RETURNING", troopsStatistics.Retreating).ToString()));
-                InformationManager.DisplayMessage(new(Shared.EnemiesScaredText.SetTextVariable("SCARED", troopsStatistics.Nearby).ToString()));
-                InformationManager.DisplayMessage(settings.FleeingEnemiesReturn
-                    ? new(Shared.EnemiesRestoredText.SetTextVariable("RETURNING", troopsStatistics.Fleeting).ToString())
-                    : new(Shared.EnemiesFledText.SetTextVariable("FLED", troopsStatistics.Fleeting).ToString())
-                );
+                InformationManager.DisplayMessage(new(AlliesInspiredText.SetTextVariable("INSPIRED", troopsStatistics.Inspired).ToString()));
+                InformationManager.DisplayMessage(new(AlliesRestoredText.SetTextVariable("RETURNING", troopsStatistics.Retreating).ToString()));
+                InformationManager.DisplayMessage(new(EnemiesScaredText.SetTextVariable("SCARED", troopsStatistics.Nearby).ToString()));
+                //if (settings.FleeingEnemiesReturn)
+                //{
+                //    InformationManager.DisplayMessage(new(EnemiesRestoredText.SetTextVariable("RETURNING", troopsStatistics.Fled).ToString()));
+                //}
+                //else
+                {
+                    InformationManager.DisplayMessage(new(EnemiesFledText.SetTextVariable("FLED", troopsStatistics.Fled).ToString()));
+                }
             }
             else
             {
@@ -135,11 +144,11 @@ namespace YellToInspire
                 if (troopsStatistics.Nearby > 0)
                 {
                     sb.Append($"{troopsStatistics.Nearby} nearby enemy unit(s) have their courage tested");
-                    if (troopsStatistics.Fleeting > 0)
+                    if (troopsStatistics.Fled > 0)
                     {
-                        sb.Append($", and {troopsStatistics.Fleeting} of them are shaken to the core and flee!");
-                        if (settings.FleeingEnemiesReturn)
-                            sb.Append(" But they regain their composure and reengage!");
+                        sb.Append($", and {troopsStatistics.Fled} of them are shaken to the core and flee!");
+                        //if (settings.FledEnemiesReturn)
+                        //    sb.Append(" But they regain their composure and reengage!");
                     }
                     else
                         sb.Append(", but they all hold steadfast!");

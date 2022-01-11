@@ -9,7 +9,7 @@
     <ModuleName>$(MSBuildProjectName)</ModuleName>
     <Authors>BoiZoi (Kahchow), Mehdiocrity, BUTR</Authors>
     <Configurations>Debug;Release</Configurations>
-    <DefineConstants>$(DefineConstants);</DefineConstants>
+    <DefineConstants>$(DefineConstants);$(ConstGameVersionWithPrefix)</DefineConstants>
     <!--Some code analyzers don't support common.props parsing-->
     <TargetFrameworks Condition=" '$(TargetFrameworks)' == '' ">net472</TargetFrameworks>
   </PropertyGroup>

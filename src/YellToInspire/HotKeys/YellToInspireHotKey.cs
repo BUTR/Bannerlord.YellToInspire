@@ -3,18 +3,13 @@
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.InputSystem;
 using TaleWorlds.MountAndBlade;
-using TaleWorlds.MountAndBlade.CustomBattle;
-
-using YellToInspire.Skills;
 
 using HotKeyManager = Bannerlord.ButterLib.HotKeys.HotKeyManager;
 
 namespace YellToInspire.HotKeys
 {
-    public class YellToInspireHotKey : HotKeyBase
+    internal sealed class YellToInspireHotKey : HotKeyBase
     {
-        private static Agent? MainAgent => Mission.Current?.MainAgent;
-
         protected override string DisplayName { get; }
         protected override string Description { get; }
         protected override InputKey DefaultKey { get; }
@@ -30,20 +25,20 @@ namespace YellToInspire.HotKeys
 
         protected override void OnReleased()
         {
-            if (MainAgent is null) return;
-            if (!MainAgent.IsPlayerControlled) return;
+            if (Mission.Current?.MainAgent is not { IsPlayerControlled: true } agent) return;
+            if (InspireManager.Current is not { } inspireManager) return;
             if (MBCommon.IsPaused) return;
 
-            if (CustomGame.Current is null && Hero.MainHero is not null)
+            if (agent.Character is CharacterObject { HeroObject: { } hero })
             {
-                if (Hero.MainHero.GetPerkValue(SkillsAndTalents.InspireBasic))
+                if (hero.GetPerkValue(Perks.InspireBasic))
                 {
-                    InspireManager.Current.InspireAura();
+                    inspireManager.InspireAura(agent);
                 }
             }
             else
             {
-                InspireManager.Current.InspireAura();
+                inspireManager.InspireAura(agent);
             }
         }
     }

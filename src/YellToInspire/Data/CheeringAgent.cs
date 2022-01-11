@@ -1,6 +1,8 @@
-﻿using TaleWorlds.MountAndBlade;
+﻿using System;
 
-namespace YellToInspire
+using TaleWorlds.MountAndBlade;
+
+namespace YellToInspire.Data
 {
-    public record CheeringAgent(Agent Agent, double InitialTime, double TimeDelay);
+    internal sealed record CheeringAgent(WeakReference<Agent> Agent, double InitialTime, double TimeDelay);
 }
