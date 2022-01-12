@@ -1,6 +1,5 @@
 ﻿using System;
 
-using TaleWorlds.CampaignSystem;
 using TaleWorlds.Engine;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;

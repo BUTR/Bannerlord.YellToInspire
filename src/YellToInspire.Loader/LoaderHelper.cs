@@ -118,10 +118,10 @@ namespace YellToInspire.Loader
                 {
                     return AccessTools2.GetTypesFromAssembly(a).Where(t => typeof(MBSubModuleBase).IsAssignableFrom(t));
                 }
-                catch (Exception e) when (e is ReflectionTypeLoadException)
+                catch (ReflectionTypeLoadException e)
                 {
                     logger?.LogError(e, "Implementation {name} is not compatible with the current game!", Path.GetFileName(a.Location));
-                    return Enumerable.Empty<Type>();
+                    return e.Types.Where(t => typeof(MBSubModuleBase).IsAssignableFrom(t));
                 }
 
             }).ToList();
@@ -168,14 +168,14 @@ namespace YellToInspire.Loader
 
                     var container = mdReader.GetMemberReference((MemberReferenceHandle) ctorHandle).Parent;
                     var name = mdReader.GetTypeReference((TypeReferenceHandle) container).Name;
-                    if (!string.Equals(mdReader.GetString(name), "AssemblyMetadataAttribute")) continue;
+                    if (!string.Equals(mdReader.GetString(name), "AssemblyMetadataAttribute", StringComparison.Ordinal)) continue;
 
                     var attributeReader = mdReader.GetBlobReader(attr.Value);
                     attributeReader.ReadByte();
                     attributeReader.ReadByte();
                     var key = attributeReader.ReadSerializedString();
                     var value = attributeReader.ReadSerializedString();
-                    if (string.Equals(key, "GameVersion"))
+                    if (string.Equals(key, "GameVersion", StringComparison.Ordinal))
                     {
                         if (!ApplicationVersion.TryParse(value, out var implementationGameVersion))
                         {
