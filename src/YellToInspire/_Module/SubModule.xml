@@ -27,6 +27,7 @@
     <DependedModuleMetadata id="CustomBattle" order="LoadBeforeThis" version="e$gameversion$.*" />
   </DependedModuleMetadatas>
   <SubModules>
+    <!-- Bannerlord Module Loader. Do not change the name! -->
     <SubModule>
       <Name value="Bannerlord Module Loader" />
       <DLLName value="Bannerlord.ModuleLoader.dll" />
