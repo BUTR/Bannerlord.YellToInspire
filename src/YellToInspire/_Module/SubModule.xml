@@ -28,10 +28,12 @@
   </DependedModuleMetadatas>
   <SubModules>
     <SubModule>
-      <Name value="$modulename$ Loader" />
-      <DLLName value="$modulename$.Loader.dll" />
-      <SubModuleClassType value="$modulename$.Loader.LoaderSubModule" />
-      <Tags />
+      <Name value="Bannerlord Module Loader" />
+      <DLLName value="Bannerlord.ModuleLoader.dll" />
+      <SubModuleClassType value="Bannerlord.ModuleLoader.SubModule" />
+      <Tags>
+        <Tag key="LoaderFilter" value ="YellToInspire.*.dll" />
+      </Tags>
     </SubModule>
   </SubModules>
 </Module>

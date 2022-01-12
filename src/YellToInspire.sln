@@ -19,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C1A4BD70
 		..\build\common.targets = ..\build\common.targets
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YellToInspire.Loader", "YellToInspire.Loader\YellToInspire.Loader.csproj", "{A6A4B9EF-9137-42A1-9909-239888ED764B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D0AE6987-1B3A-4BBD-B9FD-A55C3209515A}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\dotnet-format-daily.yml = ..\.github\workflows\dotnet-format-daily.yml
@@ -48,14 +46,6 @@ Global
 		{B5962C16-F849-4AE7-A155-5068555FBDA1}.Stable_Debug|x64.Build.0 = Stable_Debug|x64
 		{B5962C16-F849-4AE7-A155-5068555FBDA1}.Stable_Release|x64.ActiveCfg = Stable_Release|x64
 		{B5962C16-F849-4AE7-A155-5068555FBDA1}.Stable_Release|x64.Build.0 = Stable_Release|x64
-		{A6A4B9EF-9137-42A1-9909-239888ED764B}.Beta_Debug|x64.ActiveCfg = Minimal_Debug|x64
-		{A6A4B9EF-9137-42A1-9909-239888ED764B}.Beta_Debug|x64.Build.0 = Minimal_Debug|x64
-		{A6A4B9EF-9137-42A1-9909-239888ED764B}.Beta_Release|x64.ActiveCfg = Minimal_Release|x64
-		{A6A4B9EF-9137-42A1-9909-239888ED764B}.Beta_Release|x64.Build.0 = Minimal_Release|x64
-		{A6A4B9EF-9137-42A1-9909-239888ED764B}.Stable_Debug|x64.ActiveCfg = Minimal_Debug|x64
-		{A6A4B9EF-9137-42A1-9909-239888ED764B}.Stable_Debug|x64.Build.0 = Minimal_Debug|x64
-		{A6A4B9EF-9137-42A1-9909-239888ED764B}.Stable_Release|x64.ActiveCfg = Minimal_Release|x64
-		{A6A4B9EF-9137-42A1-9909-239888ED764B}.Stable_Release|x64.Build.0 = Minimal_Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,7 +54,6 @@ Global
 		{B5962C16-F849-4AE7-A155-5068555FBDA1} = {CC992BF5-AA89-42C1-B1D4-BF66DDA11D3B}
 		{CC992BF5-AA89-42C1-B1D4-BF66DDA11D3B} = {949B80C5-50B3-462D-A7B2-DB4B314AFF13}
 		{C1A4BD70-E886-4E5C-9428-EDCD2ABEB1CC} = {949B80C5-50B3-462D-A7B2-DB4B314AFF13}
-		{A6A4B9EF-9137-42A1-9909-239888ED764B} = {CC992BF5-AA89-42C1-B1D4-BF66DDA11D3B}
 		{D0AE6987-1B3A-4BBD-B9FD-A55C3209515A} = {949B80C5-50B3-462D-A7B2-DB4B314AFF13}
 		{FA0A0906-3A1E-4C66-9BC7-3BAFA55C9941} = {C1A4BD70-E886-4E5C-9428-EDCD2ABEB1CC}
 	EndGlobalSection
