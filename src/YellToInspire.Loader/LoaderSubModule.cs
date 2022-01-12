@@ -19,24 +19,27 @@ namespace YellToInspire.Loader
 
         private bool ServiceRegistrationWasCalled { get; set; }
 
+        public LoaderSubModule()
+        {
+            _ = MBSubModuleBasePatch.Enable(_harmonyWrappers);
+        }
+
         public override void OnServiceRegistration()
         {
             ServiceRegistrationWasCalled = true;
 
-            _ = MBSubModuleBasePatch.Enable(_harmonyWrappers);
-
             var logger = this.GetTempServiceProvider()?.GetRequiredService<ILogger<LoaderSubModule>>() ?? NullLogger<LoaderSubModule>.Instance;
-            SubModules.AddRange(LoaderHelper.LoadAllImplementations(logger, "YellToInspire.*.dll").Select(x => new MBSubModuleBaseWrapper(x)).ToList());
+            _subModules.AddRange(LoaderHelper.LoadAllImplementations(logger, "YellToInspire.*.dll").Select(x => new MBSubModuleBaseWrapper(x)).ToList());
 
             base.OnServiceRegistration();
         }
 
-        protected override void OnSubModuleLoad()
+        public override void OnSubModuleLoad()
         {
             if (!ServiceRegistrationWasCalled)
             {
                 var logger = this.GetTempServiceProvider()?.GetRequiredService<ILogger<LoaderSubModule>>() ?? NullLogger<LoaderSubModule>.Instance;
-                SubModules.AddRange(LoaderHelper.LoadAllImplementations(logger, "YellToInspire.*.dll").Select(x => new MBSubModuleBaseWrapper(x)).ToList());
+                _subModules.AddRange(LoaderHelper.LoadAllImplementations(logger, "YellToInspire.*.dll").Select(x => new MBSubModuleBaseWrapper(x)).ToList());
             }
 
             base.OnSubModuleLoad();
