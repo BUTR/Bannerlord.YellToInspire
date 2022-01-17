@@ -17,10 +17,16 @@ namespace YellToInspire.HotKeys
 
         public YellToInspireHotKey() : base(nameof(YellToInspireHotKey))
         {
-            DisplayName = "Yell To Inspire";
-            Description = "Yell To Inspire.";
+            DisplayName = "{=3F9hwn8h4W}Yell To Inspire";
+            Description = "{=u68iVSY338}Yell To Inspire.";
             DefaultKey = InputKey.V;
             Category = HotKeyManager.Categories[HotKeyCategory.Action];
+            Predicate = IsKeyActive;
+        }
+
+        private bool IsKeyActive()
+        {
+            return Campaign.Current is not null && Mission.Current is not null;
         }
 
         protected override void OnReleased()

@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{949B80C5-50B3-462D-A7B2-DB4B314AFF13}"
 	ProjectSection(SolutionItems) = preProject
 		..\.editorconfig = ..\.editorconfig
+		..\README.md = ..\README.md
 		..\supported-game-versions.txt = ..\supported-game-versions.txt
 	EndProjectSection
 EndProject
