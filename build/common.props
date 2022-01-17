@@ -9,6 +9,8 @@
     <Authors>BoiZoi (Kahchow), Mehdiocrity, BUTR</Authors>
     <!--Some code analyzers don't support common.props parsing-->
     <TargetFrameworks Condition=" '$(TargetFrameworks)' == '' ">net472</TargetFrameworks>
+    <!-- Manually set the game version -->
+    <!--<OverrideGameVersion>e1.6.5</OverrideGameVersion>-->
   </PropertyGroup>
 
   <!--Development Variables-->
