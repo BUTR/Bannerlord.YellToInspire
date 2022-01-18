@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YellToInspire", "YellToInspire\YellToInspire.csproj", "{B5962C16-F849-4AE7-A155-5068555FBDA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bannerlord.YellToInspire", "Bannerlord.YellToInspire\Bannerlord.YellToInspire.csproj", "{B5962C16-F849-4AE7-A155-5068555FBDA1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{949B80C5-50B3-462D-A7B2-DB4B314AFF13}"
 	ProjectSection(SolutionItems) = preProject

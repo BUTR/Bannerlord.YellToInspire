@@ -52,7 +52,7 @@ namespace YellToInspire
                     {
 #if e162 || e163 || e164 || e165
                         nearbyAllyAgent.SetMorale(25f);
-#elif e170
+#elif e170 || e171
                         nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
 #else
 #error NOT SET
@@ -67,7 +67,7 @@ namespace YellToInspire
                     {
 #if e162 || e163 || e164 || e165
                         nearbyAllyAgent.SetMorale(25f);
-#elif e170
+#elif e170 || e171
                         nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
 #else
 #error NOT SET
@@ -91,8 +91,8 @@ namespace YellToInspire
                 {
 #if e162 || e163 || e164 || e165
                     if (true)
-#elif e170
-                     if (commonAiComponent.CanPanic())
+#elif e170 || e171
+                    if (commonAiComponent.CanPanic())
 #else
 #error NOT SET
 #endif

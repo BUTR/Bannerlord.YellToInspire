@@ -83,7 +83,7 @@ namespace YellToInspire
 
 #if e162 || e163 || e164
             if (hero is not null && Mission.Current.GetMissionBehaviour<BattleEndLogic>() is { PlayerVictory: false })
-#elif e165 || e170
+#elif e165 || e170 || e171
             if (hero is not null && Mission.Current.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: false })
 #else
 #error NOT SET
@@ -104,7 +104,7 @@ namespace YellToInspire
                 { Retreating: > 0 } => SkinVoiceManager.VoiceType.FaceEnemy,
 #if e162 || e163 || e164
                 _ when Mission.Current.GetMissionBehaviour<BattleEndLogic>() is { PlayerVictory: true } => SkinVoiceManager.VoiceType.Victory,
-#elif e165 || e170
+#elif e165 || e170 || e171
                 _ when Mission.Current.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: true } => SkinVoiceManager.VoiceType.Victory,
 #else
 #error NOT SET
