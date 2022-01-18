@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <Name value="Yell To Inspire (BUTR)" />
-  <Id value="$modulename$" />
+  <Name value="$modulename$"/>
+  <Id value="$moduleid$" />
   <Version value="v$version$" />
   <Official value="false" />
   <DefaultModule value="false" />
@@ -30,10 +30,10 @@
     <!-- Bannerlord Module Loader. Do not change the name! -->
     <SubModule>
       <Name value="Bannerlord Module Loader" />
-      <DLLName value="Bannerlord.ModuleLoader.$modulename$.dll" />
-      <SubModuleClassType value="Bannerlord.ModuleLoader.$modulename$" />
+      <DLLName value="Bannerlord.ModuleLoader.$moduleid$.dll" />
+      <SubModuleClassType value="Bannerlord.ModuleLoader.$moduleidflat$" />
       <Tags>
-        <Tag key="LoaderFilter" value ="$modulename$.*.dll" />
+        <Tag key="LoaderFilter" value ="$moduleid$.*.dll" />
       </Tags>
     </SubModule>
   </SubModules>

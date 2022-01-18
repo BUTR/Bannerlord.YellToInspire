@@ -15,10 +15,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CC992BF5-AA89-42C1-B1D4-BF66DDA11D3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C1A4BD70-E886-4E5C-9428-EDCD2ABEB1CC}"
-	ProjectSection(SolutionItems) = preProject
-		..\build\common.props = ..\build\common.props
-		..\build\common.targets = ..\build\common.targets
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D0AE6987-1B3A-4BBD-B9FD-A55C3209515A}"
 	ProjectSection(SolutionItems) = preProject

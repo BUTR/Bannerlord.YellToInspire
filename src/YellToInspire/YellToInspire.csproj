@@ -1,35 +1,53 @@
-﻿<!--EXTERNAL_PROPERTIES: DefineConstantsGameVersion;ButterLibVersion;HarmonyVersion;ButterLibVersion;BuildResourcesVersion-->
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<!--EXTERNAL_PROPERTIES: GameVersion;-->
+<Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.53">
 
   <PropertyGroup>
-    <AssemblyName>$(ModuleName).$(GameVersion)</AssemblyName>
-    <DefineConstants>$(DefineConstants);$(GameVersionConstant)</DefineConstants>
-    <Configurations>Stable_Debug;Stable_Release;Beta_Debug;Beta_Release</Configurations>
+    <!--
+    <TargetFramework>netstandard2.0</TargetFramework>
+    -->
   </PropertyGroup>
 
+  <PropertyGroup>
+    <!-- Module Id -->
+    <ModuleId>YellToInspire</ModuleId>
+    <!-- Module Name -->
+    <ModuleName>Yell To Inspire (BUTR)</ModuleName>
+    <!-- Module Version -->
+    <Version>1.0.0</Version>
+    <!-- Module manually override GameVersion -->
+    <!-- <OverrideGameVersion>e1.6.2</OverrideGameVersion> -->
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>BoiZoi (Kahchow), Mehdiocrity, BUTR</Authors>
+  </PropertyGroup>
+
+  <!-- Development Variables -->
+  <PropertyGroup>
+    <!-- Harmony Version -->
+    <HarmonyVersion>2.1.1</HarmonyVersion>
+    <!-- UIExtenderEx Version -->
+    <UIExtenderExVersion>2.1.8</UIExtenderExVersion>
+    <!-- ButterLib Version -->
+    <ButterLibVersion>1.0.31</ButterLibVersion>
+    <!-- MCM Version -->
+    <MCMVersion>4.3.16</MCMVersion>
+    <!-- BUTRShared Version -->
+    <BUTRSharedVersion>2.0.0.71</BUTRSharedVersion>
+    <!-- ModuleManager Version -->
+    <BUTRModuleManagerVersion>2.0.80</BUTRModuleManagerVersion>
+    <!-- ModuleLoader Version -->
+    <BUTRModuleLoaderVersion>1.0.1.23</BUTRModuleLoaderVersion>
+    <!-- Harmony Extensions Version -->
+    <HarmonyExtensionsVersion>2.0.0.51</HarmonyExtensionsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DisableReferenceAssemblies>true</DisableReferenceAssemblies>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Bannerlord.BuildResources" Version="$(BuildResourcesVersion)" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-    <PackageReference Include="Bannerlord.ModuleLoader.Injector" Version="$(BUTRModuleLoaderVersion)" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
     <PackageReference Include="Bannerlord.ReferenceAssemblies.Core.EarlyAccess" Version="$(GameVersion).*" IncludeAssets="compile" />
     <PackageReference Include="Bannerlord.ReferenceAssemblies.CustomBattle.EarlyAccess" Version="$(GameVersion).*" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.UIExtenderEx" Version="$(UIExtenderExVersion)" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.ButterLib" Version="$(ButterLibVersion)" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.MCM" Version="$(MCMVersion)" IncludeAssets="compile" />
-    <PackageReference Include="Harmony.Extensions" Version="$(HarmonyExtensionsVersion)" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-    <PackageReference Include="Lib.Harmony" Version="$(HarmonyVersion)" IncludeAssets="compile" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="IsExternalInit" Version="1.0.2" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-    <PackageReference Include="Nullable" Version="1.3.0" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-  </ItemGroup>
-
-  <!-- Extra Substitution Variables to Use in SubModule.xml -->
-  <ItemGroup>
-    <SubModuleOverrides Include="MCMVersion">
-      <Regex>\$mcmversion\$</Regex>
-      <Replacement>$(MCMVersion)</Replacement>
-    </SubModuleOverrides>
   </ItemGroup>
 
 </Project>
