@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{949B80C5-50B3-462D-A7B2-DB4B314AFF13}"
 	ProjectSection(SolutionItems) = preProject
 		..\.editorconfig = ..\.editorconfig
+		..\changelog.txt = ..\changelog.txt
 		..\README.md = ..\README.md
 		..\supported-game-versions.txt = ..\supported-game-versions.txt
 	EndProjectSection
@@ -19,6 +20,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D0AE6987-1B3A-4BBD-B9FD-A55C3209515A}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\dotnet-format-daily.yml = ..\.github\workflows\dotnet-format-daily.yml
+		..\.github\workflows\publish.yml = ..\.github\workflows\publish.yml
 		..\.github\workflows\test-build.yml = ..\.github\workflows\test-build.yml
 	EndProjectSection
 EndProject

@@ -28,7 +28,7 @@ if (-not $OutputPath || -not (Test-Path -Path $OutputPath)) {
 
 $temp = New-TemporaryDirectory;
 
-$proj = [IO.Path]::GetFullPath((Join-Path -Path $BasePath -ChildPath 'src/YellToInspire/YellToInspire.csproj')); # Normalize path
+$proj = [IO.Path]::GetFullPath((Join-Path -Path $BasePath -ChildPath 'src/Bannerlord.YellToInspire/Bannerlord.YellToInspire.csproj')); # Normalize path
 $bin =  [IO.Path]::GetFullPath((Join-Path -Path $OutputPath -ChildPath 'Modules/YellToInspire/bin/Win64_Shipping_Client')); # Normalize path
 $pdll = Join-Path -Path $bin -ChildPath 'YellToInspire*.dll';
 $ppdb = Join-Path -Path $bin -ChildPath 'YellToInspire*.pdb';
