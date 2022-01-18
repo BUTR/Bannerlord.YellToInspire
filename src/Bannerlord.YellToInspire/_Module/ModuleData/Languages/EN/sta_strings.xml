@@ -35,19 +35,26 @@ Cooldown: {COOLDOWN} seconds" />
     <string id="V8iSlcN2mq" text="Yell To Inspire {VERSION}" />
     <string id="OSbrbCqXUR" text="Base Ability Radius" />
     <string id="p2qRWZ7Ezg" text="Ability Radius Increase per Level" />
+    <string id="f0iSyhJJ9H" text="Depends on Leadership." />
     <string id="dpeaW5tpf0" text="Base Ability Cooldown" />
     <string id="pVdQUEHQub" text="Ability Cooldown Decrease per Level" />
+    <string id="dmGkKtAq4M" text="Depends on Leadership." />
     <string id="xEeTLJBPXY" text="Base Allied Morale Gain" />
     <string id="UIOWxJ8oHq" text="Allied Morale Gain Increase per Level" />
+    <string id="KFuKPM6vlD" text="Depends on Leadership." />
     <string id="t8iYNduG6l" text="Base Enemy Chance to Flee" />
     <string id="lqtQwtLcWt" text="Chance to Flee Increase per Level" />
+    <string id="BadCyQmGTs" text="Depends on Roguery. 1/100 of a %." />
     <string id="gvqobBynZ4" text="Enemy Flee Morale Threshold" />
     <string id="L5BB55wpAZ" text="Min Response Delay" />
     <string id="ykC6USItRT" text="Max Response Delay" />
     <string id="MVuF5MdRAd" text="Leadership Exp per Ally" />
+    <string id="DOR2xn2cYG" text="Amount of added Leadership experience per ally" />
     <string id="mnVFi42L7r" text="Roguery Exp per Enemy" />
+    <string id="z8P8DzRpwc" text="Amount of added Roguery experience per enemy." />
     <string id="I7z9HhTKKJ" text="Fled Enemies Return" />
     <string id="8LnTLK7Eap" text="Show Sphere Indicators" />
+    <string id="pkSxma77ZI" text="Show sphere showing the area affecting soldiers." />
     <string id="kDA1RynjWe" text="Show Detailed Message" />
     <string id="oIjsBtyRi6" text="Show Detailed Message Text" />
     <string id="MBlehjhwnx" text="Enable Cheer Random Delay" />
