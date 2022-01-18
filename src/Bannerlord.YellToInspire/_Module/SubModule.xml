@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Module xmlns="https://github.com/BUTR/Bannerlord.XmlSchemas"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="https://github.com/BUTR/Bannerlord.XmlSchemas
-                            https://raw.githubusercontent.com/BUTR/Bannerlord.XmlSchemas/master/SubModule.xml" >
+<Module>
   <Name value="$modulename$"/>
   <Id value="$moduleid$" />
   <Version value="v$version$" />
@@ -10,7 +7,7 @@
   <DefaultModule value="false" />
   <SingleplayerModule value="true" />
   <MultiplayerModule value="false" />
-  <!--<Url value="" />-->
+  <Url value="https://www.nexusmods.com/mountandblade2bannerlord/mods/3638" />
   <DependedModules>
     <DependedModule Id="Bannerlord.Harmony" DependentVersion="v$harmonyversion$" />
     <DependedModule Id="Bannerlord.UIExtenderEx" DependentVersion="v$uiextenderexversion$" />
