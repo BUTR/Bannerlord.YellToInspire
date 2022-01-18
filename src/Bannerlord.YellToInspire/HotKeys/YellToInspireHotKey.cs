@@ -15,37 +15,47 @@ namespace Bannerlord.YellToInspire.HotKeys
         protected override InputKey DefaultKey { get; }
         protected override string Category { get; }
 
+        private bool _isDown;
+
         public YellToInspireHotKey() : base(nameof(YellToInspireHotKey))
         {
             DisplayName = "{=3F9hwn8h4W}Yell To Inspire";
             Description = "{=u68iVSY338}Yell To Inspire.";
             DefaultKey = InputKey.V;
             Category = HotKeyManager.Categories[HotKeyCategory.Action];
-            Predicate = IsKeyActive;
         }
 
-        private bool IsKeyActive()
+        protected override void IsDown()
         {
-            return Campaign.Current is not null && Mission.Current is not null;
+            _isDown = true;
+
+            base.IsDown();
         }
 
         protected override void OnReleased()
         {
-            if (Mission.Current?.MainAgent is not { IsPlayerControlled: true } agent) return;
-            if (InspireManager.Current is not { } inspireManager) return;
-            if (MBCommon.IsPaused) return;
-
-            if (agent.Character is CharacterObject { HeroObject: { } hero })
+            if (_isDown)
             {
-                if (hero.GetPerkValue(Perks.InspireBasic))
+                _isDown = false;
+
+                if (Mission.Current?.MainAgent is not {IsPlayerControlled: true} agent) return;
+                if (InspireManager.Current is not { } inspireManager) return;
+                if (MBCommon.IsPaused) return;
+
+                if (agent.Character is CharacterObject {HeroObject: { } hero})
+                {
+                    if (hero.GetPerkValue(Perks.InspireBasic))
+                    {
+                        inspireManager.InspireAura(agent);
+                    }
+                }
+                else
                 {
                     inspireManager.InspireAura(agent);
                 }
             }
-            else
-            {
-                inspireManager.InspireAura(agent);
-            }
+
+            base.OnReleased();
         }
     }
 }

@@ -18,22 +18,22 @@ namespace Bannerlord.YellToInspire
 
         public float AbilityRadius(BasicCharacterObject? character)
         {
-            var raw = BaseAbilityRadius + (character?.GetSkillValue(Skills.Leadership) ?? 0 * AbilityRadiusIncreasePerLevel);
+            var raw = BaseAbilityRadius + (((float?) character?.GetSkillValue(Skills.Leadership) ?? 0f) * AbilityRadiusIncreasePerLevel);
             return MathF.Clamp(raw, 1f, 100f);
         }
         public float AbilityCooldown(BasicCharacterObject? character)
         {
-            var raw = BaseAbilityCooldown - (character?.GetSkillValue(Skills.Leadership) ?? 0 * AbilityCooldownDecreasePerLevel);
+            var raw = BaseAbilityCooldown - (((float?) character?.GetSkillValue(Skills.Leadership) ?? 0f) * (AbilityCooldownDecreasePerLevel / 1000f));
             return MathF.Clamp(raw, 3f, 300f);
         }
         public float AlliedMoraleGain(BasicCharacterObject? character)
         {
-            var raw = BaseAlliedMoraleGain + (character?.GetSkillValue(Skills.Leadership) ?? 0 * AlliedMoraleGainIncreasePerLevel);
+            var raw = BaseAlliedMoraleGain + (((float?) character?.GetSkillValue(Skills.Leadership) ?? 0f) * AlliedMoraleGainIncreasePerLevel);
             return MathF.Clamp(raw, 0f, 100f);
         }
         public float EnemyChanceToFlee(BasicCharacterObject? character)
         {
-            var raw = BaseEnemyChanceToFlee + (character?.GetSkillValue(Skills.Roguery) ?? 0 * ChanceToFleeIncreasePerLevel / 100f);
+            var raw = BaseEnemyChanceToFlee + (((float?) character?.GetSkillValue(Skills.Roguery) ?? 0f) * ChanceToFleeIncreasePerLevel / 100f);
             return MathF.Clamp(raw, 0f, 1f);
         }
 
@@ -62,7 +62,7 @@ namespace Bannerlord.YellToInspire
         [SettingPropertyFloatingInteger("{=t8iYNduG6l}Base Enemy Chance to Flee", 0f, 1f, "0.00%", Order = 6, RequireRestart = false, HintText = "")]
         public float BaseEnemyChanceToFlee { get; set; } = 0.5f;
 
-        [SettingPropertyFloatingInteger("{=lqtQwtLcWt}Chance to Flee Increase per Level", 0f, 100f, "#0%", Order = 7, RequireRestart = false, HintText = "{=BadCyQmGTs}Depends on Roguery. 1/100 of a %")]
+        [SettingPropertyFloatingInteger("{=lqtQwtLcWt}Chance to Flee Increase per Level", 0f, 100f, "#0%", Order = 7, RequireRestart = false, HintText = "{=BadCyQmGTs}Depends on Roguery. 1/100 of a %.")]
         public float ChanceToFleeIncreasePerLevel { get; set; } = 15f;
 
 
@@ -77,10 +77,10 @@ namespace Bannerlord.YellToInspire
         public float MaxResponseDelay { get; set; } = 2.2f;
 
 
-        [SettingPropertyFloatingInteger("{=MVuF5MdRAd}Leadership Exp per Ally", 0f, 100f, "#0 exp", Order = 11, RequireRestart = false, HintText = "{=DOR2xn2cYG}Amount of added Leadership experience per ally")]
+        [SettingPropertyFloatingInteger("{=MVuF5MdRAd}Leadership Exp per Ally", 0f, 100f, "#0 exp", Order = 11, RequireRestart = false, HintText = "{=DOR2xn2cYG}Amount of added Leadership experience per ally.")]
         public float LeadershipExpPerAlly { get; set; } = 1f;
 
-        [SettingPropertyFloatingInteger("{=mnVFi42L7r}Roguery Exp per Enemy", 0f, 100f, "#0 exp", Order = 12, RequireRestart = false, HintText = "{=z8P8DzRpwc}Amount of added Roguery experience per enemy")]
+        [SettingPropertyFloatingInteger("{=mnVFi42L7r}Roguery Exp per Enemy", 0f, 100f, "#0 exp", Order = 12, RequireRestart = false, HintText = "{=z8P8DzRpwc}Amount of added Roguery experience per enemy.")]
         public float RogueryExpPerEnemy { get; set; } = 1f;
 
 
@@ -88,7 +88,7 @@ namespace Bannerlord.YellToInspire
         //public bool FledEnemiesReturn { get; set; } = false;
 
 
-        [SettingPropertyBool("{=8LnTLK7Eap}Show Sphere Indicators", Order = 14, RequireRestart = false, HintText = "{=pkSxma77ZI}Show sphere showing the area affecting soldiers")]
+        [SettingPropertyBool("{=8LnTLK7Eap}Show Sphere Indicators", Order = 14, RequireRestart = false, HintText = "{=pkSxma77ZI}Show sphere showing the area affecting soldiers.")]
         public bool ShowSphereIndicators { get; set; } = true;
 
 
