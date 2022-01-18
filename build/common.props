@@ -27,7 +27,7 @@
     <!--MCM Version-->
     <MCMVersion>4.3.17</MCMVersion>
     <!--BuildResources Version-->
-    <BuildResourcesVersion>1.0.0.39</BuildResourcesVersion>
+    <BuildResourcesVersion>1.0.0.48</BuildResourcesVersion>
     <!--ModuleLoader Version-->
     <BUTRModuleLoaderVersion>1.0.1.19</BUTRModuleLoaderVersion>
     <!--Harmony Extensions Version-->
