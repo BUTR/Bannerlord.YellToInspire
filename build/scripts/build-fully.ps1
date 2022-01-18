@@ -29,9 +29,9 @@ if (-not $OutputPath || -not (Test-Path -Path $OutputPath)) {
 $temp = New-TemporaryDirectory;
 
 $proj = [IO.Path]::GetFullPath((Join-Path -Path $BasePath -ChildPath 'src/Bannerlord.YellToInspire/Bannerlord.YellToInspire.csproj')); # Normalize path
-$bin =  [IO.Path]::GetFullPath((Join-Path -Path $OutputPath -ChildPath 'Modules/YellToInspire/bin/Win64_Shipping_Client')); # Normalize path
-$pdll = Join-Path -Path $bin -ChildPath 'YellToInspire*.dll';
-$ppdb = Join-Path -Path $bin -ChildPath 'YellToInspire*.pdb';
+$bin =  [IO.Path]::GetFullPath((Join-Path -Path $OutputPath -ChildPath 'Modules/Bannerlord.YellToInspire/bin/Win64_Shipping_Client')); # Normalize path
+$pdll = Join-Path -Path $bin -ChildPath 'Bannerlord.YellToInspire*.dll';
+$ppdb = Join-Path -Path $bin -ChildPath 'Bannerlord.YellToInspire*.pdb';
 $gameversions = Get-Content -Path supported-game-versions.txt;
 
 # The folders are required to be created before executing the script
