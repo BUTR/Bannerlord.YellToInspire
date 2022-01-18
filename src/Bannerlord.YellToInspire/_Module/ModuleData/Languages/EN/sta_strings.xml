@@ -34,32 +34,44 @@ Cooldown: {COOLDOWN} seconds" />
 
     <string id="V8iSlcN2mq" text="Yell To Inspire {VERSION}" />
     <string id="OSbrbCqXUR" text="Base Ability Radius" />
+    <string id="4eLA2GbEcp" text="Determines the base radius of your yell ability in meters, also the value for Custom Battles." />
     <string id="p2qRWZ7Ezg" text="Ability Radius Increase per Level" />
-    <string id="f0iSyhJJ9H" text="Depends on Leadership." />
+    <string id="f0iSyhJJ9H" text="Determines how much extra ability radius in meters per level in Leadership." />
     <string id="dpeaW5tpf0" text="Base Ability Cooldown" />
+    <string id="E9nVaeVhWx" text="Determines the base length of the cooldown period in seconds between ability uses, also the value for Custom Battles." />
     <string id="pVdQUEHQub" text="Ability Cooldown Decrease per Level" />
-    <string id="dmGkKtAq4M" text="Depends on Leadership." />
+    <string id="dmGkKtAq4M" text="Determines how much less cooldown time in seconds per level in Leadership." />
     <string id="xEeTLJBPXY" text="Base Allied Morale Gain" />
+    <string id="lYflwGnkSY" text="Determines the base anount of how much morale each friendly unit gains per yell, also the value for Custom Battles." />
     <string id="UIOWxJ8oHq" text="Allied Morale Gain Increase per Level" />
-    <string id="KFuKPM6vlD" text="Depends on Leadership." />
+    <string id="KFuKPM6vlD" text="Determines how much extra morale gain per level in Leadership." />
     <string id="t8iYNduG6l" text="Base Enemy Chance to Flee" />
+    <string id="9k0gcHzZiB" text="The % chance an enemy will flee if affected by a yell and their morale is low enough." />
     <string id="lqtQwtLcWt" text="Chance to Flee Increase per Level" />
-    <string id="BadCyQmGTs" text="Depends on Roguery. 1/100 of a %." />
+    <string id="BadCyQmGTs" text="Determines how much extra % chance to make enemies flee per level in Roguery. 1/100 of a %." />
     <string id="gvqobBynZ4" text="Enemy Flee Morale Threshold" />
+    <string id="fKTW3QsIOh" text="Determines how low morale needs to be for an enemy unit to flee." />
     <string id="L5BB55wpAZ" text="Min Response Delay" />
+    <string id="RyxKXEQgm6" text="The minimum amount of random time in seconds before a unit responds to your yell." />
     <string id="ykC6USItRT" text="Max Response Delay" />
+    <string id="nAwgC95YKZ" text="The maximum amount of random time in seconds before a unit responds to your yell." />
     <string id="MVuF5MdRAd" text="Leadership Exp per Ally" />
-    <string id="DOR2xn2cYG" text="Amount of added Leadership experience per ally" />
+    <string id="DOR2xn2cYG" text="The base amount (which is multiplied by attribute and focus bonus) of Leadership exp gained per ally affected by Inspire." />
     <string id="mnVFi42L7r" text="Roguery Exp per Enemy" />
-    <string id="z8P8DzRpwc" text="Amount of added Roguery experience per enemy." />
+    <string id="z8P8DzRpwc" text="The base amount (which is multiplied by attribute and focus bonus) of Roguery exp gained per enemy affected by Inspire." />
     <string id="I7z9HhTKKJ" text="Fled Enemies Return" />
+    <string id="n6ViryinCm" text="Determines if fleeing enemies return to battle, like a taunt of sorts." />
     <string id="8LnTLK7Eap" text="Show Sphere Indicators" />
     <string id="pkSxma77ZI" text="Show sphere showing the area affecting soldiers." />
     <string id="kDA1RynjWe" text="Show Detailed Message" />
     <string id="oIjsBtyRi6" text="Show Detailed Message Text" />
+    <string id="qiJ4Uud7qw" text="Displays message containing a rundown of the number of friendly and enemy units affected per ability use." />
     <string id="MBlehjhwnx" text="Enable Cheer Random Delay" />
+    <string id="CTT0d1Q6Q7" text="Determines if units individually respond to yells with a small random amount of delay." />
     <string id="GCpn22ub5U" text="Enable Cheer Animation" />
+    <string id="cPUY6zLpa6" text="Determines if the player and allies units play cheering animations." />
     <string id="EYQuao3mup" text="Enable Enemy Reaction" />
+    <string id="YncLuM2Sps" text="Determines whether enemies verbally respond in fear to your yells." />
 
     <string id="gqr3o3aOfu" text="Allied unit(s) that were inspired: {INSPIRED}" />
     <string id="5fapWaqKVw" text="Allied unit(s) that are returning to battle: {RETURNING}" />

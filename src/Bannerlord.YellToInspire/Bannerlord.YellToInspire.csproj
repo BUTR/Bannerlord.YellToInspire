@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <!-- Module Id -->
-    <ModuleId>YellToInspire</ModuleId>
+    <ModuleId>Bannerlord.YellToInspire</ModuleId>
     <!-- Module Name -->
     <ModuleName>BUTR's Yell To Inspire</ModuleName>
     <!-- Module Version -->

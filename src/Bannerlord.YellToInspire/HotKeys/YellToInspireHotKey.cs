@@ -15,7 +15,7 @@ namespace Bannerlord.YellToInspire.HotKeys
         protected override InputKey DefaultKey { get; }
         protected override string Category { get; }
 
-        private bool _isDown;
+        private bool _isKeyDown;
 
         public YellToInspireHotKey() : base(nameof(YellToInspireHotKey))
         {
@@ -27,16 +27,16 @@ namespace Bannerlord.YellToInspire.HotKeys
 
         protected override void IsDown()
         {
-            _isDown = true;
+            _isKeyDown = true;
 
             base.IsDown();
         }
 
         protected override void OnReleased()
         {
-            if (_isDown)
+            if (_isKeyDown)
             {
-                _isDown = false;
+                _isKeyDown = false;
 
                 if (Mission.Current?.MainAgent is not {IsPlayerControlled: true} agent) return;
                 if (InspireManager.Current is not { } inspireManager) return;
