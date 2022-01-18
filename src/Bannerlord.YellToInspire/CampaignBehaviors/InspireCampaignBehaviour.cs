@@ -1,8 +1,8 @@
-﻿using TaleWorlds.CampaignSystem;
+﻿using Bannerlord.YellToInspire.Handlers;
 
-using YellToInspire.Handlers;
+using TaleWorlds.CampaignSystem;
 
-namespace YellToInspire.CampaignBehaviors
+namespace Bannerlord.YellToInspire.CampaignBehaviors
 {
     internal sealed class InspireCampaignBehaviour : CampaignBehaviorBase
     {

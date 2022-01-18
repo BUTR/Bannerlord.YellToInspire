@@ -1,10 +1,10 @@
-﻿using TaleWorlds.MountAndBlade;
+﻿using Bannerlord.YellToInspire.HotKeys;
 
-using YellToInspire.HotKeys;
+using TaleWorlds.MountAndBlade;
 
 using HotKeyManager = Bannerlord.ButterLib.HotKeys.HotKeyManager;
 
-namespace YellToInspire
+namespace Bannerlord.YellToInspire
 {
     internal sealed class SubModule : MBSubModuleBase
     {

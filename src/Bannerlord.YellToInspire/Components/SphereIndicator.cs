@@ -4,7 +4,7 @@ using TaleWorlds.Engine;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 
-namespace YellToInspire.Components
+namespace Bannerlord.YellToInspire.Components
 {
     internal sealed class AbilitySphereIndicator : IDisposable
     {

@@ -1,7 +1,7 @@
 ﻿using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 
-namespace YellToInspire
+namespace Bannerlord.YellToInspire
 {
     public static class Skills
     {

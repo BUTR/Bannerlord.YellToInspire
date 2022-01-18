@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Bannerlord.YellToInspire.CampaignBehaviors;
+
+using System;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 
-using YellToInspire.CampaignBehaviors;
-
-namespace YellToInspire.Handlers
+namespace Bannerlord.YellToInspire.Handlers
 {
     internal sealed class CampaignHandler : MBSubModuleBase
     {

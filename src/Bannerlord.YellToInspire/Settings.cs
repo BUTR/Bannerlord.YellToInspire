@@ -5,7 +5,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
-namespace YellToInspire
+namespace Bannerlord.YellToInspire
 {
     public sealed class Settings : AttributeGlobalSettings<Settings>
     {

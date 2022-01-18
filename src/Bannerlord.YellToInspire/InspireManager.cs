@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bannerlord.YellToInspire.Components;
+
+using System;
 using System.Linq;
 
 using TaleWorlds.CampaignSystem;
@@ -6,9 +8,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 
-using YellToInspire.Components;
-
-namespace YellToInspire
+namespace Bannerlord.YellToInspire
 {
     internal sealed class InspireManager : IDisposable
     {

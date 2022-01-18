@@ -7,7 +7,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 
-namespace YellToInspire
+namespace Bannerlord.YellToInspire
 {
     internal static class Utils
     {

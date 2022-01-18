@@ -6,7 +6,7 @@ using TaleWorlds.MountAndBlade;
 
 using HotKeyManager = Bannerlord.ButterLib.HotKeys.HotKeyManager;
 
-namespace YellToInspire.HotKeys
+namespace Bannerlord.YellToInspire.HotKeys
 {
     internal sealed class YellToInspireHotKey : HotKeyBase
     {

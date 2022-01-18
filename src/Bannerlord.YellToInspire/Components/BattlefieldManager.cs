@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Bannerlord.YellToInspire.Data;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 
-using YellToInspire.Data;
-
-namespace YellToInspire.Components
+namespace Bannerlord.YellToInspire.Components
 {
     internal sealed class BattlefieldManager : IDisposable
     {

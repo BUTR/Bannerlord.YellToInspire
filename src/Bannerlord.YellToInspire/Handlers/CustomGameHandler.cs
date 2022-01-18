@@ -1,7 +1,7 @@
 ﻿using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 
-namespace YellToInspire.Handlers
+namespace Bannerlord.YellToInspire.Handlers
 {
     internal sealed class CustomGameHandler : MBSubModuleBase
     {
