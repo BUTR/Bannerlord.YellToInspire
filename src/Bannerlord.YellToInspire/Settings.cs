@@ -11,6 +11,7 @@ namespace Bannerlord.YellToInspire
     {
         public override string Id => "YellToInspire_v1";
         public override string FolderName => "YellToInspire";
+        public override string FormatType => "json2";
         public override string DisplayName => new TextObject("{=V8iSlcN2mq}Yell To Inspire {VERSION}", new()
         {
             { "VERSION", typeof(Settings).Assembly.GetName().Version?.ToString(3) ?? "ERROR" }
