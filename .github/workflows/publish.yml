@@ -26,7 +26,7 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
 
     - name: Build Bannerlord.YellToInspire
-      run: ./build/scripts/build-fully.ps1 ./ ./bannerlord
+      run: ./build/scripts/build-fully.ps1 './' './bannerlord' 'Bannerlord.YellToInspire' 'src/Bannerlord.YellToInspire/Bannerlord.YellToInspire.csproj';
       shell: pwsh
 
     - name: Upload Bannerlord folder

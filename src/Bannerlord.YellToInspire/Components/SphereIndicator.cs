@@ -48,7 +48,7 @@ namespace Bannerlord.YellToInspire.Components
                     : MBMath.Lerp(_radius, settings.AbilityRadius(_causingAgent?.Character), 0.1f);
             }
 
-            if (DisplaySphereIndicators)
+            if (settings.ShowSphereIndicators && DisplaySphereIndicators)
             {
                 MBDebug.RenderDebugSphere(
                     new Vec3(_position.X, _position.Y, Mission.Current.Scene.GetGroundHeightAtPosition(_position)),
