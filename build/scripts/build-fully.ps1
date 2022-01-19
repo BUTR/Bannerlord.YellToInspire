@@ -5,7 +5,15 @@ param (
 
     [Parameter()]
     [System.String]
-    $OutputPath
+    $OutputPath,
+
+    [Parameter()]
+    [System.String]
+    $ModuleId,
+
+    [Parameter()]
+    [System.String]
+    $ProjectPath
 )
 
 function New-TemporaryDirectory {
@@ -28,10 +36,10 @@ if (-not $OutputPath || -not (Test-Path -Path $OutputPath)) {
 
 $temp = New-TemporaryDirectory;
 
-$proj = [IO.Path]::GetFullPath((Join-Path -Path $BasePath -ChildPath 'src/Bannerlord.YellToInspire/Bannerlord.YellToInspire.csproj')); # Normalize path
-$bin =  [IO.Path]::GetFullPath((Join-Path -Path $OutputPath -ChildPath 'Modules/Bannerlord.YellToInspire/bin/Win64_Shipping_Client')); # Normalize path
-$pdll = Join-Path -Path $bin -ChildPath 'Bannerlord.YellToInspire*.dll';
-$ppdb = Join-Path -Path $bin -ChildPath 'Bannerlord.YellToInspire*.pdb';
+$proj = [IO.Path]::GetFullPath($ProjectPath); # Normalize path
+$bin =  [IO.Path]::GetFullPath((Join-Path -Path $OutputPath -ChildPath ('Modules/' + $ModuleId + '/bin/Win64_Shipping_Client'))); # Normalize path
+$pdll = Join-Path -Path $bin -ChildPath ($ModuleId + '*.dll');
+$ppdb = Join-Path -Path $bin -ChildPath ($ModuleId + '*.pdb');
 $gameversions = Get-Content -Path supported-game-versions.txt;
 
 # The folders are required to be created before executing the script
