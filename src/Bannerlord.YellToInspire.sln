@@ -8,25 +8,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{949B80C5-50B3-462D-A7B2-DB4B314AFF13}"
 	ProjectSection(SolutionItems) = preProject
 		..\.editorconfig = ..\.editorconfig
-		..\changelog.txt = ..\changelog.txt
 		..\README.md = ..\README.md
-		..\supported-game-versions.txt = ..\supported-game-versions.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CC992BF5-AA89-42C1-B1D4-BF66DDA11D3B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C1A4BD70-E886-4E5C-9428-EDCD2ABEB1CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D0AE6987-1B3A-4BBD-B9FD-A55C3209515A}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\dotnet-format-daily.yml = ..\.github\workflows\dotnet-format-daily.yml
 		..\.github\workflows\publish.yml = ..\.github\workflows\publish.yml
 		..\.github\workflows\test-build.yml = ..\.github\workflows\test-build.yml
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{FA0A0906-3A1E-4C66-9BC7-3BAFA55C9941}"
-	ProjectSection(SolutionItems) = preProject
-		..\build\scripts\build-fully.ps1 = ..\build\scripts\build-fully.ps1
 	EndProjectSection
 EndProject
 Global
@@ -52,9 +43,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B5962C16-F849-4AE7-A155-5068555FBDA1} = {CC992BF5-AA89-42C1-B1D4-BF66DDA11D3B}
 		{CC992BF5-AA89-42C1-B1D4-BF66DDA11D3B} = {949B80C5-50B3-462D-A7B2-DB4B314AFF13}
-		{C1A4BD70-E886-4E5C-9428-EDCD2ABEB1CC} = {949B80C5-50B3-462D-A7B2-DB4B314AFF13}
 		{D0AE6987-1B3A-4BBD-B9FD-A55C3209515A} = {949B80C5-50B3-462D-A7B2-DB4B314AFF13}
-		{FA0A0906-3A1E-4C66-9BC7-3BAFA55C9941} = {C1A4BD70-E886-4E5C-9428-EDCD2ABEB1CC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9914E5D9-BF50-47C0-A194-519A91226325}

@@ -31,5 +31,5 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Build Yell To Inspire for test
-      run: ./build/scripts/build-fully.ps1 './' './bannerlord' 'Bannerlord.YellToInspire' 'src/Bannerlord.YellToInspire/Bannerlord.YellToInspire.csproj';
+      run: dotnet pack src/Bannerlord.YellToInspire/Bannerlord.YellToInspire.csproj --configuration Release -p:GameFolder="$PWD/bannerlord";
       shell: pwsh

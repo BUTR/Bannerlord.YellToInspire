@@ -1,5 +1,5 @@
 ﻿<!--EXTERNAL_PROPERTIES: GameVersion;-->
-<Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.55">
+<Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.60">
 
   <PropertyGroup>
     <!-- Module Id -->
@@ -34,6 +34,8 @@
     <BUTRModuleLoaderVersion>1.0.1.24</BUTRModuleLoaderVersion>
     <!-- Harmony Extensions Version -->
     <HarmonyExtensionsVersion>2.0.0.51</HarmonyExtensionsVersion>
+
+    <ExtendedBuild>false</ExtendedBuild>
   </PropertyGroup>
 
   <PropertyGroup>

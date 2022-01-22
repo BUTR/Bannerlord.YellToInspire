@@ -26,7 +26,7 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
 
     - name: Build Bannerlord.YellToInspire
-      run: ./build/scripts/build-fully.ps1 './' './bannerlord' 'Bannerlord.YellToInspire' 'src/Bannerlord.YellToInspire/Bannerlord.YellToInspire.csproj';
+      run: dotnet pack src/Bannerlord.YellToInspire/Bannerlord.YellToInspire.csproj --configuration Release -p:GameFolder="$PWD/bannerlord";
       shell: pwsh
 
     - name: Upload Bannerlord folder
@@ -68,9 +68,9 @@ jobs:
     - name: Run ChangelogParser
       id: changelog
       run: |
-        vers="$(bannerlord_changelog_parser latestversion -f "$PWD/changelog.txt")"
+        vers="$(bannerlord_changelog_parser latestversion -f "$PWD/src/Bannerlord.YellToInspire/changelog.txt")"
         echo "::set-output name=mod_version::$vers"
-        desc="$(bannerlord_changelog_parser fulldescription -f "$PWD/changelog.txt")"
+        desc="$(bannerlord_changelog_parser fulldescription -f "$PWD/src/Bannerlord.YellToInspire/changelog.txt")"
         desc="${desc//'%'/'%25'}"
         desc="${desc//$'\n'/'%0A'}"
         desc="${desc//$'\r'/'%0D'}"
