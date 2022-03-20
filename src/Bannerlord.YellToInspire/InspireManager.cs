@@ -81,13 +81,7 @@ namespace Bannerlord.YellToInspire
             if (affectedAgents.Count > 0)
                 _battlefieldManager.DelayedAgentReactions(affectedAgents);
 
-#if e162 || e163 || e164
-            if (hero is not null && Mission.Current.GetMissionBehaviour<BattleEndLogic>() is { PlayerVictory: false })
-#elif e165 || e170 || e171 || e172
             if (hero is not null && Mission.Current.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: false })
-#else
-#error NOT SET
-#endif
             {
                 hero.AddSkillXp(Skills.Leadership, settings.LeadershipExpPerAlly * troopsStatistics.Inspired);
                 hero.AddSkillXp(Skills.Roguery, settings.RogueryExpPerEnemy * troopsStatistics.Nearby);
@@ -102,13 +96,7 @@ namespace Bannerlord.YellToInspire
             {
                 { Fled: > 0 } => SkinVoiceManager.VoiceType.Victory,
                 { Retreating: > 0 } => SkinVoiceManager.VoiceType.FaceEnemy,
-#if e162 || e163 || e164
-                _ when Mission.Current.GetMissionBehaviour<BattleEndLogic>() is { PlayerVictory: true } => SkinVoiceManager.VoiceType.Victory,
-#elif e165 || e170 || e171 || e172
                 _ when Mission.Current.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: true } => SkinVoiceManager.VoiceType.Victory,
-#else
-#error NOT SET
-#endif
                 _ => SkinVoiceManager.VoiceType.Yell
             };
             causingAgent.MakeVoice(voiceType, SkinVoiceManager.CombatVoiceNetworkPredictionType.NoPrediction);

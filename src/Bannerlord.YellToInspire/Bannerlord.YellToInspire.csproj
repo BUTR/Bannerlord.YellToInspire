@@ -7,7 +7,7 @@
     <!-- Module Name -->
     <ModuleName>BUTR's Yell To Inspire</ModuleName>
     <!-- Module Version -->
-    <Version>0.4.2</Version>
+    <Version>0.5.0</Version>
     <!-- Module manually override GameVersion -->
     <!-- <OverrideGameVersion>e1.6.2</OverrideGameVersion> -->
   </PropertyGroup>
@@ -22,6 +22,10 @@
     <HarmonyVersion>2.2.1</HarmonyVersion>
     <!-- UIExtenderEx Version -->
     <UIExtenderExVersion>2.1.8</UIExtenderExVersion>
+    <!-- ButterLib Version -->
+    <ButterLibVersion>2.1.1</ButterLibVersion>
+    <!-- MCM Version -->
+    <MCMVersion>4.5.0</MCMVersion>
     <!-- BUTRShared Version -->
     <BUTRSharedVersion>2.0.0.78</BUTRSharedVersion>
     <!-- ModuleManager Version -->
@@ -38,12 +42,6 @@
     <DisableReferenceAssemblies>true</DisableReferenceAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Condition="$([System.Version]::Parse('$(GameVersion)').CompareTo($([System.Version]::Parse('1.7.2')))) &lt; 0" Include="Bannerlord.ButterLib" Version="1.0.31" />
-    <PackageReference Condition="$([System.Version]::Parse('$(GameVersion)').CompareTo($([System.Version]::Parse('1.7.1')))) &gt; 0" Include="Bannerlord.ButterLib" Version="2.1.1" />
-    
-    <PackageReference Condition="$([System.Version]::Parse('$(GameVersion)').CompareTo($([System.Version]::Parse('1.7.2')))) &lt; 0" Include="Bannerlord.MCM" Version="4.3.16" />
-    <PackageReference Condition="$([System.Version]::Parse('$(GameVersion)').CompareTo($([System.Version]::Parse('1.7.1')))) &gt; 0" Include="Bannerlord.MCM" Version="4.5.0" />
-
     <PackageReference Include="Bannerlord.ReferenceAssemblies.Core.EarlyAccess" Version="$(GameVersion).*" IncludeAssets="compile" />
     <PackageReference Include="Bannerlord.ReferenceAssemblies.CustomBattle.EarlyAccess" Version="$(GameVersion).*" IncludeAssets="compile" />
   </ItemGroup>

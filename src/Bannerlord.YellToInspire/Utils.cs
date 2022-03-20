@@ -50,13 +50,8 @@ namespace Bannerlord.YellToInspire
                 {
                     if (causingAgent.Character is not CharacterObject charObj || charObj.GetPerkValue(Perks.InspireResolve))
                     {
-#if e162 || e163 || e164 || e165
-                        nearbyAllyAgent.SetMorale(25f);
-#elif e170 || e171 || e172
                         nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
-#else
-#error NOT SET
-#endif
+
                         commonAiComponent.StopRetreating();
                         statistics.Retreating++;
                     }
@@ -65,13 +60,8 @@ namespace Bannerlord.YellToInspire
                 {
                     if (causingAgent.Character is not CharacterObject charObj || charObj.GetPerkValue(Perks.InspireResolve))
                     {
-#if e162 || e163 || e164 || e165
-                        nearbyAllyAgent.SetMorale(25f);
-#elif e170 || e171 || e172
                         nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
-#else
-#error NOT SET
-#endif
+
                         commonAiComponent.StopRetreating();
                         statistics.Retreating++;
                     }
@@ -89,13 +79,7 @@ namespace Bannerlord.YellToInspire
 
                 if (nearbyEnemyAgent.GetMorale() <= settings.EnemyFleeMoraleThreshold)
                 {
-#if e162 || e163 || e164 || e165
-                    if (true)
-#elif e170 || e171 || e172
                     if (commonAiComponent.CanPanic())
-#else
-#error NOT SET
-#endif
                     {
                         statistics.Fled++;
 
