@@ -1,5 +1,5 @@
 ﻿<!--EXTERNAL_PROPERTIES: GameVersion;-->
-<Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.62">
+<Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.68">
 
   <PropertyGroup>
     <!-- Module Id -->
