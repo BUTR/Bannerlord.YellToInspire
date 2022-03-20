@@ -23,13 +23,13 @@
     <!-- UIExtenderEx Version -->
     <UIExtenderExVersion>2.1.8</UIExtenderExVersion>
     <!-- BUTRShared Version -->
-    <BUTRSharedVersion>2.0.0.71</BUTRSharedVersion>
+    <BUTRSharedVersion>2.0.0.78</BUTRSharedVersion>
     <!-- ModuleManager Version -->
     <BUTRModuleManagerVersion>3.0.94</BUTRModuleManagerVersion>
     <!-- ModuleLoader Version -->
     <BUTRModuleLoaderVersion>1.0.1.24</BUTRModuleLoaderVersion>
     <!-- Harmony Extensions Version -->
-    <HarmonyExtensionsVersion>2.0.0.51</HarmonyExtensionsVersion>
+    <HarmonyExtensionsVersion>2.0.0.55</HarmonyExtensionsVersion>
 
     <ExtendedBuild>false</ExtendedBuild>
   </PropertyGroup>
