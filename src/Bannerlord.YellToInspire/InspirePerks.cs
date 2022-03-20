@@ -1,5 +1,10 @@
-﻿using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
+﻿using TaleWorlds.Core;
+
+#if e162 || e163 || e164 || e165 || e170 || e171
+using PerkObject = TaleWorlds.CampaignSystem.PerkObject;
+#elif e172
+using PerkObject = TaleWorlds.CampaignSystem.CharacterDevelopment.PerkObject;
+#endif
 
 namespace Bannerlord.YellToInspire
 {

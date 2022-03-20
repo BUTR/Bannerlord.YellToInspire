@@ -9,6 +9,11 @@
   <MultiplayerModule value="false" />
   <Url value="https://www.nexusmods.com/mountandblade2bannerlord/mods/3638" />
   <DependedModules>
+    <DependedModule Id="Native" DependentVersion="e$gameversion$.*" />
+    <DependedModule Id="SandBoxCore" DependentVersion="e$gameversion$.*" />
+    <DependedModule Id="Sandbox" DependentVersion="e$gameversion$.*" />
+    <!--<DependedModule Id="StoryMode" DependentVersion="e$gameversion$.*" IsOptional="true" />-->
+    <DependedModule Id="CustomBattle" DependentVersion="e$gameversion$.*" />
     <DependedModule Id="Bannerlord.Harmony" DependentVersion="v$harmonyversion$" />
     <DependedModule Id="Bannerlord.UIExtenderEx" DependentVersion="v$uiextenderexversion$" />
     <DependedModule Id="Bannerlord.ButterLib" DependentVersion="v$butterlibversion$" />

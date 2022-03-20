@@ -16,7 +16,7 @@ namespace Bannerlord.YellToInspire
             {
                 _isInitialized = true;
 
-                if (HotKeyManager.Create("YellToInspire") is { } hkm)
+                if (HotKeyManager.Create("Bannerlord.YellToInspire") is { } hkm)
                 {
                     hkm.Add<YellToInspireHotKey>();
                     hkm.Build();

@@ -52,7 +52,7 @@ namespace Bannerlord.YellToInspire
                     {
 #if e162 || e163 || e164 || e165
                         nearbyAllyAgent.SetMorale(25f);
-#elif e170 || e171
+#elif e170 || e171 || e172
                         nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
 #else
 #error NOT SET
@@ -67,7 +67,7 @@ namespace Bannerlord.YellToInspire
                     {
 #if e162 || e163 || e164 || e165
                         nearbyAllyAgent.SetMorale(25f);
-#elif e170 || e171
+#elif e170 || e171 || e172
                         nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
 #else
 #error NOT SET
@@ -91,7 +91,7 @@ namespace Bannerlord.YellToInspire
                 {
 #if e162 || e163 || e164 || e165
                     if (true)
-#elif e170 || e171
+#elif e170 || e171 || e172
                     if (commonAiComponent.CanPanic())
 #else
 #error NOT SET
