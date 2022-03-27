@@ -38,9 +38,13 @@ Cooldown: {COOLDOWN} seconds" />
     <string id="p2qRWZ7Ezg" text="Ability Radius Increase per Level" />
     <string id="f0iSyhJJ9H" text="Determines how much extra ability radius in meters per level in Leadership." />
     <string id="dpeaW5tpf0" text="Base Ability Cooldown" />
-    <string id="E9nVaeVhWx" text="Determines the base length of the cooldown period in seconds between ability uses, also the value for Custom Battles." />
+    <string id="E9nVaeVhWx" text="Determines the base length of the cooldown period in seconds between ability uses, also the value for Custom Battles. Used in the Cooldown Gameplay Type." />
     <string id="pVdQUEHQub" text="Ability Cooldown Decrease per Level" />
-    <string id="dmGkKtAq4M" text="Determines how much less cooldown time in seconds per level in Leadership." />
+    <string id="dmGkKtAq4M" text="Determines how much less cooldown time in seconds per level in Leadership. Used in the Cooldown Gameplay Type." />
+    <string id="rRlOssxSIO" text="Base Ability Kill Multiplier" />
+    <string id="XwRROTxNCu" text="Determines the base inspiration multiplier of killing someone, also the value for Custom Battles. Used in the Killing Gameplay Type. 1/100." />
+    <string id="lsn3e1jhWd" text="Ability Kill Multiplier" />
+    <string id="HLvZSlfuA4" text="Determines the extra inspiration multiplier of killing someone per level. Used in the Killing Gameplay Type. 1 + 1/100." />
     <string id="xEeTLJBPXY" text="Base Allied Morale Gain" />
     <string id="lYflwGnkSY" text="Determines the base anount of how much morale each friendly unit gains per yell, also the value for Custom Battles." />
     <string id="UIOWxJ8oHq" text="Allied Morale Gain Increase per Level" />
@@ -72,11 +76,17 @@ Cooldown: {COOLDOWN} seconds" />
     <string id="cPUY6zLpa6" text="Determines if the player and allies units play cheering animations." />
     <string id="EYQuao3mup" text="Enable Enemy Reaction" />
     <string id="YncLuM2Sps" text="Determines whether enemies verbally respond in fear to your yells." />
+    <string id="K4Inr7E7PZ" text="Gameplay Type" />
+    <string id="adWH7RVK6o" text="The type of gameplay to use." />
 
     <string id="gqr3o3aOfu" text="Allied unit(s) that were inspired: {INSPIRED}" />
     <string id="5fapWaqKVw" text="Allied unit(s) that are returning to battle: {RETURNING}" />
     <string id="Ldui1l6RMK" text="Enemy unit(s) that had their courage tested: {SCARED}" />
     <string id="8aQ7tO6TbA" text="Enemy unit(s) that are fleeing: {FLED}" />
     <string id="zy6xciLnky" text="Enemy unit(s) that are returning to battle: {RETURNING}" />
+
+    <string id="MFZQek5Upy" text="You are not ready to use Inspire yet!" />
+    <string id="Zt8Qbxh3HP" text="Your Inspire ability is ready!" />
+
   </strings>
 </base>

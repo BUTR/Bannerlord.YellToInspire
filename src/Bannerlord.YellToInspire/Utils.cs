@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Bannerlord.YellToInspire.Data;
+using Bannerlord.YellToInspire.MissionBehaviors.AgentComponents;
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,13 +14,13 @@ namespace Bannerlord.YellToInspire
 {
     internal static class Utils
     {
-        public struct TroopStatistics
+        public static readonly TextObject[] AbilityPhrases =
         {
-            public int Inspired;
-            public int Retreating;
-            public int Nearby;
-            public int Fled;
-        }
+            new("{=OG3KT8KQvR}A primal bellow echos forth from the depths of your soul!"),
+            new("{=0SKEk61Zj0}Your banshee howl pierces the battlefield!"),
+            new("{=HT9YJgKEl2}You let out a deafening warcry!"),
+            new("{=Nr6docL7MZ}You explode with a thunderous roar!")
+        };
 
         private static readonly TextObject AlliesInspiredText = new("{=gqr3o3aOfu}Allied unit(s) that were inspired: {INSPIRED}");
         private static readonly TextObject AlliesRestoredText = new("{=5fapWaqKVw}Allied unit(s) that are returning to battle: {RETURNING}");
@@ -25,7 +28,44 @@ namespace Bannerlord.YellToInspire
         private static readonly TextObject EnemiesFledText = new("{=8aQ7tO6TbA}Enemy unit(s) that are fleeing: {FLED}");
         private static readonly TextObject EnemiesRestoredText = new("{=zy6xciLnky}Enemy unit(s) that are returning to battle: {RETURNING}");
 
-        public static (TroopStatistics Statistics, List<WeakReference<Agent>> AffectedAgents) AffectTroops(Agent causingAgent)
+        /// <summary>
+        /// Will work with any agent, not the main hero only
+        /// </summary>
+        public static TroopStatistics InspireAura(Agent causingAgent)
+        {
+            if (Settings.Instance is not { } settings) return TroopStatistics.Empty;
+
+            var hero = causingAgent.Character is CharacterObject charObj ? charObj.HeroObject : null;
+
+            if (hero is not null && hero.GetSkillValue(Skills.Leadership) >= 5 && !hero.GetPerkValue(Perks.InspireBasic))
+                hero.HeroDeveloper.AddPerk(Perks.InspireBasic);
+
+            if (causingAgent.GetComponent<SphereIndicatorAgentComponent>() is { } sphereIndicatorAgentComponent)
+                sphereIndicatorAgentComponent.Trigger();
+
+            var (troopsStatistics, affectedAgents) = AffectTroops(causingAgent);
+            if (causingAgent.GetComponent<InspireNearAgentsAgentComponent>() is { } inspireNearAgentsAgentComponent)
+                inspireNearAgentsAgentComponent.Trigger(affectedAgents);
+
+            if (hero is not null && causingAgent.Mission.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: false })
+            {
+                hero.AddSkillXp(Skills.Leadership, settings.LeadershipExpPerAlly * troopsStatistics.Inspired);
+                hero.AddSkillXp(Skills.Roguery, settings.RogueryExpPerEnemy * troopsStatistics.Nearby);
+            }
+
+            var voiceType = troopsStatistics switch
+            {
+                { Fled: > 0 } => SkinVoiceManager.VoiceType.Victory,
+                { Retreating: > 0 } => SkinVoiceManager.VoiceType.FaceEnemy,
+                _ when causingAgent.Mission.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: true } => SkinVoiceManager.VoiceType.Victory,
+                _ => SkinVoiceManager.VoiceType.Yell
+            };
+            causingAgent.MakeVoice(voiceType, SkinVoiceManager.CombatVoiceNetworkPredictionType.NoPrediction);
+
+            return troopsStatistics;
+        }
+
+        private static (TroopStatistics Statistics, List<WeakReference<Agent>> AffectedAgents) AffectTroops(Agent causingAgent)
         {
             if (Settings.Instance is not { } settings) return default;
 
@@ -35,7 +75,7 @@ namespace Bannerlord.YellToInspire
             var statistics = new TroopStatistics();
             var affectedAgents = new List<WeakReference<Agent>>();
 
-            foreach (var nearbyAllyAgent in Mission.Current.GetNearbyAllyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
+            foreach (var nearbyAllyAgent in causingAgent.Mission.GetNearbyAllyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
             {
                 if (nearbyAllyAgent == causingAgent) continue;
 
@@ -68,7 +108,7 @@ namespace Bannerlord.YellToInspire
                 }
             }
 
-            foreach (var nearbyEnemyAgent in Mission.Current.GetNearbyEnemyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
+            foreach (var nearbyEnemyAgent in causingAgent.Mission.GetNearbyEnemyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
             {
                 if (nearbyEnemyAgent.GetComponent<CommonAIComponent>() is not { } commonAiComponent) continue;
 
