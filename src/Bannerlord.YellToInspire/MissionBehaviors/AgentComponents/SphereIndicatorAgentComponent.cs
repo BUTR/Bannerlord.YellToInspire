@@ -11,6 +11,9 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
     /// </summary>
     internal sealed class SphereIndicatorAgentComponent : AgentComponent, IAgentComponentOnTick
     {
+        private SettingsProviderMissionBehavior? SettingsProvider => Agent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>();
+        private Settings? Settings => SettingsProvider is { } settingsProvider ? settingsProvider.Get<Settings>() : null;
+
         private Vec3 _position = Vec3.Zero;
         private float _radius = 0f;
 
@@ -24,7 +27,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
         public void Trigger()
         {
-            if (Settings.Instance is not { } settings) return;
+            if (Settings is not { } settings) return;
 
             _radius = settings.ShowSphereIndicators ? float.Epsilon * 2f : 0f;
             _position = Agent.Position;
@@ -33,7 +36,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
         public void OnTick(float _)
         {
-            if (Settings.Instance is not { } settings) return;
+            if (Settings is not { } settings) return;
 
             if (!MBCommon.IsPaused && _triggerTime != 0 && PassedSinceTrigger <= settings.AbilityCooldown(Agent.Character))
             {

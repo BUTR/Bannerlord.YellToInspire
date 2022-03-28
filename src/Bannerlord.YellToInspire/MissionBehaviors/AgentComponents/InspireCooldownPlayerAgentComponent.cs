@@ -11,6 +11,10 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
     {
         private static readonly TextObject CooldownText = new("{=FsbQpeMJYJ}Your ability is still on cooldown for {TIME} second(s)!");
 
+        private SettingsProviderMissionBehavior? SettingsProvider => Agent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>();
+        private Settings? Settings => SettingsProvider is { } settingsProvider ? settingsProvider.Get<Settings>() : null;
+        private InspireCooldownStateAgentComponent? State => Agent.GetComponent<InspireCooldownStateAgentComponent>();
+
         public InspireCooldownPlayerAgentComponent(Agent agent) : base(agent) { }
 
         public void OnTick(float dt)
@@ -19,9 +23,9 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
             if (Agent.Mission.InputManager.IsHotKeyDownAndReleased(YellToInspireHotkeyCategory.YellToInspireKeyId))
             {
-                if (Settings.Instance is not { } settings) return;
+                if (Settings is not { } settings) return;
 
-                if (Agent.GetComponent<InspireCooldownStateAgentComponent>() is not { } state) return;
+                if (State is not { } state) return;
 
                 if (!state.CanInspire())
                 {
@@ -39,7 +43,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
                         InformationManager.DisplayMessage(new(Utils.AbilityPhrases[MBRandom.RandomInt(0, Utils.AbilityPhrases.Length)].ToString()));
                         if (settings.ShowDetailedMessage)
-                            Utils.ShowDetailedMessage(troopsStatistics);
+                            Utils.ShowDetailedMessage(troopsStatistics, settings.ShowDetailedMessageText);
                     }
                 }
                 else
@@ -49,7 +53,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
                     InformationManager.DisplayMessage(new(Utils.AbilityPhrases[MBRandom.RandomInt(0, Utils.AbilityPhrases.Length)].ToString()));
                     if (settings.ShowDetailedMessage)
-                        Utils.ShowDetailedMessage(troopsStatistics);
+                        Utils.ShowDetailedMessage(troopsStatistics, settings.ShowDetailedMessageText);
                 }
             }
         }

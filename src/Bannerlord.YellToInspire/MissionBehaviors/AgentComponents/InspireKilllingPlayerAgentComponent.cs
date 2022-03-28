@@ -12,6 +12,10 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
         private static readonly TextObject ReadyText = new("{=Zt8Qbxh3HP}Your Inspire ability is ready!");
         private static readonly TextObject NotReadyText = new("{=MFZQek5Upy}You are not ready to use Inspire yet!");
 
+        private SettingsProviderMissionBehavior? SettingsProvider => Agent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>();
+        private Settings? Settings => SettingsProvider is { } settingsProvider ? settingsProvider.Get<Settings>() : null;
+        private InspireKillingStateAgentComponent? State => Agent.GetComponent<InspireKillingStateAgentComponent>();
+
         private bool _messageWasShown = false;
 
         public InspireKilllingPlayerAgentComponent(Agent agent) : base(agent) { }
@@ -20,7 +24,8 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
         {
             if (MBCommon.IsPaused) return;
 
-            if (Agent.GetComponent<InspireKillingStateAgentComponent>() is not { } state) return;
+            if (Settings is not { } settings) return;
+            if (State is not { } state) return;
 
             if (!_messageWasShown)
             {
@@ -33,7 +38,6 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
             if (Agent.Mission.InputManager.IsHotKeyDownAndReleased(YellToInspireHotkeyCategory.YellToInspireKeyId))
             {
-                if (Settings.Instance is not { } settings) return;
 
                 if (!state.CanInspire())
                 {

@@ -1,4 +1,5 @@
 ﻿using Bannerlord.YellToInspire.Data;
+using Bannerlord.YellToInspire.MissionBehaviors;
 using Bannerlord.YellToInspire.MissionBehaviors.AgentComponents;
 
 using System;
@@ -33,7 +34,8 @@ namespace Bannerlord.YellToInspire
         /// </summary>
         public static TroopStatistics InspireAura(Agent causingAgent)
         {
-            if (Settings.Instance is not { } settings) return TroopStatistics.Empty;
+            if (causingAgent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>() is not { } settingsProvider) return TroopStatistics.Empty;
+            if (settingsProvider.Get<Settings>() is not { } settings) return TroopStatistics.Empty;
 
             var hero = causingAgent.Character is CharacterObject charObj ? charObj.HeroObject : null;
 
@@ -43,7 +45,7 @@ namespace Bannerlord.YellToInspire
             if (causingAgent.GetComponent<SphereIndicatorAgentComponent>() is { } sphereIndicatorAgentComponent)
                 sphereIndicatorAgentComponent.Trigger();
 
-            var (troopsStatistics, affectedAgents) = AffectTroops(causingAgent);
+            var (troopsStatistics, affectedAgents) = AffectTroops(causingAgent, settings);
             if (causingAgent.GetComponent<InspireNearAgentsAgentComponent>() is { } inspireNearAgentsAgentComponent)
                 inspireNearAgentsAgentComponent.Trigger(affectedAgents);
 
@@ -65,10 +67,8 @@ namespace Bannerlord.YellToInspire
             return troopsStatistics;
         }
 
-        private static (TroopStatistics Statistics, List<WeakReference<Agent>> AffectedAgents) AffectTroops(Agent causingAgent)
+        private static (TroopStatistics Statistics, List<WeakReference<Agent>> AffectedAgents) AffectTroops(Agent causingAgent, Settings settings)
         {
-            if (Settings.Instance is not { } settings) return default;
-
             var vec2Pos = causingAgent.Position.AsVec2;
             var team = causingAgent.Team;
 
@@ -136,11 +136,9 @@ namespace Bannerlord.YellToInspire
             return (statistics, affectedAgents);
         }
 
-        public static void ShowDetailedMessage(TroopStatistics troopsStatistics)
+        public static void ShowDetailedMessage(TroopStatistics troopsStatistics, bool showDetailedMessageText)
         {
-            if (Settings.Instance is not { } settings) return;
-
-            if (settings.ShowDetailedMessageText)
+            if (showDetailedMessageText)
             {
                 InformationManager.DisplayMessage(new(AlliesInspiredText.SetTextVariable("INSPIRED", troopsStatistics.Inspired).ToString()));
                 InformationManager.DisplayMessage(new(AlliesRestoredText.SetTextVariable("RETURNING", troopsStatistics.Retreating).ToString()));

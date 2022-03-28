@@ -12,6 +12,9 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
     {
         public float InspireMeter { get; private set; } = 0f;
 
+        private SettingsProviderMissionBehavior? SettingsProvider => Agent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>();
+        private Settings? Settings => SettingsProvider is { } settingsProvider ? settingsProvider.Get<Settings>() : null;
+
         public InspireKillingStateAgentComponent(Agent agent) : base(agent) { }
 
         public bool CanInspire() => InspireMeter >= 100f;
@@ -26,7 +29,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
             var agentFlags = affectedAgent.GetAgentFlags();
             if (!agentFlags.HasFlag(AgentFlag.IsHumanoid)) return;
 
-            if (Settings.Instance is not { } settings) return;
+            if (Settings is not { } settings) return;
             var multiplier = settings.AbilityKillMultiplier(Agent.Character);
 
             InspireMeter += affectedAgentState switch

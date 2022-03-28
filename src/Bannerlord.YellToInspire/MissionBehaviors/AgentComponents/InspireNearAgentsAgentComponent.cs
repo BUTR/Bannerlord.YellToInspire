@@ -13,12 +13,15 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
     internal sealed class InspireNearAgentsAgentComponent : AgentComponent, IAgentComponentOnTick
     {
         private sealed record CheeringAgent(WeakReference<Agent> Agent, double InitialTime, double TimeDelay);
-       
+
         private static readonly ActionIndexCache[] CheerActions =
         {
             ActionIndexCache.Create("act_command"),
             ActionIndexCache.Create("act_command_follow")
         };
+
+        private SettingsProviderMissionBehavior? SettingsProvider => Agent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>();
+        private Settings? Settings => SettingsProvider is { } settingsProvider ? settingsProvider.Get<Settings>() : null;
 
         private readonly List<WeakReference<Agent>> _affectedAgents = new();
         private readonly List<CheeringAgent> _cheeringAgents = new();
@@ -29,7 +32,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
         public void Trigger(IEnumerable<WeakReference<Agent>> affectedAgents)
         {
-            if (Settings.Instance is not { } settings) return;
+            if (Settings is not { } settings) return;
 
             _affectedAgents.AddRange(affectedAgents);
 
@@ -63,7 +66,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
         private void DelayAndReact()
         {
-            if (Settings.Instance is not { } settings) return;
+            if (Settings is not { } settings) return;
 
             foreach (var weakReference in _affectedAgents.ToList())
             {
