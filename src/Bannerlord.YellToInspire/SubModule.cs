@@ -99,7 +99,6 @@ Friendly fleeing units under the effect of Inspire regain their resolve and retu
         {
             if (mission.CombatType != Mission.MissionCombatType.NoCombat && Settings.Instance is { } settings)
             {
-                mission.AddMissionBehavior(new SettingsProviderMissionBehavior(GenericServiceProvider.GetService<BaseSettingsProvider>()));
                 mission.AddMissionBehavior(new InspireHotKeyBehaviour());
                 mission.AddMissionBehavior(new InspireComponentTickBehaviour());
                 mission.AddMissionBehavior(settings.GameplayType.SelectedValue switch

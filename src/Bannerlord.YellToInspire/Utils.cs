@@ -2,6 +2,8 @@
 using Bannerlord.YellToInspire.MissionBehaviors;
 using Bannerlord.YellToInspire.MissionBehaviors.AgentComponents;
 
+using MCM;
+
 using System;
 using System.Collections.Generic;
 using System.Text;

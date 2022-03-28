@@ -1,4 +1,6 @@
-﻿using TaleWorlds.MountAndBlade;
+﻿using MCM;
+
+using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {

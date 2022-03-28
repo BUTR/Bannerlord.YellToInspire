@@ -20,7 +20,7 @@
   <!-- Development Variables -->
   <PropertyGroup>
     <!-- MCM Version -->
-    <MCMVersion>4.5.0</MCMVersion>
+    <MCMVersion>4.6.0</MCMVersion>
     <!-- BUTRShared Version -->
     <BUTRSharedVersion>2.0.0.82</BUTRSharedVersion>
     <!-- ModuleManager Version -->
