@@ -40,12 +40,12 @@ namespace Bannerlord.YellToInspire.MissionBehaviors
             {
                 if (agent.GetComponent<InspireKillingAIAgentComponent>() is { } aiAgentComponent)
                     agent.RemoveComponent(aiAgentComponent);
-                agent.AddComponent(new InspireKilllingPlayerAgentComponent(agent));
+                agent.AddComponent(new InspireKillingPlayerAgentComponent(agent));
             }
 
             if (agent.Controller == Agent.ControllerType.AI)
             {
-                if (agent.GetComponent<InspireKilllingPlayerAgentComponent>() is { } playerAgentComponent)
+                if (agent.GetComponent<InspireKillingPlayerAgentComponent>() is { } playerAgentComponent)
                     agent.RemoveComponent(playerAgentComponent);
                 agent.AddComponent(new InspireKillingAIAgentComponent(agent));
             }

@@ -4,7 +4,7 @@ using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
-    internal sealed class InspireCooldownAIAgentComponent : InspireBaseWithStateAgentComponent<InspireCooldownStateAgentComponent>
+    public sealed class InspireCooldownAIAgentComponent : InspireBaseWithStateAgentComponent<InspireCooldownStateAgentComponent>
     {
         public InspireCooldownAIAgentComponent(Agent agent) : base(agent) { }
 

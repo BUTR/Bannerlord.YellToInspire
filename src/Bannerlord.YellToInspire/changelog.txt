@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.0
+Game Versions: e1.7.2
+* Added a new gameplay system - based on killing and filling a meter
+* Rewritten again, made modder friendly for others to expand and integrate the mod
+---------------------------------------------------------------------------------------------------
 Version: 0.5.0
 Game Versions: e1.7.2
 * Support for e1.7.2

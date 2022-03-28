@@ -2,7 +2,7 @@
 <Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.68">
 
   <PropertyGroup>
-    <DefineConstants>$(DefineConstants);TRACE;_RGL_KEEP_ASSERTS</DefineConstants>
+    <DefineConstants>$(DefineConstants);_RGL_KEEP_ASSERTS</DefineConstants>
     <!-- Module Id -->
     <ModuleId>Bannerlord.YellToInspire</ModuleId>
     <!-- Module Name -->
@@ -22,7 +22,7 @@
     <!-- MCM Version -->
     <MCMVersion>4.5.0</MCMVersion>
     <!-- BUTRShared Version -->
-    <BUTRSharedVersion>2.0.0.78</BUTRSharedVersion>
+    <BUTRSharedVersion>2.0.0.82</BUTRSharedVersion>
     <!-- ModuleManager Version -->
     <BUTRModuleManagerVersion>3.0.94</BUTRModuleManagerVersion>
     <!-- ModuleLoader Version -->

@@ -6,7 +6,7 @@ using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
-    public sealed class InspireKilllingPlayerAgentComponent : InspireBaseWithStateAgentComponent<InspireKillingStateAgentComponent>, IAgentComponentOnTick
+    public sealed class InspireKillingPlayerAgentComponent : InspireBaseWithStateAgentComponent<InspireKillingStateAgentComponent>, IAgentComponentOnTick
     {
         private static readonly TextObject ReadyText = new("{=Zt8Qbxh3HP}Your Inspire ability is ready!");
         private static readonly TextObject NotReadyText = new("{=MFZQek5Upy}You are not ready to use Inspire yet!");
@@ -14,7 +14,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
         private bool _messageWasShown = false;
 
-        public InspireKilllingPlayerAgentComponent(Agent agent) : base(agent) { }
+        public InspireKillingPlayerAgentComponent(Agent agent) : base(agent) { }
 
         public void OnTick(float dt)
         {
