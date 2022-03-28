@@ -1,4 +1,10 @@
-﻿using System;
+﻿using Bannerlord.YellToInspire.Data;
+using Bannerlord.YellToInspire.MissionBehaviors;
+using Bannerlord.YellToInspire.MissionBehaviors.AgentComponents;
+
+using MCM;
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,33 +15,69 @@ using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire
 {
-    internal static class Utils
+    public static class Utils
     {
-        public struct TroopStatistics
+        public static readonly TextObject[] AbilityPhrases =
         {
-            public int Inspired;
-            public int Retreating;
-            public int Nearby;
-            public int Fled;
+            new("{=OG3KT8KQvR}A primal bellow echos forth from the depths of your soul!"),
+            new("{=0SKEk61Zj0}Your banshee howl pierces the battlefield!"),
+            new("{=HT9YJgKEl2}You let out a deafening warcry!"),
+            new("{=Nr6docL7MZ}You explode with a thunderous roar!")
+        };
+
+        public static readonly TextObject AlliesInspiredText = new("{=gqr3o3aOfu}Allied unit(s) that were inspired: {INSPIRED}");
+        public static readonly TextObject AlliesRestoredText = new("{=5fapWaqKVw}Allied unit(s) that are returning to battle: {RETURNING}");
+        public static readonly TextObject EnemiesScaredText = new("{=Ldui1l6RMK}Enemy unit(s) that had their courage tested: {SCARED}");
+        public static readonly TextObject EnemiesFledText = new("{=8aQ7tO6TbA}Enemy unit(s) that are fleeing: {FLED}");
+        public static readonly TextObject EnemiesRestoredText = new("{=zy6xciLnky}Enemy unit(s) that are returning to battle: {RETURNING}");
+
+        /// <summary>
+        /// Will work with any agent, not the main hero only
+        /// </summary>
+        public static TroopStatistics InspireAura(Agent causingAgent)
+        {
+            if (causingAgent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>() is not { } settingsProvider) return TroopStatistics.Empty;
+            if (settingsProvider.Get<Settings>() is not { } settings) return TroopStatistics.Empty;
+
+            var hero = causingAgent.Character is CharacterObject charObj ? charObj.HeroObject : null;
+
+            if (hero is not null && hero.GetSkillValue(Skills.Leadership) >= 5 && !hero.GetPerkValue(Perks.InspireBasic))
+                hero.HeroDeveloper.AddPerk(Perks.InspireBasic);
+
+            if (causingAgent.GetComponent<SphereIndicatorAgentComponent>() is { } sphereIndicatorAgentComponent)
+                sphereIndicatorAgentComponent.Trigger();
+
+            var (troopsStatistics, affectedAgents) = AffectTroops(causingAgent, settings);
+            if (causingAgent.GetComponent<InspireNearAgentsAgentComponent>() is { } inspireNearAgentsAgentComponent)
+                inspireNearAgentsAgentComponent.Trigger(affectedAgents);
+
+            if (hero is not null && causingAgent.Mission.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: false })
+            {
+                hero.AddSkillXp(Skills.Leadership, settings.LeadershipExpPerAlly * troopsStatistics.Inspired);
+                hero.AddSkillXp(Skills.Roguery, settings.RogueryExpPerEnemy * troopsStatistics.Nearby);
+            }
+
+            var voiceType = troopsStatistics switch
+            {
+                { Fled: > 0 } => SkinVoiceManager.VoiceType.Victory,
+                { Retreating: > 0 } => SkinVoiceManager.VoiceType.FaceEnemy,
+                _ when causingAgent.Mission.GetMissionBehavior<BattleEndLogic>() is { PlayerVictory: true } => SkinVoiceManager.VoiceType.Victory,
+                _ => SkinVoiceManager.VoiceType.Yell
+            };
+            causingAgent.MakeVoice(voiceType, SkinVoiceManager.CombatVoiceNetworkPredictionType.NoPrediction);
+
+            return troopsStatistics;
         }
 
-        private static readonly TextObject AlliesInspiredText = new("{=gqr3o3aOfu}Allied unit(s) that were inspired: {INSPIRED}");
-        private static readonly TextObject AlliesRestoredText = new("{=5fapWaqKVw}Allied unit(s) that are returning to battle: {RETURNING}");
-        private static readonly TextObject EnemiesScaredText = new("{=Ldui1l6RMK}Enemy unit(s) that had their courage tested: {SCARED}");
-        private static readonly TextObject EnemiesFledText = new("{=8aQ7tO6TbA}Enemy unit(s) that are fleeing: {FLED}");
-        private static readonly TextObject EnemiesRestoredText = new("{=zy6xciLnky}Enemy unit(s) that are returning to battle: {RETURNING}");
-
-        public static (TroopStatistics Statistics, List<WeakReference<Agent>> AffectedAgents) AffectTroops(Agent causingAgent)
+        public static (TroopStatistics Statistics, List<WeakReference<Agent>> AffectedAgents) AffectTroops(Agent causingAgent, Settings settings)
         {
-            if (Settings.Instance is not { } settings) return default;
-
             var vec2Pos = causingAgent.Position.AsVec2;
             var team = causingAgent.Team;
 
             var statistics = new TroopStatistics();
             var affectedAgents = new List<WeakReference<Agent>>();
 
-            foreach (var nearbyAllyAgent in Mission.Current.GetNearbyAllyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
+            foreach (var nearbyAllyAgent in causingAgent.Mission.GetNearbyAllyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
             {
                 if (nearbyAllyAgent == causingAgent) continue;
 
@@ -68,7 +110,7 @@ namespace Bannerlord.YellToInspire
                 }
             }
 
-            foreach (var nearbyEnemyAgent in Mission.Current.GetNearbyEnemyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
+            foreach (var nearbyEnemyAgent in causingAgent.Mission.GetNearbyEnemyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
             {
                 if (nearbyEnemyAgent.GetComponent<CommonAIComponent>() is not { } commonAiComponent) continue;
 
@@ -96,11 +138,9 @@ namespace Bannerlord.YellToInspire
             return (statistics, affectedAgents);
         }
 
-        public static void ShowDetailedMessage(TroopStatistics troopsStatistics)
+        public static void ShowDetailedMessage(TroopStatistics troopsStatistics, bool showDetailedMessageText)
         {
-            if (Settings.Instance is not { } settings) return;
-
-            if (settings.ShowDetailedMessageText)
+            if (showDetailedMessageText)
             {
                 InformationManager.DisplayMessage(new(AlliesInspiredText.SetTextVariable("INSPIRED", troopsStatistics.Inspired).ToString()));
                 InformationManager.DisplayMessage(new(AlliesRestoredText.SetTextVariable("RETURNING", troopsStatistics.Retreating).ToString()));

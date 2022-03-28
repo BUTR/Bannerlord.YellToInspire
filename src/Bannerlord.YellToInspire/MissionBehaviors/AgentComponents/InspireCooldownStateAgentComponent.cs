@@ -1,0 +1,39 @@
+﻿using Bannerlord.YellToInspire.Data;
+
+using TaleWorlds.CampaignSystem;
+using TaleWorlds.MountAndBlade;
+
+namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
+{
+    public class InspireCooldownStateAgentComponent : InspireBaseAgentComponent
+    {
+        protected double _cooldownSnapshot;
+        public virtual double PastCooldown => MissionTime.Now.ToSeconds - _cooldownSnapshot;
+
+        public InspireCooldownStateAgentComponent(Agent agent) : base(agent) { }
+
+        public virtual bool CanInspire(out double cooldown)
+        {
+            if (Settings is not { } settings)
+            {
+                cooldown = 0f;
+                return false;
+            }
+
+            var abilityCooldown = settings.AbilityCooldown(Agent.Character);
+            cooldown = abilityCooldown - PastCooldown;
+
+            return Agent.Character is CharacterObject { HeroObject: { } hero }
+                ? hero.GetPerkValue(Perks.InspireBasic) && CooldownCheck()
+                : CooldownCheck();
+
+            bool CooldownCheck() => _cooldownSnapshot == 0 || PastCooldown > abilityCooldown;
+        }
+
+        public virtual TroopStatistics Inspire()
+        {
+            _cooldownSnapshot = MissionTime.Now.ToSeconds;
+            return Utils.InspireAura(Agent);
+        }
+    }
+}

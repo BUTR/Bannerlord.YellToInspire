@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns="https://github.com/BUTR/Bannerlord.XmlSchemas"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://github.com/BUTR/Bannerlord.XmlSchemas
+                          https://raw.githubusercontent.com/BUTR/Bannerlord.XmlSchemas/master/ModuleStrings.xsd" >
+  <strings>
+    <string id="str_hotkey_category_name.YellToInspireCategory" text="{=3F9hwn8h4W}Yell To Inspire" />
+    <string id="str_hotkey_name.YellToInspireCategory_YellToInspireKey" text="{=3F9hwn8h4W}Yell To Inspire" />
+    <string id="str_hotkey_description.YellToInspireCategory_YellToInspireKey" text="{=u68iVSY338}Yell To Inspire." />
+  </strings>
+</base>

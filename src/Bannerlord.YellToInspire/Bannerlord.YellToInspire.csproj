@@ -2,12 +2,13 @@
 <Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.68">
 
   <PropertyGroup>
+    <DefineConstants>$(DefineConstants);_RGL_KEEP_ASSERTS</DefineConstants>
     <!-- Module Id -->
     <ModuleId>Bannerlord.YellToInspire</ModuleId>
     <!-- Module Name -->
     <ModuleName>BUTR's Yell To Inspire</ModuleName>
     <!-- Module Version -->
-    <Version>0.5.0</Version>
+    <Version>0.6.0</Version>
     <!-- Module manually override GameVersion -->
     <!-- <OverrideGameVersion>e1.6.2</OverrideGameVersion> -->
   </PropertyGroup>
@@ -18,22 +19,14 @@
 
   <!-- Development Variables -->
   <PropertyGroup>
-    <!-- Harmony Version -->
-    <HarmonyVersion>2.2.1</HarmonyVersion>
-    <!-- UIExtenderEx Version -->
-    <UIExtenderExVersion>2.1.8</UIExtenderExVersion>
-    <!-- ButterLib Version -->
-    <ButterLibVersion>2.1.1</ButterLibVersion>
     <!-- MCM Version -->
-    <MCMVersion>4.5.0</MCMVersion>
+    <MCMVersion>4.6.0</MCMVersion>
     <!-- BUTRShared Version -->
-    <BUTRSharedVersion>2.0.0.78</BUTRSharedVersion>
+    <BUTRSharedVersion>2.0.0.82</BUTRSharedVersion>
     <!-- ModuleManager Version -->
     <BUTRModuleManagerVersion>3.0.94</BUTRModuleManagerVersion>
     <!-- ModuleLoader Version -->
     <BUTRModuleLoaderVersion>1.0.1.24</BUTRModuleLoaderVersion>
-    <!-- Harmony Extensions Version -->
-    <HarmonyExtensionsVersion>2.0.0.55</HarmonyExtensionsVersion>
 
     <ExtendedBuild>false</ExtendedBuild>
   </PropertyGroup>
@@ -41,9 +34,10 @@
   <PropertyGroup>
     <DisableReferenceAssemblies>true</DisableReferenceAssemblies>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Bannerlord.ReferenceAssemblies.Core.EarlyAccess" Version="$(GameVersion).*" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.ReferenceAssemblies.CustomBattle.EarlyAccess" Version="$(GameVersion).*" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.ReferenceAssemblies.Native.EarlyAccess" Version="$(GameVersion).*" IncludeAssets="compile" />
   </ItemGroup>
 
 </Project>
