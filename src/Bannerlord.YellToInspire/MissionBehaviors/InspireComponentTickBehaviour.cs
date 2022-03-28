@@ -23,9 +23,13 @@ namespace Bannerlord.YellToInspire.MissionBehaviors
             var activeAgents = Mission.Agents;
             for (var i = 0; i < activeAgents.Count; i++)
             {
-                foreach (var agentComponent in activeAgents[i].Components.OfType<IAgentComponentOnTick>())
+                var components = activeAgents[i].Components;
+                for (var j = 0; j < components.Count; j++)
                 {
-                    agentComponent.OnTick(dt);
+                    if (components[i] is IAgentComponentOnTick agentComponent)
+                    {
+                        agentComponent.OnTick(dt);
+                    }
                 }
             }
         }
