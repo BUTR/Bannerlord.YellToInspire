@@ -5,7 +5,7 @@ using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors
 {
-    internal sealed class InspireGameplayCooldownBehaviour : MissionBehavior
+    public class InspireGameplayCooldownBehaviour : MissionBehavior
     {
         public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
 

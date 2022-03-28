@@ -11,7 +11,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors
     /// For some reason the <see cref="AgentComponent"/> only has <see cref="AgentComponent.OnTickAsAI"/>,
     /// so if we added it, the Player won't be handled.
     /// </summary>
-    internal class InspireComponentTickBehaviour : MissionBehavior
+    internal sealed class InspireComponentTickBehaviour : MissionBehavior
     {
         public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
 

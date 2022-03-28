@@ -1,26 +1,39 @@
-﻿using TaleWorlds.MountAndBlade;
+﻿using Bannerlord.YellToInspire.Data;
+
+using TaleWorlds.CampaignSystem;
+using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
-    internal sealed class InspireCooldownStateAgentComponent : AgentComponent
+    public class InspireCooldownStateAgentComponent : InspireBaseAgentComponent
     {
-        private double _cooldownSnapshot;
-        public double PastCooldown => MissionTime.Now.ToSeconds - _cooldownSnapshot;
-
-        private SettingsProviderMissionBehavior? SettingsProvider => Agent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>();
-        private Settings? Settings => SettingsProvider is { } settingsProvider ? settingsProvider.Get<Settings>() : null;
+        protected double _cooldownSnapshot;
+        public virtual double PastCooldown => MissionTime.Now.ToSeconds - _cooldownSnapshot;
 
         public InspireCooldownStateAgentComponent(Agent agent) : base(agent) { }
 
-        public bool CanInspire()
+        public virtual bool CanInspire(out double cooldown)
         {
-            if (Settings is not { } settings) return false;
-            return _cooldownSnapshot == 0 || PastCooldown > settings.AbilityCooldown(Agent.Character);
+            if (Settings is not { } settings)
+            {
+                cooldown = 0f;
+                return false;
+            }
+
+            var abilityCooldown = settings.AbilityCooldown(Agent.Character);
+            cooldown = abilityCooldown - PastCooldown;
+
+            return Agent.Character is CharacterObject { HeroObject: { } hero }
+                ? hero.GetPerkValue(Perks.InspireBasic) && CooldownCheck()
+                : CooldownCheck();
+
+            bool CooldownCheck() => _cooldownSnapshot == 0 || PastCooldown > abilityCooldown;
         }
 
-        public void ResetInspiration()
+        public virtual TroopStatistics Inspire()
         {
             _cooldownSnapshot = MissionTime.Now.ToSeconds;
+            return Utils.InspireAura(Agent);
         }
     }
 }

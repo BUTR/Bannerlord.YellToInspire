@@ -1,6 +1,6 @@
 ﻿namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
-    internal interface IAgentComponentOnTick
+    public interface IAgentComponentOnTick
     {
         public void OnTick(float dt);
     }

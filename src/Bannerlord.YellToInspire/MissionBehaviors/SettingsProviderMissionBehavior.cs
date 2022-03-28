@@ -8,7 +8,7 @@ using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors
 {
-    public class SettingsProviderMissionBehavior : MissionBehavior
+    public sealed class SettingsProviderMissionBehavior : MissionBehavior
     {
         public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
 

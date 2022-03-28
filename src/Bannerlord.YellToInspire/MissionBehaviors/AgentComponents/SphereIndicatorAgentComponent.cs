@@ -9,23 +9,20 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
     /// <summary>
     /// Displays the Debug Sphere of the affected area.
     /// </summary>
-    internal sealed class SphereIndicatorAgentComponent : AgentComponent, IAgentComponentOnTick
+    public class SphereIndicatorAgentComponent : InspireBaseAgentComponent, IAgentComponentOnTick
     {
-        private SettingsProviderMissionBehavior? SettingsProvider => Agent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>();
-        private Settings? Settings => SettingsProvider is { } settingsProvider ? settingsProvider.Get<Settings>() : null;
+        protected Vec3 _position = Vec3.Zero;
+        protected float _radius = 0f;
 
-        private Vec3 _position = Vec3.Zero;
-        private float _radius = 0f;
+        protected double _triggerTime = 0d;
+        protected double _lifetime = 3d;
 
-        private double _triggerTime = 0d;
-        private double _lifetime = 3d;
-
-        private bool DisplaySphereIndicators => Math.Abs(_radius - 0f) > float.Epsilon;
-        private double PassedSinceTrigger => MissionTime.Now.ToSeconds - _triggerTime;
+        protected virtual bool DisplaySphereIndicators => Math.Abs(_radius - 0f) > float.Epsilon;
+        protected virtual double PassedSinceTrigger => MissionTime.Now.ToSeconds - _triggerTime;
 
         public SphereIndicatorAgentComponent(Agent agent) : base(agent) { }
 
-        public void Trigger()
+        public virtual void Trigger()
         {
             if (Settings is not { } settings) return;
 
@@ -34,7 +31,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
             _triggerTime = MissionTime.Now.ToSeconds;
         }
 
-        public void OnTick(float _)
+        public virtual void OnTick(float _)
         {
             if (Settings is not { } settings) return;
 

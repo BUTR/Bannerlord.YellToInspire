@@ -10,27 +10,25 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
     /// <summary>
     /// Manages the actual cheering of Agents provided to <see cref="Trigger"/>.
     /// </summary>
-    internal sealed class InspireNearAgentsAgentComponent : AgentComponent, IAgentComponentOnTick
+    public class InspireNearAgentsAgentComponent : InspireBaseAgentComponent, IAgentComponentOnTick
     {
-        private sealed record CheeringAgent(WeakReference<Agent> Agent, double InitialTime, double TimeDelay);
+        protected sealed record CheeringAgent(WeakReference<Agent> Agent, double InitialTime, double TimeDelay);
 
-        private static readonly ActionIndexCache[] CheerActions =
+        protected static readonly ActionIndexCache[] CheerActions =
         {
             ActionIndexCache.Create("act_command"),
             ActionIndexCache.Create("act_command_follow")
         };
 
-        private SettingsProviderMissionBehavior? SettingsProvider => Agent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>();
-        private Settings? Settings => SettingsProvider is { } settingsProvider ? settingsProvider.Get<Settings>() : null;
 
-        private readonly List<WeakReference<Agent>> _affectedAgents = new();
-        private readonly List<CheeringAgent> _cheeringAgents = new();
+        protected readonly List<WeakReference<Agent>> _affectedAgents = new();
+        protected readonly List<CheeringAgent> _cheeringAgents = new();
 
-        private double _triggerTime = 0d;
+        protected double _triggerTime = 0d;
 
         public InspireNearAgentsAgentComponent(Agent agent) : base(agent) { }
 
-        public void Trigger(IEnumerable<WeakReference<Agent>> affectedAgents)
+        public virtual void Trigger(IEnumerable<WeakReference<Agent>> affectedAgents)
         {
             if (Settings is not { } settings) return;
 
@@ -44,7 +42,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
             }
         }
 
-        public void OnTick(float _)
+        public virtual void OnTick(float _)
         {
             if (_cheeringAgents.Count > 0)
                 StopCheeringAgentsAfterDelay();
@@ -64,7 +62,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
             _triggerTime = 0f;
         }
 
-        private void DelayAndReact()
+        protected virtual void DelayAndReact()
         {
             if (Settings is not { } settings) return;
 
@@ -102,13 +100,13 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
             }
         }
 
-        private void Cheer(Agent agent)
+        protected virtual void Cheer(Agent agent)
         {
             agent.SetActionChannel(1, CheerActions[MBRandom.RandomInt(CheerActions.Length)]);
             _cheeringAgents.Add(new CheeringAgent(new(agent), MissionTime.Now.ToSeconds, 1.5));
         }
 
-        private void StopCheeringAgentsAfterDelay()
+        protected virtual void StopCheeringAgentsAfterDelay()
         {
             if (Agent.Mission is null)
             {

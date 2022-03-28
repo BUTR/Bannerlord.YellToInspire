@@ -2,7 +2,7 @@
 
 namespace Bannerlord.YellToInspire.HotKeys
 {
-    internal sealed class YellToInspireHotkeyCategory : GameKeyContext
+    public sealed class YellToInspireHotkeyCategory : GameKeyContext
     {
         public static readonly string CategoryId = "YellToInspireCategory";
         public static readonly string YellToInspireKeyId = "YellToInspireKey";

@@ -1,16 +1,11 @@
 ﻿using System.Linq;
 
-using TaleWorlds.CampaignSystem;
 using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
-    internal sealed class InspireKillingAIAgentComponent : AgentComponent
+    public sealed class InspireKillingAIAgentComponent : InspireBaseWithStateAgentComponent<InspireKillingStateAgentComponent>
     {
-        private SettingsProviderMissionBehavior? SettingsProvider => Agent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>();
-        private Settings? Settings => SettingsProvider is { } settingsProvider ? settingsProvider.Get<Settings>() : null;
-        private InspireKillingStateAgentComponent? State => Agent.GetComponent<InspireKillingStateAgentComponent>();
-
         public InspireKillingAIAgentComponent(Agent agent) : base(agent) { }
 
         public override void OnTickAsAI(float dt)
@@ -27,19 +22,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
             if (!state.CanInspire()) return;
 
-            if (Agent.Character is CharacterObject { HeroObject: { } hero })
-            {
-                if (hero.GetPerkValue(Perks.InspireBasic))
-                {
-                    state.ResetInspiration();
-                    Utils.InspireAura(Agent);
-                }
-            }
-            else
-            {
-                state.ResetInspiration();
-                Utils.InspireAura(Agent);
-            }
+            state.Inspire();
         }
     }
 }

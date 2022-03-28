@@ -8,7 +8,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors
     /// We need the derivative <see cref="MissionView"/> so we can use <see cref="MissionView.OnMissionScreenInitialize"/>
     /// to register the <see cref="YellToInspireHotkeyCategory"/>
     /// </summary>
-    internal class InspireHotKeyBehaviour : MissionView
+    internal sealed class InspireHotKeyBehaviour : MissionView
     {
         public override void OnMissionScreenInitialize()
         {

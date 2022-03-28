@@ -1,19 +1,15 @@
 ﻿using Bannerlord.YellToInspire.HotKeys;
 
-using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
-    internal sealed class InspireCooldownPlayerAgentComponent : AgentComponent, IAgentComponentOnTick
+    public sealed class InspireCooldownPlayerAgentComponent : InspireBaseWithStateAgentComponent<InspireCooldownStateAgentComponent>, IAgentComponentOnTick
     {
         private static readonly TextObject CooldownText = new("{=FsbQpeMJYJ}Your ability is still on cooldown for {TIME} second(s)!");
 
-        private SettingsProviderMissionBehavior? SettingsProvider => Agent.Mission.GetMissionBehavior<SettingsProviderMissionBehavior>();
-        private Settings? Settings => SettingsProvider is { } settingsProvider ? settingsProvider.Get<Settings>() : null;
-        private InspireCooldownStateAgentComponent? State => Agent.GetComponent<InspireCooldownStateAgentComponent>();
 
         public InspireCooldownPlayerAgentComponent(Agent agent) : base(agent) { }
 
@@ -27,34 +23,17 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
                 if (State is not { } state) return;
 
-                if (!state.CanInspire())
+                if (!state.CanInspire(out var cooldown))
                 {
-                    var time = settings.AbilityCooldown(Agent.Character) - state.PastCooldown;
-                    InformationManager.DisplayMessage(new(CooldownText.SetTextVariable("TIME", $"{time:###0}").ToString()));
+                    InformationManager.DisplayMessage(new(CooldownText.SetTextVariable("TIME", $"{cooldown:###0}").ToString()));
                     return;
                 }
 
-                if (Agent.Character is CharacterObject { HeroObject: { } hero })
-                {
-                    if (hero.GetPerkValue(Perks.InspireBasic))
-                    {
-                        state.ResetInspiration();
-                        var troopsStatistics = Utils.InspireAura(Agent);
+                var troopsStatistics = state.Inspire();
 
-                        InformationManager.DisplayMessage(new(Utils.AbilityPhrases[MBRandom.RandomInt(0, Utils.AbilityPhrases.Length)].ToString()));
-                        if (settings.ShowDetailedMessage)
-                            Utils.ShowDetailedMessage(troopsStatistics, settings.ShowDetailedMessageText);
-                    }
-                }
-                else
-                {
-                    state.ResetInspiration();
-                    var troopsStatistics = Utils.InspireAura(Agent);
-
-                    InformationManager.DisplayMessage(new(Utils.AbilityPhrases[MBRandom.RandomInt(0, Utils.AbilityPhrases.Length)].ToString()));
-                    if (settings.ShowDetailedMessage)
-                        Utils.ShowDetailedMessage(troopsStatistics, settings.ShowDetailedMessageText);
-                }
+                InformationManager.DisplayMessage(new(Utils.AbilityPhrases[MBRandom.RandomInt(0, Utils.AbilityPhrases.Length)].ToString()));
+                if (settings.ShowDetailedMessage)
+                    Utils.ShowDetailedMessage(troopsStatistics, settings.ShowDetailedMessageText);
             }
         }
     }

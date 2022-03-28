@@ -13,7 +13,7 @@ using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire
 {
-    internal static class Utils
+    public static class Utils
     {
         public static readonly TextObject[] AbilityPhrases =
         {
@@ -23,11 +23,11 @@ namespace Bannerlord.YellToInspire
             new("{=Nr6docL7MZ}You explode with a thunderous roar!")
         };
 
-        private static readonly TextObject AlliesInspiredText = new("{=gqr3o3aOfu}Allied unit(s) that were inspired: {INSPIRED}");
-        private static readonly TextObject AlliesRestoredText = new("{=5fapWaqKVw}Allied unit(s) that are returning to battle: {RETURNING}");
-        private static readonly TextObject EnemiesScaredText = new("{=Ldui1l6RMK}Enemy unit(s) that had their courage tested: {SCARED}");
-        private static readonly TextObject EnemiesFledText = new("{=8aQ7tO6TbA}Enemy unit(s) that are fleeing: {FLED}");
-        private static readonly TextObject EnemiesRestoredText = new("{=zy6xciLnky}Enemy unit(s) that are returning to battle: {RETURNING}");
+        public static readonly TextObject AlliesInspiredText = new("{=gqr3o3aOfu}Allied unit(s) that were inspired: {INSPIRED}");
+        public static readonly TextObject AlliesRestoredText = new("{=5fapWaqKVw}Allied unit(s) that are returning to battle: {RETURNING}");
+        public static readonly TextObject EnemiesScaredText = new("{=Ldui1l6RMK}Enemy unit(s) that had their courage tested: {SCARED}");
+        public static readonly TextObject EnemiesFledText = new("{=8aQ7tO6TbA}Enemy unit(s) that are fleeing: {FLED}");
+        public static readonly TextObject EnemiesRestoredText = new("{=zy6xciLnky}Enemy unit(s) that are returning to battle: {RETURNING}");
 
         /// <summary>
         /// Will work with any agent, not the main hero only
@@ -67,7 +67,7 @@ namespace Bannerlord.YellToInspire
             return troopsStatistics;
         }
 
-        private static (TroopStatistics Statistics, List<WeakReference<Agent>> AffectedAgents) AffectTroops(Agent causingAgent, Settings settings)
+        public static (TroopStatistics Statistics, List<WeakReference<Agent>> AffectedAgents) AffectTroops(Agent causingAgent, Settings settings)
         {
             var vec2Pos = causingAgent.Position.AsVec2;
             var team = causingAgent.Team;
