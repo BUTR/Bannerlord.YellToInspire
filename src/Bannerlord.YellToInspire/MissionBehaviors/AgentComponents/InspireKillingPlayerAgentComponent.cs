@@ -42,7 +42,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
                 var troopsStatistics = state.Inspire();
 
-                InformationManager.DisplayMessage(new(Utils.AbilityPhrases[MBRandom.RandomInt(0, Utils.AbilityPhrases.Length)].ToString()));
+                InformationManager.DisplayMessage(new(Utils.GetRandomAbilityPhrase().ToString()));
                 if (settings.ShowDetailedMessage)
                     Utils.ShowDetailedMessage(troopsStatistics, settings.ShowDetailedMessageText);
             }

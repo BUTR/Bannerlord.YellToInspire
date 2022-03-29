@@ -17,7 +17,7 @@ namespace Bannerlord.YellToInspire
 {
     public static class Utils
     {
-        public static readonly TextObject[] AbilityPhrases =
+        private static readonly TextObject[] AbilityPhrases =
         {
             new("{=OG3KT8KQvR}A primal bellow echos forth from the depths of your soul!"),
             new("{=0SKEk61Zj0}Your banshee howl pierces the battlefield!"),
@@ -30,6 +30,8 @@ namespace Bannerlord.YellToInspire
         public static readonly TextObject EnemiesScaredText = new("{=Ldui1l6RMK}Enemy unit(s) that had their courage tested: {SCARED}");
         public static readonly TextObject EnemiesFledText = new("{=8aQ7tO6TbA}Enemy unit(s) that are fleeing: {FLED}");
         public static readonly TextObject EnemiesRestoredText = new("{=zy6xciLnky}Enemy unit(s) that are returning to battle: {RETURNING}");
+
+        public static TextObject GetRandomAbilityPhrase() => AbilityPhrases[MBRandom.RandomInt(0, AbilityPhrases.Length)];
 
         /// <summary>
         /// Will work with any agent, not the main hero only
