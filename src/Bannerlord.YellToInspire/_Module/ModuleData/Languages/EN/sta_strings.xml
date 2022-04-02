@@ -79,6 +79,11 @@ Cooldown: {COOLDOWN} seconds" />
     <string id="K4Inr7E7PZ" text="Gameplay Type" />
     <string id="adWH7RVK6o" text="The type of gameplay to use." />
 
+    <string id="n0R1p0achr" text="General" />
+    <string id="ZX1S3NcDvK" text="Cooldown Gameplay System" />
+    <string id="s3UCkECKCw" text="Killing Gameplay System" />
+    <string id="BYgxByyQR5" text="Tuning" />
+
     <string id="gqr3o3aOfu" text="Allied unit(s) that were inspired: {INSPIRED}" />
     <string id="5fapWaqKVw" text="Allied unit(s) that are returning to battle: {RETURNING}" />
     <string id="Ldui1l6RMK" text="Enemy unit(s) that had their courage tested: {SCARED}" />

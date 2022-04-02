@@ -1,4 +1,8 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.1
+Game Versions: e1.7.2
+* Split settings into categories
+---------------------------------------------------------------------------------------------------
 Version: 0.6.0
 Game Versions: e1.7.2
 * Added a new gameplay system - based on killing and filling a meter.

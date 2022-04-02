@@ -1,6 +1,6 @@
 ﻿using Bannerlord.YellToInspire.MissionBehaviors.AgentComponents;
 
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 
 using TaleWorlds.MountAndBlade;
 
@@ -15,6 +15,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors
     {
         public override MissionBehaviorType BehaviorType => MissionBehaviorType.Other;
 
+        [SuppressMessage("ReSharper", "ForCanBeConvertedToForeach")]
         public override void OnMissionTick(float dt)
         {
             base.OnMissionTick(dt);

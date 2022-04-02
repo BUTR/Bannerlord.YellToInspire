@@ -13,7 +13,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors
         public override void OnMissionScreenInitialize()
         {
             base.OnMissionScreenInitialize();
-            
+
             // A strange way to inject HotKeys.
             // We need to have an early entrypoint to when Mission.InputManager is injected
             // This provides this early entrypoint, as does OnRenderingStarted()
