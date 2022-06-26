@@ -1,6 +1,10 @@
 ﻿using Bannerlord.YellToInspire.HotKeys;
 
+#if e172
 using TaleWorlds.MountAndBlade.View.Missions;
+#elif e180
+using TaleWorlds.MountAndBlade.View.MissionViews;
+#endif
 
 namespace Bannerlord.YellToInspire.MissionBehaviors
 {

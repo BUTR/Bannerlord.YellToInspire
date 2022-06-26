@@ -10,6 +10,9 @@ using System.Text;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+#if e180
+using TaleWorlds.Library;
+#endif
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 
