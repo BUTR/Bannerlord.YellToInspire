@@ -3,10 +3,6 @@ using Bannerlord.YellToInspire.Data;
 using Bannerlord.YellToInspire.HotKeys;
 using Bannerlord.YellToInspire.MissionBehaviors;
 
-using BUTR.DependencyInjection;
-
-using MCM.Abstractions.Settings.Providers;
-
 using System;
 using System.IO;
 
@@ -53,7 +49,9 @@ Friendly fleeing units under the effect of Inspire regain their resolve and retu
 
             var moduleInfo = ModuleInfoHelper.GetModuleByType(typeof(SubModule));
             var path = Path.Combine(ModuleHelper.GetModuleFullPath(moduleInfo!.Id), "ModuleData", "module_strings.xml");
+#if e172
             Module.CurrentModule.GlobalTextManager.LoadGameTexts(path);
+#endif
             HotKeyManager.AddAuxiliaryCategory(new YellToInspireHotkeyCategory());
 
             base.OnSubModuleLoad();
@@ -61,6 +59,7 @@ Friendly fleeing units under the effect of Inspire regain their resolve and retu
 
         protected override void InitializeGameStarter(Game game, IGameStarter starterObject)
         {
+#if e172
             void OnHeroGainedSkill(Hero hero, SkillObject skill, bool hasNewPerk, int change, bool shouldNotify)
             {
                 if (hero != Hero.MainHero) return;
@@ -69,6 +68,16 @@ Friendly fleeing units under the effect of Inspire regain their resolve and retu
 
                 RefreshPerks();
             }
+#elif e180
+            void OnHeroGainedSkill(Hero hero, SkillObject skill, int change, bool shouldNotify)
+            {
+                if (hero != Hero.MainHero) return;
+
+                if (skill != DefaultSkills.Leadership && skill != DefaultSkills.Roguery) return;
+
+                RefreshPerks();
+            }
+#endif
 
             if (starterObject is CampaignGameStarter campaignStarter)
             {

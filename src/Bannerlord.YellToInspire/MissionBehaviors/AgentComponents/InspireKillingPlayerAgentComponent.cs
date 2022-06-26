@@ -1,6 +1,10 @@
 ﻿using Bannerlord.YellToInspire.HotKeys;
 
+#if e172
 using TaleWorlds.Core;
+#elif e180
+using TaleWorlds.Library;
+#endif
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 

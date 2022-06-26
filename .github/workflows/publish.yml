@@ -30,7 +30,7 @@ jobs:
       shell: pwsh
 
     - name: Upload Bannerlord folder
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: bannerlord
         path: ./bannerlord/
@@ -49,7 +49,7 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
 
     - name: Download bannerlord folder
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: bannerlord
         path: ./bannerlord
