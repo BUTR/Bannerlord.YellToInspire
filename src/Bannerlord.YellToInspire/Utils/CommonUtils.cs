@@ -1,5 +1,4 @@
 ﻿using Bannerlord.YellToInspire.Data;
-using Bannerlord.YellToInspire.MissionBehaviors;
 using Bannerlord.YellToInspire.MissionBehaviors.AgentComponents;
 
 using MCM;
@@ -10,15 +9,15 @@ using System.Text;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade;
 #if e180
 using TaleWorlds.Library;
 #endif
-using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade;
 
-namespace Bannerlord.YellToInspire
+namespace Bannerlord.YellToInspire.Utils
 {
-    public static class Utils
+    public static class CommonUtils
     {
         private static readonly TextObject[] AbilityPhrases =
         {

@@ -1,4 +1,5 @@
 ﻿using Bannerlord.YellToInspire.Data;
+using Bannerlord.YellToInspire.Utils;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.MountAndBlade;
@@ -33,7 +34,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
         public virtual TroopStatistics Inspire()
         {
             _cooldownSnapshot = MissionTime.Now.ToSeconds;
-            return Utils.InspireAura(Agent);
+            return CommonUtils.InspireAura(Agent);
         }
     }
 }
