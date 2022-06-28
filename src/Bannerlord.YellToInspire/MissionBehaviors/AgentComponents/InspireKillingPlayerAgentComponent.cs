@@ -1,4 +1,5 @@
 ﻿using Bannerlord.YellToInspire.HotKeys;
+using Bannerlord.YellToInspire.Utils;
 
 #if e172
 using TaleWorlds.Core;
@@ -46,9 +47,9 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
                 var troopsStatistics = state.Inspire();
 
-                InformationManager.DisplayMessage(new(Utils.GetRandomAbilityPhrase().ToString()));
+                InformationManager.DisplayMessage(new(CommonUtils.GetRandomAbilityPhrase().ToString()));
                 if (settings.ShowDetailedMessage)
-                    Utils.ShowDetailedMessage(troopsStatistics, settings.ShowDetailedMessageText);
+                    CommonUtils.ShowDetailedMessage(troopsStatistics, settings.ShowDetailedMessageText);
             }
         }
     }

@@ -8,7 +8,7 @@
     <!-- Module Name -->
     <ModuleName>BUTR's Yell To Inspire</ModuleName>
     <!-- Module Version -->
-    <Version>0.6.4</Version>
+    <Version>0.6.5</Version>
     <!-- Module manually override GameVersion -->
     <!-- <OverrideGameVersion>e1.6.2</OverrideGameVersion> -->
   </PropertyGroup>
@@ -24,9 +24,11 @@
     <!-- BUTRShared Version -->
     <BUTRSharedVersion>2.0.0.82</BUTRSharedVersion>
     <!-- ModuleManager Version -->
-    <BUTRModuleManagerVersion>3.0.94</BUTRModuleManagerVersion>
+    <BUTRModuleManagerVersion>3.0.97</BUTRModuleManagerVersion>
     <!-- ModuleLoader Version -->
-    <BUTRModuleLoaderVersion>1.0.1.24</BUTRModuleLoaderVersion>
+    <BUTRModuleLoaderVersion>1.0.1.36</BUTRModuleLoaderVersion>
+    <!-- Harmony Extensions Version -->
+    <HarmonyExtensionsVersion>3.1.0.61</HarmonyExtensionsVersion>
 
     <ExtendedBuild>false</ExtendedBuild>
   </PropertyGroup>

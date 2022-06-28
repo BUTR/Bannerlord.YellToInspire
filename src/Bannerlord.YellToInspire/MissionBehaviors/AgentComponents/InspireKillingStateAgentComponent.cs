@@ -1,4 +1,5 @@
 ﻿using Bannerlord.YellToInspire.Data;
+using Bannerlord.YellToInspire.Utils;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
@@ -21,7 +22,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
         public virtual TroopStatistics Inspire()
         {
             InspireMeter = 0f;
-            return Utils.InspireAura(Agent);
+            return CommonUtils.InspireAura(Agent);
         }
 
         public virtual void OnRemovedAgent(Agent affectedAgent, AgentState affectedAgentState, KillingBlow blow)
