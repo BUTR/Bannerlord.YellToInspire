@@ -8,7 +8,7 @@ using TaleWorlds.MountAndBlade;
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
     /// <summary>
-    /// Manages the Inspiration state for the <see cref="Agent"/> when <see cref="GameplayType.Killing"/> is used.
+    /// Manages the Inspiration state for the <see cref="Agent"/> when <see cref="Bannerlord.YellToInspire.Data.GameplayType.Killing"/> is used.
     /// </summary>
     public class InspireKillingStateAgentComponent : InspireBaseAgentComponent
     {
@@ -25,7 +25,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
             return CommonUtils.InspireAura(Agent);
         }
 
-        public virtual void OnRemovedAgent(Agent affectedAgent, AgentState affectedAgentState, KillingBlow blow)
+        public virtual void OnAffectedAgentRemoved(Agent affectedAgent, AgentState affectedAgentState, KillingBlow blow)
         {
             var agentFlags = affectedAgent.GetAgentFlags();
             if (!agentFlags.HasFlag(AgentFlag.IsHumanoid)) return;

@@ -1,25 +1,46 @@
-﻿using Bannerlord.YellToInspire.HotKeys;
+﻿using Bannerlord.ButterLib.Extensions;
+using Bannerlord.YellToInspire.HotKeys;
 using Bannerlord.YellToInspire.Utils;
 
-#if e172
-using TaleWorlds.Core;
-#elif e180
+using System;
+
 using TaleWorlds.Library;
-#endif
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
-    public sealed class InspireKillingPlayerAgentComponent : InspireBaseWithStateAgentComponent<InspireKillingStateAgentComponent>, IAgentComponentOnTick
+    public sealed class InspireKillingPlayerAgentComponent : InspireBaseWithStateAgentComponent<InspireKillingStateAgentComponent>, IAgentComponentOnTick, IDisposable
     {
         private static readonly TextObject ReadyText = new("{=Zt8Qbxh3HP}Your Inspire ability is ready!");
         private static readonly TextObject NotReadyText = new("{=MFZQek5Upy}You are not ready to use Inspire yet!");
 
 
+        private readonly IDisposable? _subscription;
         private bool _messageWasShown = false;
 
-        public InspireKillingPlayerAgentComponent(Agent agent) : base(agent) { }
+        public InspireKillingPlayerAgentComponent(Agent agent) : base(agent)
+        {
+            _subscription = Agent.Mission.InputManager.SubscribeToIsDownAndReleasedEvent<YellToInspireHotKey>(() =>
+            {
+                if (MBCommon.IsPaused) return;
+
+                if (Settings is not { } settings) return;
+                if (State is not { } state) return;
+
+                if (!state.CanInspire())
+                {
+                    InformationManager.DisplayMessage(new(NotReadyText.ToString()));
+                    return;
+                }
+
+                var troopsStatistics = state.Inspire();
+
+                InformationManager.DisplayMessage(new(CommonUtils.GetRandomAbilityPhrase().ToString()));
+                if (settings.ShowDetailedMessage)
+                    CommonUtils.ShowDetailedMessage(troopsStatistics, settings.ShowDetailedMessageText);
+            });
+        }
 
         public void OnTick(float dt)
         {
@@ -36,21 +57,17 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
                     _messageWasShown = true;
                 }
             }
+        }
 
-            if (Agent.Mission.InputManager.IsHotKeyDownAndReleased(YellToInspireHotkeyCategory.YellToInspireKeyId))
-            {
-                if (!state.CanInspire())
-                {
-                    InformationManager.DisplayMessage(new(NotReadyText.ToString()));
-                    return;
-                }
+        public override void OnAgentRemoved()
+        {
+            base.OnAgentRemoved();
+            _subscription?.Dispose();
+        }
 
-                var troopsStatistics = state.Inspire();
-
-                InformationManager.DisplayMessage(new(CommonUtils.GetRandomAbilityPhrase().ToString()));
-                if (settings.ShowDetailedMessage)
-                    CommonUtils.ShowDetailedMessage(troopsStatistics, settings.ShowDetailedMessageText);
-            }
+        public void Dispose()
+        {
+            _subscription?.Dispose();
         }
     }
 }

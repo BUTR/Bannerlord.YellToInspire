@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.8
+Game Versions: v1.0.0
+* Adapted for v1.0.0
+* Yell To Inspire HotKey was moved to Actions
+---------------------------------------------------------------------------------------------------
 Version: 0.6.7
 Game Versions: e1.7.2,e1.8.0
 * Third workaround for the language issue

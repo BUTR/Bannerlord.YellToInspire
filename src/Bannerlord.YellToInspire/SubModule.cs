@@ -1,17 +1,13 @@
 ﻿using Bannerlord.BUTR.Shared.Helpers;
+using Bannerlord.ButterLib.HotKeys;
 using Bannerlord.YellToInspire.Data;
 using Bannerlord.YellToInspire.HotKeys;
 using Bannerlord.YellToInspire.MissionBehaviors;
 
-using System;
-using System.IO;
-
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.Core;
-using TaleWorlds.InputSystem;
 using TaleWorlds.Localization;
-using TaleWorlds.ModuleManager;
 using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire
@@ -40,6 +36,8 @@ Friendly fleeing units under the effect of Inspire regain their resolve and retu
         //Friendly units under the effect of Inspire gain a small temporary health boost!");
 
 
+        private bool _isInitialized;
+
         protected override void OnSubModuleLoad()
         {
             if (Settings.Instance is { } settings)
@@ -47,28 +45,26 @@ Friendly fleeing units under the effect of Inspire regain their resolve and retu
                 settings.PropertyChanged += (_, _) => RefreshPerks();
             }
 
-            var moduleInfo = ModuleInfoHelper.GetModuleByType(typeof(SubModule));
-            var path = Path.Combine(ModuleHelper.GetModuleFullPath(moduleInfo!.Id), "ModuleData", "module_strings.xml");
-#if e172
-            Module.CurrentModule.GlobalTextManager.LoadGameTexts(path);
-#endif
-            HotKeyManager.AddAuxiliaryCategory(new YellToInspireHotkeyCategory());
-
             base.OnSubModuleLoad();
+        }
+
+
+        protected override void OnBeforeInitialModuleScreenSetAsRoot()
+        {
+            if (!_isInitialized)
+            {
+                _isInitialized = true;
+
+                if (HotKeyManager.Create(ModuleInfoHelper.GetModuleByType(typeof(SubModule))!.Id) is { } hkm)
+                {
+                    hkm.Add<YellToInspireHotKey>();
+                    hkm.Build();
+                }
+            }
         }
 
         protected override void InitializeGameStarter(Game game, IGameStarter starterObject)
         {
-#if e172
-            void OnHeroGainedSkill(Hero hero, SkillObject skill, bool hasNewPerk, int change, bool shouldNotify)
-            {
-                if (hero != Hero.MainHero) return;
-
-                if (skill != DefaultSkills.Leadership && skill != DefaultSkills.Roguery) return;
-
-                RefreshPerks();
-            }
-#elif e180
             void OnHeroGainedSkill(Hero hero, SkillObject skill, int change, bool shouldNotify)
             {
                 if (hero != Hero.MainHero) return;
@@ -77,9 +73,8 @@ Friendly fleeing units under the effect of Inspire regain their resolve and retu
 
                 RefreshPerks();
             }
-#endif
 
-            if (starterObject is CampaignGameStarter campaignStarter)
+            if (starterObject is CampaignGameStarter)
             {
                 CampaignEvents.HeroGainedSkill.AddNonSerializedListener(this, OnHeroGainedSkill);
             }
@@ -108,13 +103,11 @@ Friendly fleeing units under the effect of Inspire regain their resolve and retu
         {
             if (mission.CombatType != Mission.MissionCombatType.NoCombat && Settings.Instance is { } settings)
             {
-                mission.AddMissionBehavior(new InspireHotKeyBehaviour());
                 mission.AddMissionBehavior(new InspireComponentTickBehaviour());
-                mission.AddMissionBehavior(settings.GameplayType.SelectedValue switch
+                mission.AddMissionBehavior(settings.GameplayType.SelectedValue.Type switch
                 {
-                    GameplayType.Killing => new InspireGameplayKillingBehaviour(),
-                    GameplayType.Cooldown => new InspireGameplayCooldownBehaviour(),
-                    _ => throw new ArgumentOutOfRangeException()
+                    GameplaySystem.Killing => new InspireGameplayKillingBehaviour(),
+                    GameplaySystem.Cooldown => new InspireGameplayCooldownBehaviour(),
                 });
             }
 

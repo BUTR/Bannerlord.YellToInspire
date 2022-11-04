@@ -4,21 +4,19 @@
   <Id value="$moduleid$" />
   <Name value="$modulename$"/>
   <Version value="v$version$" />
-  <Official value="false" />
   <DefaultModule value="false" />
-  <SingleplayerModule value="true" />
-  <MultiplayerModule value="false" />
   <ModuleCategory value="Singleplayer" />
+  <ModuleType value="Community" />
   <Url value="https://www.nexusmods.com/mountandblade2bannerlord/mods/3638" />
   <DependedModules>
     <DependedModule Id="Bannerlord.MBOptionScreen" DependentVersion="v$mcmversion$" />
-    <DependedModule Id="Native" DependentVersion="e$gameversion$.*" />
+    <DependedModule Id="Native" DependentVersion="v$gameversion$.*" />
   </DependedModules>
   <!-- Community Dependency Metadata -->
   <!-- https://github.com/BUTR/Bannerlord.BUTRLoader#for-modders -->
   <DependedModuleMetadatas>
     <DependedModuleMetadata id="Bannerlord.MBOptionScreen" order="LoadBeforeThis" version="v$mcmversion$" />
-    <DependedModuleMetadata id="Native" order="LoadBeforeThis" version="e$gameversion$.*" />
+    <DependedModuleMetadata id="Native" order="LoadBeforeThis" version="v$gameversion$.*" />
   </DependedModuleMetadatas>
   <!-- Community Dependency Metadata -->
   <SubModules>
@@ -32,9 +30,4 @@
       </Tags>
     </SubModule>
   </SubModules>
-  <Xmls>
-    <XmlNode>
-      <XmlName id="GameText" path="module_strings"/>
-    </XmlNode>
-  </Xmls>
 </Module>

@@ -1,6 +1,6 @@
 ﻿namespace Bannerlord.YellToInspire.Data
 {
-    public enum GameplayType
+    public enum GameplaySystem
     {
         Killing,
         Cooldown

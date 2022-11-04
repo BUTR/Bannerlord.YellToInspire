@@ -9,11 +9,9 @@ using System.Text;
 
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
-#if e180
-using TaleWorlds.Library;
-#endif
 
 namespace Bannerlord.YellToInspire.Utils
 {
