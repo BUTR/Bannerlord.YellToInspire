@@ -1,5 +1,4 @@
-﻿
-using MCM.Abstractions.Attributes;
+﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
 
 namespace Bannerlord.YellToInspire

@@ -36,7 +36,10 @@ namespace Bannerlord.YellToInspire.MissionBehaviors
             if (agent.Controller == Agent.ControllerType.AI)
             {
                 if (agent.GetComponent<InspireCooldownPlayerAgentComponent>() is { } playerAgentComponent)
+                {
                     agent.RemoveComponent(playerAgentComponent);
+                    playerAgentComponent.Dispose();
+                }
                 agent.AddComponent(new InspireCooldownAIAgentComponent(agent));
             }
         }

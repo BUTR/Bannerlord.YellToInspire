@@ -29,7 +29,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors
             if (affectedAgent is null) return;
 
             if (affectorAgent?.GetComponent<InspireKillingStateAgentComponent>() is { } inspireStateAgentComponent)
-                inspireStateAgentComponent.OnRemovedAgent(affectedAgent, agentState, blow);
+                inspireStateAgentComponent.OnAffectedAgentRemoved(affectedAgent, agentState, blow);
         }
 
         protected override void OnAgentControllerChanged(Agent agent, Agent.ControllerType oldController)
@@ -46,7 +46,10 @@ namespace Bannerlord.YellToInspire.MissionBehaviors
             if (agent.Controller == Agent.ControllerType.AI)
             {
                 if (agent.GetComponent<InspireKillingPlayerAgentComponent>() is { } playerAgentComponent)
+                {
                     agent.RemoveComponent(playerAgentComponent);
+                    playerAgentComponent.Dispose();
+                }
                 agent.AddComponent(new InspireKillingAIAgentComponent(agent));
             }
         }

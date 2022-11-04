@@ -1,14 +1,14 @@
 ﻿<!--EXTERNAL_PROPERTIES: GameVersion;-->
-<Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.68">
+<Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.80">
 
   <PropertyGroup>
-    <DefineConstants>$(DefineConstants);_RGL_KEEP_ASSERTS</DefineConstants>
+    <DefineConstants>$(DefineConstants)</DefineConstants>
     <!-- Module Id -->
     <ModuleId>Bannerlord.YellToInspire</ModuleId>
     <!-- Module Name -->
     <ModuleName>BUTR's Yell To Inspire</ModuleName>
     <!-- Module Version -->
-    <Version>0.6.7</Version>
+    <Version>0.6.8</Version>
     <!-- Module manually override GameVersion -->
     <!-- <OverrideGameVersion>e1.6.2</OverrideGameVersion> -->
   </PropertyGroup>
@@ -20,15 +20,19 @@
   <!-- Development Variables -->
   <PropertyGroup>
     <!-- MCM Version -->
-    <MCMVersion>4.6.0</MCMVersion>
+    <MCMVersion>5.0.4</MCMVersion>
+    <!-- ButterLib Version -->
+    <ButterLibVersion>2.4.0</ButterLibVersion>
+    <!-- ButterLib Version -->
+    <HarmonyVersion>2.2.2</HarmonyVersion>
     <!-- BUTRShared Version -->
-    <BUTRSharedVersion>2.0.0.82</BUTRSharedVersion>
+    <BUTRSharedVersion>3.0.0.121</BUTRSharedVersion>
     <!-- ModuleManager Version -->
-    <BUTRModuleManagerVersion>3.0.97</BUTRModuleManagerVersion>
+    <BUTRModuleManagerVersion>4.0.149</BUTRModuleManagerVersion>
     <!-- ModuleLoader Version -->
-    <BUTRModuleLoaderVersion>1.0.1.36</BUTRModuleLoaderVersion>
+    <BUTRModuleLoaderVersion>1.0.1.43</BUTRModuleLoaderVersion>
     <!-- Harmony Extensions Version -->
-    <HarmonyExtensionsVersion>3.1.0.61</HarmonyExtensionsVersion>
+    <HarmonyExtensionsVersion>3.1.0.67</HarmonyExtensionsVersion>
 
     <ExtendedBuild>false</ExtendedBuild>
   </PropertyGroup>
@@ -38,8 +42,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bannerlord.ReferenceAssemblies.Core.EarlyAccess" Version="$(GameVersion).*" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.ReferenceAssemblies.Native.EarlyAccess" Version="$(GameVersion).*" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.ReferenceAssemblies.Core" Version="$(GameVersion).*" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.ReferenceAssemblies.Native" Version="$(GameVersion).*" IncludeAssets="compile" />
   </ItemGroup>
 
 </Project>

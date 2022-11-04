@@ -76,6 +76,8 @@ Cooldown: {COOLDOWN} seconds" />
     <string id="YncLuM2Sps" text="Determines whether enemies verbally respond in fear to your yells." />
     <string id="K4Inr7E7PZ" text="Gameplay Type" />
     <string id="adWH7RVK6o" text="The type of gameplay to use." />
+    <string id="jsdfYfdFG4" text="Cooldown" />
+    <string id="Nhd58Fg2b6" text="Killing" />
 
     <string id="n0R1p0achr" text="General" />
     <string id="ZX1S3NcDvK" text="Cooldown Gameplay System" />
