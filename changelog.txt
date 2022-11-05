@@ -1,4 +1,8 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.9
+Game Versions: v1.0.0
+* Yell To Inspire should be disabled on missions like Tavern now. Can be reverted in Options
+---------------------------------------------------------------------------------------------------
 Version: 0.6.8
 Game Versions: v1.0.0
 * Adapted for v1.0.0
