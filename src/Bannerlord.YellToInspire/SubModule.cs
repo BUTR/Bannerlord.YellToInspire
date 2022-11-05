@@ -103,12 +103,15 @@ Friendly fleeing units under the effect of Inspire regain their resolve and retu
         {
             if (mission.CombatType != Mission.MissionCombatType.NoCombat && Settings.Instance is { } settings)
             {
-                mission.AddMissionBehavior(new InspireComponentTickBehaviour());
-                mission.AddMissionBehavior(settings.GameplayType.SelectedValue.Type switch
+                if (settings.EnableInAnyMission || (mission.AttackerTeam is not null && mission.DefenderTeam is not null))
                 {
-                    GameplaySystem.Killing => new InspireGameplayKillingBehaviour(),
-                    GameplaySystem.Cooldown => new InspireGameplayCooldownBehaviour(),
-                });
+                    mission.AddMissionBehavior(new InspireComponentTickBehaviour());
+                    mission.AddMissionBehavior(settings.GameplayType.SelectedValue.Type switch
+                    {
+                        GameplaySystem.Killing => new InspireGameplayKillingBehaviour(),
+                        GameplaySystem.Cooldown => new InspireGameplayCooldownBehaviour(),
+                    });
+                }
             }
 
             base.OnMissionBehaviorInitialize(mission);

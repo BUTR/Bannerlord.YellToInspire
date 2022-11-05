@@ -78,6 +78,8 @@ Cooldown: {COOLDOWN} seconds" />
     <string id="adWH7RVK6o" text="The type of gameplay to use." />
     <string id="jsdfYfdFG4" text="Cooldown" />
     <string id="Nhd58Fg2b6" text="Killing" />
+    <string id="Hy6Tg26GAw" text="Enable in Any Mission" />
+    <string id="adWH7RVK6o" text="Keep Yell To Inspire working is missions like visiting the Tavern." />
 
     <string id="n0R1p0achr" text="General" />
     <string id="ZX1S3NcDvK" text="Cooldown Gameplay System" />
