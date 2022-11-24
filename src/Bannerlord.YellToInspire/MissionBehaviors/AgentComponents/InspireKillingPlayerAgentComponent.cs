@@ -5,17 +5,12 @@ using Bannerlord.YellToInspire.Utils;
 using System;
 
 using TaleWorlds.Library;
-using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
     public sealed class InspireKillingPlayerAgentComponent : InspireBaseWithStateAgentComponent<InspireKillingStateAgentComponent>, IAgentComponentOnTick, IDisposable
     {
-        private static readonly TextObject ReadyText = new("{=Zt8Qbxh3HP}Your Inspire ability is ready!");
-        private static readonly TextObject NotReadyText = new("{=MFZQek5Upy}You are not ready to use Inspire yet!");
-
-
         private readonly IDisposable? _subscription;
         private bool _messageWasShown = false;
 
@@ -30,7 +25,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
                 if (!state.CanInspire())
                 {
-                    InformationManager.DisplayMessage(new(NotReadyText.ToString()));
+                    InformationManager.DisplayMessage(new(Strings.AbilityNotReady.ToString()));
                     return;
                 }
 
@@ -53,7 +48,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
             {
                 if (state.CanInspire())
                 {
-                    InformationManager.DisplayMessage(new(ReadyText.ToString()));
+                    InformationManager.DisplayMessage(new(Strings.AbilityReady.ToString()));
                     _messageWasShown = true;
                 }
             }

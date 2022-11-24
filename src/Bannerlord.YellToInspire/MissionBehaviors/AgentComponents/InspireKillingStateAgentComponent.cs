@@ -8,7 +8,7 @@ using TaleWorlds.MountAndBlade;
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
     /// <summary>
-    /// Manages the Inspiration state for the <see cref="Agent"/> when <see cref="Bannerlord.YellToInspire.Data.GameplayType.Killing"/> is used.
+    /// Manages the Inspiration state for the <see cref="Agent"/> when <see cref="Bannerlord.YellToInspire.Data.GameplaySystem.Killing"/> is used.
     /// </summary>
     public class InspireKillingStateAgentComponent : InspireBaseAgentComponent
     {
@@ -17,7 +17,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
         public InspireKillingStateAgentComponent(Agent agent) : base(agent) { }
 
         public virtual bool CanInspire() => InspireMeter >= 100f &&
-                                            (Agent.Character is not CharacterObject { HeroObject: { } hero } || hero.GetPerkValue(Perks.InspireBasic));
+                                            (Agent.Character is not CharacterObject { HeroObject: { } hero } || hero.GetPerkValue(Perks.Instance.InspireBasic));
 
         public virtual TroopStatistics Inspire()
         {

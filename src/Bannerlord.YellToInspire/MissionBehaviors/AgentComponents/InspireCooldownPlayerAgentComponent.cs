@@ -5,15 +5,12 @@ using Bannerlord.YellToInspire.Utils;
 using System;
 
 using TaleWorlds.Library;
-using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
     public sealed class InspireCooldownPlayerAgentComponent : InspireBaseWithStateAgentComponent<InspireCooldownStateAgentComponent>, IDisposable
     {
-        private static readonly TextObject CooldownText = new("{=FsbQpeMJYJ}Your ability is still on cooldown for {TIME} second(s)!");
-
         private readonly IDisposable? _subscription;
 
         public InspireCooldownPlayerAgentComponent(Agent agent) : base(agent)
@@ -28,7 +25,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
                 if (!state.CanInspire(out var cooldown))
                 {
-                    InformationManager.DisplayMessage(new(CooldownText.SetTextVariable("TIME", $"{cooldown:###0}").ToString()));
+                    InformationManager.DisplayMessage(new(Strings.MessageCooldown.SetTextVariable("TIME", $"{cooldown:###0}").ToString()));
                     return;
                 }
 

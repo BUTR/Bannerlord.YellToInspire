@@ -6,6 +6,9 @@ using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 {
+    /// <summary>
+    /// Manages the Inspiration state for the <see cref="Agent"/> when <see cref="Bannerlord.YellToInspire.Data.GameplaySystem.Cooldown"/> is used.
+    /// </summary>
     public class InspireCooldownStateAgentComponent : InspireBaseAgentComponent
     {
         protected double _cooldownSnapshot;
@@ -25,7 +28,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
             cooldown = abilityCooldown - PastCooldown;
 
             return Agent.Character is CharacterObject { HeroObject: { } hero }
-                ? hero.GetPerkValue(Perks.InspireBasic) && CooldownCheck()
+                ? hero.GetPerkValue(Perks.Instance.InspireBasic) && CooldownCheck()
                 : CooldownCheck();
 
             bool CooldownCheck() => _cooldownSnapshot == 0 || PastCooldown > abilityCooldown;
