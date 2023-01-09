@@ -9,6 +9,9 @@
   <a href="https://codeclimate.com/github/BUTR/Bannerlord.YellToInspire/maintainability">
     <img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability-percentage/BUTR/Bannerlord.YellToInspire">
   </a>
+  <a title="Crowdin" target="_blank" href="https://crowdin.com/project/yell-to-inspire">
+    <img src="https://badges.crowdin.net/yell-to-inspire/localized.svg">
+  </a>
   </br>
   <a href="https://www.nexusmods.com/mountandblade2bannerlord/mods/3638" alt="NexusMods YellToInspire">
     <img src="https://img.shields.io/badge/NexusMods-YellToInspire-yellow.svg" />
