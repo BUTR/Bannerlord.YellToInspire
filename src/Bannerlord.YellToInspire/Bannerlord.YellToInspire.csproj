@@ -1,5 +1,5 @@
 ﻿<!--EXTERNAL_PROPERTIES: GameVersion;-->
-<Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.80">
+<Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.89">
 
   <PropertyGroup>
     <DefineConstants>$(DefineConstants)</DefineConstants>
@@ -20,19 +20,19 @@
   <!-- Development Variables -->
   <PropertyGroup>
     <!-- MCM Version -->
-    <MCMVersion>5.0.4</MCMVersion>
+    <MCMVersion>5.5.5</MCMVersion>
     <!-- ButterLib Version -->
-    <ButterLibVersion>2.4.0</ButterLibVersion>
+    <ButterLibVersion>2.6.2</ButterLibVersion>
     <!-- ButterLib Version -->
     <HarmonyVersion>2.2.2</HarmonyVersion>
     <!-- BUTRShared Version -->
-    <BUTRSharedVersion>3.0.0.121</BUTRSharedVersion>
+    <BUTRSharedVersion>3.0.0.130</BUTRSharedVersion>
     <!-- ModuleManager Version -->
-    <BUTRModuleManagerVersion>4.0.149</BUTRModuleManagerVersion>
+    <BUTRModuleManagerVersion>5.0.170</BUTRModuleManagerVersion>
     <!-- ModuleLoader Version -->
-    <BUTRModuleLoaderVersion>1.0.1.43</BUTRModuleLoaderVersion>
+    <BUTRModuleLoaderVersion>1.0.1.44</BUTRModuleLoaderVersion>
     <!-- Harmony Extensions Version -->
-    <HarmonyExtensionsVersion>3.1.0.67</HarmonyExtensionsVersion>
+    <HarmonyExtensionsVersion>3.2.0.73</HarmonyExtensionsVersion>
 
     <ExtendedBuild>false</ExtendedBuild>
   </PropertyGroup>
