@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 
+using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
@@ -16,7 +17,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
             if (Settings is not { } settings) return;
 
-            if (Agent.Mission.GetNearbyAgents(Agent.Position.AsVec2, settings.AbilityRadius(Agent.Character)).Count() < 3) return;
+            if (Agent.Mission.GetNearbyAgents(Agent.Position.AsVec2, settings.AbilityRadius(Agent.Character), new MBList<Agent>()).Count() < 3) return;
 
             if (State is not { } state) return;
 

@@ -17,21 +17,7 @@ namespace Bannerlord.YellToInspire.Utils
 {
     public static class CommonUtils
     {
-        private static readonly TextObject[] AbilityPhrases =
-        {
-            new("{=OG3KT8KQvR}A primal bellow echos forth from the depths of your soul!"),
-            new("{=0SKEk61Zj0}Your banshee howl pierces the battlefield!"),
-            new("{=HT9YJgKEl2}You let out a deafening warcry!"),
-            new("{=Nr6docL7MZ}You explode with a thunderous roar!")
-        };
-
-        public static readonly TextObject AlliesInspiredText = new("{=gqr3o3aOfu}Allied unit(s) that were inspired: {INSPIRED}");
-        public static readonly TextObject AlliesRestoredText = new("{=5fapWaqKVw}Allied unit(s) that are returning to battle: {RETURNING}");
-        public static readonly TextObject EnemiesScaredText = new("{=Ldui1l6RMK}Enemy unit(s) that had their courage tested: {SCARED}");
-        public static readonly TextObject EnemiesFledText = new("{=8aQ7tO6TbA}Enemy unit(s) that are fleeing: {FLED}");
-        public static readonly TextObject EnemiesRestoredText = new("{=zy6xciLnky}Enemy unit(s) that are returning to battle: {RETURNING}");
-
-        public static TextObject GetRandomAbilityPhrase() => AbilityPhrases[MBRandom.RandomInt(0, AbilityPhrases.Length)];
+        public static TextObject GetRandomAbilityPhrase() => Strings.AbilityPhrases[MBRandom.RandomInt(0, Strings.AbilityPhrases.Length)];
 
         /// <summary>
         /// Will work with any agent, not the main hero only
@@ -43,8 +29,8 @@ namespace Bannerlord.YellToInspire.Utils
 
             var hero = causingAgent.Character is CharacterObject charObj ? charObj.HeroObject : null;
 
-            if (hero is not null && hero.GetSkillValue(Skills.Leadership) >= 5 && !hero.GetPerkValue(Perks.InspireBasic))
-                hero.HeroDeveloper.AddPerk(Perks.InspireBasic);
+            if (hero is not null && hero.GetSkillValue(Skills.Leadership) >= 5 && !hero.GetPerkValue(Perks.Instance.InspireBasic))
+                hero.HeroDeveloper.AddPerk(Perks.Instance.InspireBasic);
 
             if (causingAgent.GetComponent<SphereIndicatorAgentComponent>() is { } sphereIndicatorAgentComponent)
                 sphereIndicatorAgentComponent.Trigger();
@@ -79,7 +65,7 @@ namespace Bannerlord.YellToInspire.Utils
             var statistics = new TroopStatistics();
             var affectedAgents = new List<WeakReference<Agent>>();
 
-            foreach (var nearbyAllyAgent in causingAgent.Mission.GetNearbyAllyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
+            foreach (var nearbyAllyAgent in causingAgent.Mission.GetNearbyAllyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team, new MBList<Agent>()))
             {
                 if (nearbyAllyAgent == causingAgent) continue;
 
@@ -92,7 +78,7 @@ namespace Bannerlord.YellToInspire.Utils
 
                 if (commonAiComponent.IsRetreating)
                 {
-                    if (causingAgent.Character is not CharacterObject charObj || charObj.GetPerkValue(Perks.InspireResolve))
+                    if (causingAgent.Character is not CharacterObject charObj || charObj.GetPerkValue(Perks.Instance.InspireResolve))
                     {
                         nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
 
@@ -102,7 +88,7 @@ namespace Bannerlord.YellToInspire.Utils
                 }
                 if (commonAiComponent.IsPanicked)
                 {
-                    if (causingAgent.Character is not CharacterObject charObj || charObj.GetPerkValue(Perks.InspireResolve))
+                    if (causingAgent.Character is not CharacterObject charObj || charObj.GetPerkValue(Perks.Instance.InspireResolve))
                     {
                         nearbyAllyAgent.SetMorale(commonAiComponent.RecoveryMorale);
 
@@ -112,7 +98,7 @@ namespace Bannerlord.YellToInspire.Utils
                 }
             }
 
-            foreach (var nearbyEnemyAgent in causingAgent.Mission.GetNearbyEnemyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
+            foreach (var nearbyEnemyAgent in causingAgent.Mission.GetNearbyEnemyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team, new MBList<Agent>()))
             {
                 if (nearbyEnemyAgent.GetComponent<CommonAIComponent>() is not { } commonAiComponent) continue;
 
@@ -144,16 +130,16 @@ namespace Bannerlord.YellToInspire.Utils
         {
             if (showDetailedMessageText)
             {
-                InformationManager.DisplayMessage(new(AlliesInspiredText.SetTextVariable("INSPIRED", troopsStatistics.Inspired).ToString()));
-                InformationManager.DisplayMessage(new(AlliesRestoredText.SetTextVariable("RETURNING", troopsStatistics.Retreating).ToString()));
-                InformationManager.DisplayMessage(new(EnemiesScaredText.SetTextVariable("SCARED", troopsStatistics.Nearby).ToString()));
+                InformationManager.DisplayMessage(new(Strings.AlliesInspired.SetTextVariable("INSPIRED", troopsStatistics.Inspired).ToString()));
+                InformationManager.DisplayMessage(new(Strings.AlliesRestored.SetTextVariable("RETURNING", troopsStatistics.Retreating).ToString()));
+                InformationManager.DisplayMessage(new(Strings.EnemiesScared.SetTextVariable("SCARED", troopsStatistics.Nearby).ToString()));
                 //if (settings.FleeingEnemiesReturn)
                 //{
                 //    InformationManager.DisplayMessage(new(EnemiesRestoredText.SetTextVariable("RETURNING", troopsStatistics.Fled).ToString()));
                 //}
                 //else
                 {
-                    InformationManager.DisplayMessage(new(EnemiesFledText.SetTextVariable("FLED", troopsStatistics.Fled).ToString()));
+                    InformationManager.DisplayMessage(new(Strings.EnemiesFled.SetTextVariable("FLED", troopsStatistics.Fled).ToString()));
                 }
             }
             else
@@ -182,6 +168,19 @@ namespace Bannerlord.YellToInspire.Utils
 
                 InformationManager.DisplayMessage(new(sb.ToString()));
             }
+        }
+
+        public static TextObject SetVariables(TextObject textObject)
+        {
+            if (Settings.Instance is not { } settings) return textObject;
+            var @char = CharacterObject.PlayerCharacter;
+
+            return textObject
+                .SetTextVariable("NEWLINE", "\n")
+                .SetTextVariable("RADIUS", settings.AbilityRadius(@char))
+                .SetTextVariable("MORALE", settings.AlliedMoraleGain(@char))
+                .SetTextVariable("FLEE", settings.EnemyChanceToFlee(@char))
+                .SetTextVariable("COOLDOWN", settings.AbilityCooldown(@char));
         }
     }
 }

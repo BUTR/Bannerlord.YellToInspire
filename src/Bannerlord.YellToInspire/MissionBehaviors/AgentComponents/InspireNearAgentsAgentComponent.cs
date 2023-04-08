@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 
 namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
@@ -36,7 +37,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
             _triggerTime = MissionTime.Now.ToSeconds;
 
-            if (!Agent.Mission.GetNearbyEnemyAgents(Agent.Position.AsVec2, 8f, Agent.Team).Any() && settings.EnableCheerAnimation)
+            if (!Agent.Mission.GetNearbyEnemyAgents(Agent.Position.AsVec2, 8f, Agent.Team, new MBList<Agent>()).Any() && settings.EnableCheerAnimation)
             {
                 Cheer(Agent);
             }
@@ -87,7 +88,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
                 if (agent.Team == Agent.Team)
                 {
                     agent.SetWantsToYell();
-                    if (!Agent.Mission.GetNearbyEnemyAgents(agent.Position.AsVec2, 8f, agent.Team).Any() && settings.EnableCheerAnimation)
+                    if (!Agent.Mission.GetNearbyEnemyAgents(agent.Position.AsVec2, 8f, agent.Team, new MBList<Agent>()).Any() && settings.EnableCheerAnimation)
                     {
                         Cheer(agent);
                     }
@@ -124,7 +125,7 @@ namespace Bannerlord.YellToInspire.MissionBehaviors.AgentComponents
 
                 if (cheeringAgent.InitialTime + cheeringAgent.TimeDelay > MissionTime.Now.ToSeconds)
                 {
-                    if (!Agent.Mission.GetNearbyEnemyAgents(agent.Position.AsVec2, 8f, agent.Team).Any())
+                    if (!Agent.Mission.GetNearbyEnemyAgents(agent.Position.AsVec2, 8f, agent.Team, new MBList<Agent>()).Any())
                         continue;
                 }
 

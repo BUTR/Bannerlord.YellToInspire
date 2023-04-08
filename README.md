@@ -1,4 +1,36 @@
 # Bannerlord.YellToInspire
+<p align="center">
+  <a href="https://github.com/BUTR/Bannerlord.YellToInspire" alt="Lines Of Code">
+    <img src="https://aschey.tech/tokei/github/BUTR/Bannerlord.YellToInspire?category=code" />
+  </a>
+  <a href="https://www.codefactor.io/repository/github/butr/bannerlord.yelltoinspire">
+    <img src="https://www.codefactor.io/repository/github/butr/bannerlord.yelltoinspire/badge" alt="CodeFactor" />
+  </a>
+  <a href="https://codeclimate.com/github/BUTR/Bannerlord.YellToInspire/maintainability">
+    <img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability-percentage/BUTR/Bannerlord.YellToInspire">
+  </a>
+  <a title="Crowdin" target="_blank" href="https://crowdin.com/project/yell-to-inspire">
+    <img src="https://badges.crowdin.net/yell-to-inspire/localized.svg">
+  </a>
+  </br>
+  <a href="https://www.nexusmods.com/mountandblade2bannerlord/mods/3638" alt="NexusMods YellToInspire">
+    <img src="https://img.shields.io/badge/NexusMods-YellToInspire-yellow.svg" />
+  </a>
+  <a href="https://www.nexusmods.com/mountandblade2bannerlord/mods/3638" alt="NexusMods YellToInspire">
+    <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnexusmods-version-pzk4e0ejol6j.runkit.sh%3FgameId%3Dmountandblade2bannerlord%26modId%3D3638" />
+  </a>
+  <a href="https://www.nexusmods.com/mountandblade2bannerlord/mods/3638" alt="NexusMods YellToInspire">
+    <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnexusmods-downloads-ayuqql60xfxb.runkit.sh%2F%3Ftype%3Dunique%26gameId%3D3174%26modId%3D3638" />
+  </a>
+  <a href="https://www.nexusmods.com/mountandblade2bannerlord/mods/3638" alt="NexusMods YellToInspire">
+    <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnexusmods-downloads-ayuqql60xfxb.runkit.sh%2F%3Ftype%3Dtotal%26gameId%3D3174%26modId%3D3638" />
+  </a>
+  <a href="https://www.nexusmods.com/mountandblade2bannerlord/mods/3638" alt="NexusMods YellToInspire">
+    <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnexusmods-downloads-ayuqql60xfxb.runkit.sh%2F%3Ftype%3Dviews%26gameId%3D3174%26modId%3D3638" />
+  </a>
+  </br>
+  <img src="https://staticdelivery.nexusmods.com/mods/3174/images/3638/3638-1642520726-61812109.png" width="800">
+</p>
 
 Rewritten several times and server as an example of a gameplay mod.  
   

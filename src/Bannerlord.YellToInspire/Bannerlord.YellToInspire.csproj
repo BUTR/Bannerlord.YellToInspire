@@ -1,14 +1,17 @@
 ﻿<!--EXTERNAL_PROPERTIES: GameVersion;-->
-<Project Sdk="Bannerlord.BUTRModule.Sdk/1.0.1.80">
+<Project Sdk="Bannerlord.BUTRModule.Sdk/1.1.0.99">
 
   <PropertyGroup>
-    <DefineConstants>$(DefineConstants)</DefineConstants>
+    <BuildForWindows>true</BuildForWindows>
+    <BuildForWindowsStore>true</BuildForWindowsStore>
     <!-- Module Id -->
     <ModuleId>Bannerlord.YellToInspire</ModuleId>
     <!-- Module Name -->
     <ModuleName>BUTR's Yell To Inspire</ModuleName>
+    <!-- Module Url -->
+    <ModuleUrl>https://www.nexusmods.com/mountandblade2bannerlord/mods/3638</ModuleUrl>
     <!-- Module Version -->
-    <Version>0.6.9</Version>
+    <Version>0.6.10</Version>
     <!-- Module manually override GameVersion -->
     <!-- <OverrideGameVersion>e1.6.2</OverrideGameVersion> -->
   </PropertyGroup>
@@ -20,19 +23,19 @@
   <!-- Development Variables -->
   <PropertyGroup>
     <!-- MCM Version -->
-    <MCMVersion>5.0.4</MCMVersion>
+    <MCMVersion>5.7.1</MCMVersion>
     <!-- ButterLib Version -->
-    <ButterLibVersion>2.4.0</ButterLibVersion>
+    <ButterLibVersion>2.8.0</ButterLibVersion>
     <!-- ButterLib Version -->
     <HarmonyVersion>2.2.2</HarmonyVersion>
     <!-- BUTRShared Version -->
-    <BUTRSharedVersion>3.0.0.121</BUTRSharedVersion>
+    <BUTRSharedVersion>3.0.0.135</BUTRSharedVersion>
     <!-- ModuleManager Version -->
-    <BUTRModuleManagerVersion>4.0.149</BUTRModuleManagerVersion>
+    <BUTRModuleManagerVersion>5.0.198</BUTRModuleManagerVersion>
     <!-- ModuleLoader Version -->
-    <BUTRModuleLoaderVersion>1.0.1.43</BUTRModuleLoaderVersion>
+    <BUTRModuleLoaderVersion>1.0.1.44</BUTRModuleLoaderVersion>
     <!-- Harmony Extensions Version -->
-    <HarmonyExtensionsVersion>3.1.0.67</HarmonyExtensionsVersion>
+    <HarmonyExtensionsVersion>3.2.0.77</HarmonyExtensionsVersion>
 
     <ExtendedBuild>false</ExtendedBuild>
   </PropertyGroup>

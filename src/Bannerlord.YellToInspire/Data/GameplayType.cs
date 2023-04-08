@@ -4,8 +4,8 @@ namespace Bannerlord.YellToInspire.Data
     {
         public override string ToString() => Type switch
         {
-            GameplaySystem.Killing => "{=Nhd58Fg2b6}Killing",
-            GameplaySystem.Cooldown => "{=jsdfYfdFG4}Cooldown",
+            GameplaySystem.Killing => Strings.DropdownKilling,
+            GameplaySystem.Cooldown => Strings.DropdownCooldown,
         };
     }
 }
