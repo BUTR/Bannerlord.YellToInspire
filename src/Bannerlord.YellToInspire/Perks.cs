@@ -45,12 +45,12 @@ namespace Bannerlord.YellToInspire
 
         private void InitializeAll()
         {
-            InspireBasic?.Initialize(Strings.InspireName, CommonUtils.SetVariables(Strings.InspireBasicDescription).ToString(),
-                Skills.Leadership, 5, null, SkillEffect.PerkRole.PartyLeader, 10f,
-                SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.Add);
-            InspireResolve?.Initialize(Strings.InspireResolveName, Strings.InspireResolveDescription.ToString(),
-                Skills.Leadership, 35, null, SkillEffect.PerkRole.PartyLeader, 15f,
-                SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.AddFactor);
+            InspireBasic?.Initialize(Strings.InspireName, Skills.Leadership, 5, null,
+                CommonUtils.SetVariables(Strings.InspireBasicDescription).ToString(), SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.Add,
+                string.Empty, SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.Add);
+            InspireResolve?.Initialize(Strings.InspireResolveName, Skills.Leadership, 35, null,
+                Strings.InspireResolveDescription.ToString(), SkillEffect.PerkRole.PartyLeader, 15f, SkillEffect.EffectIncrementType.Add,
+                string.Empty, SkillEffect.PerkRole.None, 0f, SkillEffect.EffectIncrementType.Add);
         }
 
         private void UnregisterAll()

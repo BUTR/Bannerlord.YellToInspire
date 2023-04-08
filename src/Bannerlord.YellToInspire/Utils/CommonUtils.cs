@@ -65,7 +65,7 @@ namespace Bannerlord.YellToInspire.Utils
             var statistics = new TroopStatistics();
             var affectedAgents = new List<WeakReference<Agent>>();
 
-            foreach (var nearbyAllyAgent in causingAgent.Mission.GetNearbyAllyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
+            foreach (var nearbyAllyAgent in causingAgent.Mission.GetNearbyAllyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team, new MBList<Agent>()))
             {
                 if (nearbyAllyAgent == causingAgent) continue;
 
@@ -98,7 +98,7 @@ namespace Bannerlord.YellToInspire.Utils
                 }
             }
 
-            foreach (var nearbyEnemyAgent in causingAgent.Mission.GetNearbyEnemyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team))
+            foreach (var nearbyEnemyAgent in causingAgent.Mission.GetNearbyEnemyAgents(vec2Pos, settings.AbilityRadius(causingAgent.Character), team, new MBList<Agent>()))
             {
                 if (nearbyEnemyAgent.GetComponent<CommonAIComponent>() is not { } commonAiComponent) continue;
 

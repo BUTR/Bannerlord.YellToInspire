@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.10
+Game Versions: v1.1.0,v1.1.1,v1.1.2
+* Updated to v1.1.*
+* Xbox Game Pass PC Support
+---------------------------------------------------------------------------------------------------
 Version: 0.6.9
 Game Versions: v1.0.0
 * Yell To Inspire should be disabled on missions like Tavern now. Can be reverted in Options
