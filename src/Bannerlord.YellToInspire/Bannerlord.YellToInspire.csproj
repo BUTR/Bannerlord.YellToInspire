@@ -2,13 +2,13 @@
 <Project Sdk="Bannerlord.BUTRModule.Sdk/1.1.0.99">
 
   <PropertyGroup>
-    <DefineConstants>$(DefineConstants)</DefineConstants>
     <BuildForWindows>true</BuildForWindows>
     <BuildForWindowsStore>true</BuildForWindowsStore>
     <!-- Module Id -->
     <ModuleId>Bannerlord.YellToInspire</ModuleId>
     <!-- Module Name -->
     <ModuleName>BUTR's Yell To Inspire</ModuleName>
+    <!-- Module Url -->
     <ModuleUrl>https://www.nexusmods.com/mountandblade2bannerlord/mods/3638</ModuleUrl>
     <!-- Module Version -->
     <Version>0.6.10</Version>
