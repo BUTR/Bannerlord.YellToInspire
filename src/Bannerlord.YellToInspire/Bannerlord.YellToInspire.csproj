@@ -11,9 +11,9 @@
     <!-- Module Url -->
     <ModuleUrl>https://www.nexusmods.com/mountandblade2bannerlord/mods/3638</ModuleUrl>
     <!-- Module Version -->
-    <Version>0.6.10</Version>
+    <Version>0.6.11</Version>
     <!-- Module manually override GameVersion -->
-    <!-- <OverrideGameVersion>e1.6.2</OverrideGameVersion> -->
+    <!-- <OverrideGameVersion>v1.0.0</OverrideGameVersion> -->
   </PropertyGroup>
 
   <PropertyGroup>
@@ -23,15 +23,15 @@
   <!-- Development Variables -->
   <PropertyGroup>
     <!-- MCM Version -->
-    <MCMVersion>5.7.1</MCMVersion>
+    <MCMVersion>5.7.2</MCMVersion>
     <!-- ButterLib Version -->
-    <ButterLibVersion>2.8.0</ButterLibVersion>
+    <ButterLibVersion>2.8.1</ButterLibVersion>
     <!-- ButterLib Version -->
     <HarmonyVersion>2.2.2</HarmonyVersion>
     <!-- BUTRShared Version -->
-    <BUTRSharedVersion>3.0.0.135</BUTRSharedVersion>
+    <BUTRSharedVersion>3.0.0.136</BUTRSharedVersion>
     <!-- ModuleManager Version -->
-    <BUTRModuleManagerVersion>5.0.198</BUTRModuleManagerVersion>
+    <BUTRModuleManagerVersion>5.0.209</BUTRModuleManagerVersion>
     <!-- ModuleLoader Version -->
     <BUTRModuleLoaderVersion>1.0.1.44</BUTRModuleLoaderVersion>
     <!-- Harmony Extensions Version -->
@@ -45,8 +45,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bannerlord.ReferenceAssemblies.Core" Version="$(GameVersion).*" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.ReferenceAssemblies.Native" Version="$(GameVersion).*" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.ReferenceAssemblies.Core" Version="$(GameVersion).*-*" />
+    <PackageReference Include="Bannerlord.ReferenceAssemblies.Native" Version="$(GameVersion).*-*" />
   </ItemGroup>
 
 </Project>
