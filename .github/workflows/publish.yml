@@ -45,7 +45,7 @@ jobs:
           desc="${desc//$'\r'/'%0D'}"
           echo "::set-output name=mod_description::$desc"
       - name: Upload Bannerlord folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bannerlord
           path: ./bannerlord/
@@ -64,8 +64,8 @@ jobs:
       mod_description: ${{ needs.build-module.outputs.mod_description }}
       artifact_name: bannerlord
     secrets:
-      NEXUSMODS_APIKEY: ${{ secrets.NEXUSMODS_APIKEY }}
-      NEXUSMODS_COOKIES: ${{ secrets.NEXUSMODS_COOKIES }}
+      NEXUSMODS_APIKEY: ${{ secrets.ARAGAS_NEXUSMODS_API_KEY }}
+      NEXUSMODS_SESSION_COOKIE: ${{ secrets.ARAGAS_NEXUSMODS_SESSION_COOKIE }}
 
   ###########################
   #          STEAM          #

@@ -1,5 +1,5 @@
 ﻿<!--EXTERNAL_PROPERTIES: GameVersion;-->
-<Project Sdk="Bannerlord.BUTRModule.Sdk/1.1.0.99">
+<Project Sdk="Bannerlord.BUTRModule.Sdk/1.1.0.108">
 
   <PropertyGroup>
     <BuildForWindows>true</BuildForWindows>
@@ -11,7 +11,7 @@
     <!-- Module Url -->
     <ModuleUrl>https://www.nexusmods.com/mountandblade2bannerlord/mods/3638</ModuleUrl>
     <!-- Module Version -->
-    <Version>0.6.11</Version>
+    <Version>0.6.12</Version>
     <!-- Module manually override GameVersion -->
     <!-- <OverrideGameVersion>v1.0.0</OverrideGameVersion> -->
   </PropertyGroup>
@@ -23,15 +23,15 @@
   <!-- Development Variables -->
   <PropertyGroup>
     <!-- MCM Version -->
-    <MCMVersion>5.7.2</MCMVersion>
+    <MCMVersion>5.10.2</MCMVersion>
     <!-- ButterLib Version -->
-    <ButterLibVersion>2.8.1</ButterLibVersion>
+    <ButterLibVersion>2.9.10</ButterLibVersion>
     <!-- ButterLib Version -->
     <HarmonyVersion>2.2.2</HarmonyVersion>
     <!-- BUTRShared Version -->
-    <BUTRSharedVersion>3.0.0.136</BUTRSharedVersion>
+    <BUTRSharedVersion>3.0.0.142</BUTRSharedVersion>
     <!-- ModuleManager Version -->
-    <BUTRModuleManagerVersion>5.0.209</BUTRModuleManagerVersion>
+    <BUTRModuleManagerVersion>5.0.226</BUTRModuleManagerVersion>
     <!-- ModuleLoader Version -->
     <BUTRModuleLoaderVersion>1.0.1.44</BUTRModuleLoaderVersion>
     <!-- Harmony Extensions Version -->
