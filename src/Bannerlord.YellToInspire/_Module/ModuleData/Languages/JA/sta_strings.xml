@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/BUTR/Bannerlord.XmlSchemas/master/ModuleLanguage.xsd">
+  <tags>
+    <tag language="日本語"/>
+  </tags>
+  <strings>
+    <string id="X0lXr5OeSQ" text="鼓舞する"/>
+    <string id="fTNsdClmjc" text="覚悟の鼓舞"/>
+    <string id="c2MjU4ZqPQ" text="{INPUT}を押して叫び、味方を鼓舞し、敵の心には恐怖を植え付ける。{NEWLINE}付近の味方の士気が少しだけ上昇し、敵の士気は低下し、逃走確率がわずかに上昇する。{NEWLINE}効果半径・効果の大きさ・クールダウン間隔は指揮スキルに依存する。{NEWLINE}敵の逃走確率は悪行スキルに依存する。{NEWLINE}{NEWLINE}現在の効果半径:{RADIUS}m{NEWLINE}味方の士気上昇 +{MORALE}{NEWLINE}敵の逃走確率: {FLEE}%{NEWLINE}クールダウン: {COOLDOWN}秒"/>
+    <string id="cGR5dN440y" text="鼓舞効果を受けた逃走中の味方が覚悟を取り戻し、戦場に戻るようになる"/>
+    <string id="NmyOWk1YDa" text="逃走中の味方が鼓舞効果を受け、短時間だけ速度が上昇する"/>
+    <string id="YwMTY7RbUv" text="逃走中の味方が鼓舞効果を受け、短時間だけ体力が上昇する"/>
+
+    <string id="3F9hwn8h4W" text="Yell To Inspire"/>
+    <string id="u68iVSY338" text="Yell To Inspire."/>
+
+    <string id="FsbQpeMJYJ" text="あと{TIME}秒のクールダウンが必要だ!"/>
+    <string id="OG3KT8KQvR" text="魂の奥底に、本能の雄叫びが響き渡る!"/>
+    <string id="0SKEk61Zj0" text="バンシーの絶叫の如き怒声が戦場を貫く!"/>
+    <string id="HT9YJgKEl2" text="耳をつんざく雄叫びを放った!"/>
+    <string id="Nr6docL7MZ" text="雷鳴のような吠え声を炸裂させた!"/>
+
+    <string id="V8iSlcN2mq" text="Yell To Inspire {VERSION}"/>
+    <string id="OSbrbCqXUR" text="基礎効果半径"/>
+    <string id="4eLA2GbEcp" text="鼓舞能力の効果半径の基礎値を指定します。カスタムバトルでも適用されます。"/>
+    <string id="p2qRWZ7Ezg" text="1レベルあたりの能力の効果半径"/>
+    <string id="f0iSyhJJ9H" text="指揮スキル1レベルあたりの、その他の能力の効果半径の大きさを指定します。"/>
+    <string id="dpeaW5tpf0" text="基礎クールダウン値"/>
+    <string id="E9nVaeVhWx" text="能力が再使用できるまでのクールダウン時間の長さを秒単位で指定します。カスタムバトルにも適用されます。クールダウンのゲームシステムで使用されます。"/>
+    <string id="pVdQUEHQub" text="1レベルあたりの能力のクールダウン時間減少値"/>
+    <string id="dmGkKtAq4M" text="指揮スキル1レベルごとに、クールダウン秒が減少する大きさを指定します。クールダウンのゲームシステムで使用されます。"/>
+    <string id="rRlOssxSIO" text="能力のキル倍率基礎値"/>
+    <string id="XwRROTxNCu" text="敵を倒した際の奮起の基礎値を指定します。カスタムバトルにも適用されます。「キル」のゲームタイプで使用されます。1/100"/>
+    <string id="lsn3e1jhWd" text="能力のキル倍率"/>
+    <string id="HLvZSlfuA4" text="1レベルごとに、敵を1人倒した際に追加で奮起する倍率を指定します。「キル」のゲームタイプで使用されます。1+1/100"/>
+    <string id="xEeTLJBPXY" text="味方士気上昇の基礎値"/>
+    <string id="lYflwGnkSY" text="1度叫ぶたびに、友軍1人1人の上昇する士気の大きさの基礎値を指定します。カスタムバトルにも適用されます。"/>
+    <string id="UIOWxJ8oHq" text="1レベルごとの味方の士気上昇"/>
+    <string id="KFuKPM6vlD" text="指揮1レベルごとに追加される、士気上昇効果の大きさを指定します。"/>
+    <string id="t8iYNduG6l" text="敵の逃走確率の基礎値"/>
+    <string id="9k0gcHzZiB" text="士気が十分に低い時、雄叫びの影響を受けて敵が逃走する確率のパーセンテージです。"/>
+    <string id="lqtQwtLcWt" text="1レベルごとの逃走確率"/>
+    <string id="BadCyQmGTs" text="悪行スキル1レベルごとに追加される、敵の逃走確率の大きさを指定します。単位は 1/100%です。"/>
+    <string id="gvqobBynZ4" text="敵が逃走する士気のしきい値"/>
+    <string id="fKTW3QsIOh" text="この値を下回ったときの敵が逃走を始める士気の大きさを指定します。"/>
+    <string id="L5BB55wpAZ" text="反応の最小遅延時間"/>
+    <string id="RyxKXEQgm6" text="兵士があなたの叫びに反応するまでのランダムな時間の最小値を秒単位で指定します。"/>
+    <string id="ykC6USItRT" text="反応の最大遅延時間"/>
+    <string id="nAwgC95YKZ" text="兵士があなたの叫びに反応するまでのランダムな時間の最大値を秒単位で指定します。"/>
+    <string id="MVuF5MdRAd" text="味方1人ごとの指揮経験値"/>
+    <string id="DOR2xn2cYG" text="鼓舞の影響を受けた味方1人あたりから得られる、指揮経験値の量の基礎値です。特質値とフォーカスポイントが乗算されます。"/>
+    <string id="mnVFi42L7r" text="敵1人ごとの悪行経験値"/>
+    <string id="z8P8DzRpwc" text="鼓舞の影響を受けた敵1人あたりから得られる、あ企業経験値の量の基礎値です。特質値とフォーカスポイントが乗算されます。"/>
+    <string id="I7z9HhTKKJ" text="逃げた敵が復帰する"/>
+    <string id="n6ViryinCm" text="逃走している敵が戦場に復帰するかどうかを指定します。"/>
+    <string id="8LnTLK7Eap" text="球状インジケータを表示する"/>
+    <string id="pkSxma77ZI" text="兵士への影響範囲を表す球体を表示します。"/>
+    <string id="kDA1RynjWe" text="詳細なメッセージを表示する"/>
+    <string id="oIjsBtyRi6" text="詳細なメッセージテキストを表示する"/>
+    <string id="qiJ4Uud7qw" text="能力の使用で影響を受ける味方と敵の数に関するメッセージを表示します。"/>
+    <string id="MBlehjhwnx" text="鼓舞への反応のランダム遅延を有効にする"/>
+    <string id="CTT0d1Q6Q7" text="鼓舞に対する兵士1人1人の反応が、ランダムに僅かに遅れるかどうかを指定します。"/>
+    <string id="GCpn22ub5U" text="鼓舞のアニメーションを有効にする"/>
+    <string id="cPUY6zLpa6" text="プレイヤーと味方が応援アニメーションを実行するかどうかを指定します。"/>
+    <string id="EYQuao3mup" text="敵の反応を有効にする"/>
+    <string id="YncLuM2Sps" text="敵があなたの雄叫びに対して、恐怖のセリフで反応するかどうかを指定します。"/>
+    <string id="K4Inr7E7PZ" text="ゲームタイプ"/>
+    <string id="adWH7RVK6o" text="使用するゲームタイプです。"/>
+    <string id="jsdfYfdFG4" text="クールダウン"/>
+    <string id="Nhd58Fg2b6" text="キル"/>
+    <string id="Hy6Tg26GAw" text="全てのミッションマップで有効"/>
+    <string id="adWH7RVK6o" text="酒場など、全てのミッションマップでYell To Inspireの機能が有効になります。"/>
+
+    <string id="n0R1p0achr" text="全般"/>
+    <string id="ZX1S3NcDvK" text="クールダウンのゲームシステム"/>
+    <string id="s3UCkECKCw" text="キルゲームシステム"/>
+    <string id="BYgxByyQR5" text="調整"/>
+
+    <string id="gqr3o3aOfu" text="奮起させた味方: {INSPIRED}"/>
+    <string id="5fapWaqKVw" text="戦場に復帰した味方: {RETURNING}"/>
+    <string id="Ldui1l6RMK" text="勇気をくじかれた敵: {SCARED}"/>
+    <string id="8aQ7tO6TbA" text="逃走した敵: {FLED}"/>
+    <string id="zy6xciLnky" text="戦場に復帰した敵: {RETURNING}"/>
+
+    <string id="MFZQek5Upy" text="鼓舞を使用する条件が揃っていない!"/>
+    <string id="Zt8Qbxh3HP" text="鼓舞が使用できる!"/>
+
+  </strings>
+</base>
